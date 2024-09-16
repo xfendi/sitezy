@@ -1,70 +1,49 @@
-# Getting Started with Create React App
+# Sitezy
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**Sitezy** is a web application designed to simplify website and e-commerce store creation. Its goal is to provide users with an intuitive interface to build professional websites without needing extensive technical knowledge. Sitezy includes a powerful dashboard for managing users, teams, content, and more.
 
-## Available Scripts
+## Project Overview
 
-In the project directory, you can run:
+Sitezy allows users to:
+- **Create Websites/Stores**: Choose from a variety of customizable templates to build your site or store.
+- **Manage Content**: Users can easily update and manage content through a simple and intuitive interface.
+- **Collaborate in Teams**: Teams can work together on website or store projects, with different permissions and roles assigned to users.
+- **Responsive Designs**: Every website created with Sitezy is optimized for all screen sizes.
 
-### `npm start`
+### Current Development Stage
+- **Version**: 0.1 (Beta)
+- **Ongoing Development**: The core functionality of website creation is implemented. We're currently expanding the dashboard features and user management capabilities.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Future Plans
+- **Template Marketplace**: A marketplace for users to buy and sell custom templates.
+- **Advanced Analytics**: Integrate data analytics to track website traffic, conversions, and more.
+- **SEO Tools**: Help users optimize their websites for search engines with built-in SEO tools.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Architecture
 
-### `npm test`
+Sitezy is built using a modern web development stack:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Frontend
+- **React JS**: The user interface is built using React for its reusable components and state management.
+- **React Router**: For efficient routing and navigation.
+- **Context API**: Manages global state across different parts of the application.
+- **CSS Modules / Tailwind**: For modular and scalable styling.
 
-### `npm run build`
+### Backend (To be developed)
+- **Node.js / Express**: Planned backend framework for API development and server-side logic.
+- **MongoDB / Firebase**: Planned database to store user data, site content, and templates.
+- **JWT / OAuth**: Authentication and authorization methods for user accounts.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### API Design
+The API will be designed to:
+- Handle user authentication and authorization.
+- Allow CRUD operations on websites, teams, and content.
+- Provide endpoints for third-party integrations (e.g., analytics, payment gateways).
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Installation
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+To set up the project locally, follow these steps:
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)"# sitezy" 
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/xfendi/sitezy.git
