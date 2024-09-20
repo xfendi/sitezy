@@ -32,12 +32,12 @@ const NavBar = () => {
             </a>
           </li>
           <li>
-            <a href="/pricing" className="navbar__links-link">
+            <a href="/#pricing" className="navbar__links-link">
               Pricing
             </a>
           </li>
           <li>
-            <a href="/customers" className="navbar__links-link">
+            <a href="/#customers" className="navbar__links-link">
               Customers
             </a>
           </li>
@@ -50,10 +50,10 @@ const NavBar = () => {
       </div>
       <div className={isOpen ? "navbar__right navbar-open" : "navbar__right"}>
         <div className="navbar__buttons">
-          <a href="/login" className="navbar__buttons-button">
+          <a href="/auth/login" className="navbar__buttons-button">
             Log In
           </a>
-          <a href="/signup" className="navbar__buttons-button btn-dark">
+          <a href="/auth/signup" className="navbar__buttons-button btn-dark">
             Get Started
           </a>
         </div>

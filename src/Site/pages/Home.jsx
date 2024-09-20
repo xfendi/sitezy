@@ -16,7 +16,7 @@ import { FaStar } from "react-icons/fa";
 const Home = () => {
   return (
     <>
-    <div class="absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]"></div>
+    <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]"></div>
       <section className="section landing" data-aos="fade-up" data-aos-easing="ease-out-back" data-aos-delay="200" >
         <div className="landing__text">
           <div className="section__title">Build Websites Fast with Sitezy!</div>
@@ -26,7 +26,7 @@ const Home = () => {
             launch!
           </div>
           <div className="section__buttons">
-            <a href="/signup" className="btn-primary">
+            <a href="/auth/signup" className="btn-primary">
               Get Started
             </a>
             <a href="/about" className="btn-light">
@@ -181,20 +181,25 @@ const Home = () => {
         </div>
         <div className="section__main pricing__container">
           <div className="pricing__plan" data-aos="fade-up" data-aos-easing="ease-out-back" data-aos-delay="200">
-            <div className="pricing__plan-name">Basic</div>
+            <div className="pricing__plan-name">Free</div>
             <div className="pricing__plan-price">
-              <h1>$10</h1>
-              <span>per month</span>
+              <h1>FREE</h1>
             </div>
             <div className="pricing__plan-description">
-              Ideal for Individuals or small startups.
+              Perfect for getting started!
             </div>
             <ul className="pricing__plan-features">
               <li>
                 <div className="icon-circle">
                   <LuCheck size={15} />
                 </div>{" "}
-                Access to 5 Professional Templates
+                1 Website
+              </li>
+              <li>
+                <div className="icon-circle">
+                  <LuCheck size={15} />
+                </div>{" "}
+                Access to 5 Templates
               </li>
               <li>
                 <div className="icon-circle">
@@ -228,14 +233,14 @@ const Home = () => {
               </li>
             </ul>
             <div className="pricing__plan-button">
-              <button href="/signup" className="btn-light">Get Started</button>
+              <button href="/auth/signup" className="btn-light">Get Started</button>
             </div>
           </div>
 
           <div className="pricing__plan pricing__plan__middle" data-aos="fade-up" data-aos-easing="ease-out-back" data-aos-delay="300">
             <div className="pricing__plan-name">Pro</div>
             <div className="pricing__plan-price">
-              <h1>$25</h1>
+              <h1>$15</h1>
               <span>per month</span>
             </div>
             <div className="pricing__plan-description">
@@ -246,54 +251,54 @@ const Home = () => {
                 <div className="icon-circle">
                   <LuCheck size={15} />
                 </div>{" "}
-                Access to 20 Professional Templates
+                Access to 25+ templates
               </li>
               <li>
                 <div className="icon-circle">
                   <LuCheck size={15} />
                 </div>{" "}
-                Priority Email Support (24/7)
+                Priority email support (Mon-Sun, 8am-8pm)
               </li>
               <li>
                 <div className="icon-circle">
                   <LuCheck size={15} />
                 </div>{" "}
-                Weekly Feature Updates
+                Weekly feature updates
               </li>
               <li>
                 <div className="icon-circle">
                   <LuCheck size={15} />
                 </div>{" "}
-                Advanced SEO Tools
+                Advanced SEO tools (meta tags, keywords)
               </li>
               <li>
                 <div className="icon-circle">
                   <LuCheck size={15} />
                 </div>{" "}
-                Enhanced Analytics Dashboard
+                Advanced analytics dashboard (traffic sources, user behavior)
               </li>
               <li>
                 <div className="icon-circle">
                   <LuCheck size={15} />
                 </div>{" "}
-                Customizable Templates
+                Custom domain support
               </li>
               <li>
                 <div className="icon-circle">
                   <LuCheck size={15} />
                 </div>{" "}
-                Ability to Add Custom Fonts
+                Full customization options (fonts, colors, layout tweaks)
               </li>
             </ul>
             <div className="pricing__plan-button">
-              <button href="/signup" className="btn-dark">Get Started</button>
+              <button href="/auth/signup" className="btn-dark">Get Started</button>
             </div>
           </div>
 
           <div className="pricing__plan" data-aos="fade-up" data-aos-easing="ease-out-back" data-aos-delay="400">
-            <div className="pricing__plan-name">Premium</div>
+            <div className="pricing__plan-name">Business</div>
             <div className="pricing__plan-price">
-              <h1>$50</h1>
+              <h1>$35</h1>
               <span>per month</span>
             </div>
             <div className="pricing__plan-description">
@@ -305,59 +310,59 @@ const Home = () => {
                 <div className="icon-circle">
                   <LuCheck size={15} />
                 </div>{" "}
-                Unlimited Professional Templates
+                Access to 50+ premium templates
               </li>
               <li>
                 <div className="icon-circle">
                   <LuCheck size={15} />
                 </div>{" "}
-                24/7 Priority Support with Live Chat
+                VIP priority support (chat and email 24/7)
               </li>
               <li>
                 <div className="icon-circle">
                   <LuCheck size={15} />
                 </div>{" "}
-                Daily Feature Updates
+                Real-time feature updates
               </li>
               <li>
                 <div className="icon-circle">
                   <LuCheck size={15} />
                 </div>{" "}
-                Comprehensive SEO Tools
+                Full SEO suite (advanced optimization, backlink tracking)
               </li>
               <li>
                 <div className="icon-circle">
                   <LuCheck size={15} />
                 </div>{" "}
-                Premium Analytics Dashboard with Insights
+                Comprehensive analytics (conversion tracking, heatmaps)
               </li>
               <li>
                 <div className="icon-circle">
                   <LuCheck size={15} />
                 </div>{" "}
-                Unlimited Customization Options
+                E-commerce integration (unlimited products, payment gateways)
               </li>
               <li>
                 <div className="icon-circle">
                   <LuCheck size={15} />
                 </div>{" "}
-                Dedicated Account Manager
+                Team collaboration (multi-user accounts, role management)
               </li>
               <li>
                 <div className="icon-circle">
                   <LuCheck size={15} />
                 </div>{" "}
-                Advanced Marketing Automation
+                Full design customization (CSS and HTML access)
               </li>
               <li>
                 <div className="icon-circle">
                   <LuCheck size={15} />
                 </div>{" "}
-                Access to Beta Features
+                Custom performance optimization (dedicated resources)
               </li>
             </ul>
             <div className="pricing__plan-button">
-              <button href="/signup" className="btn-light">Get Started</button>
+              <button href="/auth/signup" className="btn-light">Get Started</button>
             </div>
           </div>
         </div>
@@ -554,7 +559,7 @@ const Home = () => {
           started today and watch your business grow!
         </div>
         <div className="section__buttons">
-          <a href="/signup" className="btn-primary">
+          <a href="/auth/signup" className="btn-primary">
             Get Started
           </a>
           <a href="/about" className="btn-light">

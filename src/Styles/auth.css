@@ -70,3 +70,19 @@
 .btn-outline:hover {
   transform: scale(1.03);
 }
+
+/* GLOBAL AUTH */
+
+.auth__app {
+  height: 100vh;
+  width: 100vw;
+}
+
+/* FORM */
+
+.auth {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
