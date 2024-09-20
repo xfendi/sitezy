@@ -5,12 +5,12 @@ import { getStorage } from "firebase/storage";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: process.env.FIREBASE_APIKEY,
+  apiKey: process.env.REACT_APP_FIREBASE_APIKEY,
   authDomain: "yolo-sitezy.firebaseapp.com",
   projectId: "yolo-sitezy",
   storageBucket: "yolo-sitezy.appspot.com",
   messagingSenderId: "61567655316",
-  appId: "1:61567655316:web:15e005336dae69b1434381",
+  appId: process.env.REACT_APP_FIREBASE_APPID,
   measurementId: "G-S2G94WK0KL"
 };
 
