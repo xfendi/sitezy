@@ -5,13 +5,33 @@ import { doc, setDoc } from "firebase/firestore";
 import { Navigate, useNavigate } from "react-router-dom";
 
 import LogoPrimary from "../../Assets/logo-primary.png";
-import Light from "../../Assets/light.png";
-import Dark from "../../Assets/dark.png";
-import System from "../../Assets/system.png";
+
+import FreeDescription from "./Plan/FreeDescription";
+import ProDescription from "./Plan/ProDescription";
+import BusinessDescription from "./Plan/BusinessDescription";
+
+export const plans = [
+  {
+    name: "free",
+    description: <FreeDescription />,
+  },
+  {
+    name: "fro",
+    link: "",
+    priceID: "",
+    description: <ProDescription />,
+  },
+  {
+    name: "business",
+    link: "",
+    priceID: "",
+    description: <BusinessDescription />,
+  },
+]
 
 const Plan = () => {
   const [profile, setProfile] = useState(false);
-  const [selectedPlan, setSelectedPlan] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState("");
   const [activeButton, setActiveButton] = useState("");
   const [error, setError] = useState("");
 
@@ -57,75 +77,111 @@ const Plan = () => {
           <div className="form__logo">
             <img src={LogoPrimary} alt="sitezy" width="55px" />
           </div>
-          <div className="form__top-title">Choose Your Plan</div>
-          <div className="form__top-subtitle">
-            Select the perfect plan for your needs and get started with full
-            access today.
-          </div>
-        </div>
-
-        <div className="form form__left">
-          <div className="form__input-box">
-            <label htmlFor="name">Chose your plan</label>
-
-            <div className="form__input__select__image-container">
-              <div className="theme__box">
-                <button
-                  type="button"
-                  id="dark"
-                  className={
-                    activeButton === "dark"
-                      ? "active profile__theme__button profile__theme__button-dark"
-                      : "profile__theme__button profile__theme__button-dark"
-                  }
-                  onClick={() => HandlePlanClick("dark")}
-                >
-                  <img src={Dark} alt="" />
-                </button>
-                <label htmlFor="dark">Dark</label>
-              </div>
-
-              <div className="theme__box">
-                <button
-                  type="button"
-                  id="light"
-                  className={
-                    activeButton === "light"
-                      ? "active profile__theme__button profile__theme__button-light"
-                      : "profile__theme__button profile__theme__button-light"
-                  }
-                  onClick={() => HandlePlanClick("light")}
-                >
-                  <img src={Light} alt="" />
-                </button>
-                <label htmlFor="light">Light</label>
-              </div>
-
-              <div className="theme__box">
-                <button
-                  type="button"
-                  id="system"
-                  className={
-                    activeButton === "system"
-                      ? "active profile__theme__button profile__theme__button-system"
-                      : "profile__theme__button profile__theme__button-system"
-                  }
-                  onClick={() => HandlePlanClick("system")}
-                >
-                  <img src={System} alt="" />
-                </button>
-                <label htmlFor="system">System</label>
-              </div>
+          <div className="form__top-text">
+            <div className="form__top-title">Choose Your Plan</div>
+            <div className="form__top-subtitle">
+              Select the perfect plan for your needs and get started with full
+              access today.
             </div>
           </div>
         </div>
 
-        <form onSubmit={HandleSubmit} className="form__right form">
-          {error && <div className="auth__form__error">{error}</div>}
-          <button type="submit" className="btn-dark">
-            Proceed to payment
-          </button>
-        </form>
+        <div className="form__plan__small">
+          <div className="form__left">
+            <div className="form__input-box">
+              <label htmlFor="name">Chose your plan</label>
+
+              <div className="form__input__select__image-container plans__small">
+                <button
+                  type="button"
+                  id="dark"
+                  className={
+                    activeButton === "free"
+                      ? "active profile__plan__button"
+                      : "profile__plan__button"
+                  }
+                  onClick={() => HandlePlanClick("free")}
+                >
+                  <div className="input__plan__small">
+                    <div className="input__plan__small-text">
+                      <div className="input__plan__small-title">Free Plan</div>
+                      <div className="input__plan__small-description">
+                        Perfect for getting started!
+                      </div>
+                    </div>
+                    <div className="input__plan__small-price">FREE</div>
+                  </div>
+                </button>
+
+                <button
+                  type="button"
+                  id="light"
+                  className={
+                    activeButton === "pro"
+                      ? "active profile__plan__button "
+                      : "profile__plan__button"
+                  }
+                  onClick={() => HandlePlanClick("pro")}
+                >
+                  <div className="input__plan__small">
+                    <div className="input__plan__small-text">
+                      <div className="input__plan__small-title">Pro Plan</div>
+                      <div className="input__plan__small-description">
+                        Ideal for Growing businesses that need more features and
+                        support.
+                      </div>
+                    </div>
+                    <div className="input__plan__small-price">
+                      $15
+                      <br />
+                      <span>per month</span>
+                    </div>
+                  </div>
+                </button>
+
+                <button
+                  type="button"
+                  id="system"
+                  className={
+                    activeButton === "business"
+                      ? "active profile__plan__button"
+                      : "profile__plan__button"
+                  }
+                  onClick={() => HandlePlanClick("business")}
+                >
+                  <div className="input__plan__small">
+                    <div className="input__plan__small-text">
+                      <div className="input__plan__small-title">
+                        Business Plan
+                      </div>
+                      <div className="input__plan__small-description">
+                        Ideal for Established businesses requiring extensive
+                        resources and premium support.
+                      </div>
+                    </div>
+                    <div className="input__plan__small-price">
+                      $35
+                      <br />
+                      <span>per month</span>
+                    </div>
+                  </div>
+                </button>
+              </div>
+            </div>
+            <div className="from__plan__description">
+              {selectedPlan === "free" && <FreeDescription />}
+              {selectedPlan === "pro" && <ProDescription />}
+              {selectedPlan === "business" && <BusinessDescription />}
+            </div>
+          </div>
+
+          <div className="form__right">
+            {error && <div className="auth__form__error">{error}</div>}
+            <button onClick={HandleSubmit} type="submit" className="btn-dark">
+              Proceed to payment
+            </button>
+          </div>
+        </div>
       </div>
     </section>
   );
