@@ -134,7 +134,7 @@ const Profile = () => {
           const userProfile = await findProfileByUserId(userId);
           if (userProfile) {
             console.log(userProfile);
-            setProfile(true);
+            setProfile(userProfile);
           } else {
             console.log("Profil użytkownika nie został znaleziony.");
             setProfile(false);
@@ -150,7 +150,7 @@ const Profile = () => {
     fetchProfile();
   }, [userId]);
 
-  if (profile) {
+  if (profile.color) {
     return <Navigate to="/account/setup/company" />;
   }
 
