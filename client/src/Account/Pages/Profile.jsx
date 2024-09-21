@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { UserAuth } from "../../Context/AuthContext";
 import { auth, db, storage } from "../../firebase";
 import { getDoc, doc, setDoc } from "firebase/firestore";
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { updateProfile } from "firebase/auth";
 import { Navigate, useNavigate } from "react-router-dom";
 
@@ -29,8 +29,8 @@ const Profile = () => {
   const [color, setColor] = useState("");
   const [theme, setTheme] = useState("");
 
-  const [selectedFile, setSelectedFile] = useState()
-  const [preview, setPreview] = useState()
+  const [selectedFile, setSelectedFile] = useState();
+  const [preview, setPreview] = useState();
 
   const [error, setError] = useState("");
 
@@ -41,24 +41,24 @@ const Profile = () => {
 
   useEffect(() => {
     if (!selectedFile) {
-      setPreview(undefined)
-      return
+      setPreview(undefined);
+      return;
     }
 
-    const objectUrl = URL.createObjectURL(selectedFile)
-    setPreview(objectUrl)
+    const objectUrl = URL.createObjectURL(selectedFile);
+    setPreview(objectUrl);
 
-    return () => URL.revokeObjectURL(objectUrl)
-  }, [selectedFile])
+    return () => URL.revokeObjectURL(objectUrl);
+  }, [selectedFile]);
 
-  const onSelectFile = e => {
+  const onSelectFile = (e) => {
     if (!e.target.files || e.target.files.length === 0) {
-      setSelectedFile(undefined)
-      return
+      setSelectedFile(undefined);
+      return;
     }
 
-    setSelectedFile(e.target.files[0])
-  }
+    setSelectedFile(e.target.files[0]);
+  };
 
   const HandleSubmit = async (e) => {
     e.preventDefault();
@@ -66,16 +66,17 @@ const Profile = () => {
     try {
       const fileRef = ref(storage, `profiles/${userId}`);
       await uploadBytes(fileRef, selectedFile);
-      const photoURL = await getDownloadURL(fileRef) || "https://i.imgur.com/4tBUxz7.png"
+      const photoURL =
+        (await getDownloadURL(fileRef)) || "https://i.imgur.com/4tBUxz7.png";
 
-      updateProfile(user, {photoURL})
+      updateProfile(user, { photoURL });
 
       await setDoc(doc(db, "profiles", userId), {
         color: color || "#6e48eb",
         theme: theme || "light",
         createdAt: new Date(),
       });
-      
+
       navigate("/account/setup/company");
     } catch (error) {
       setError(error.message);
@@ -166,9 +167,11 @@ const Profile = () => {
           <div className="form__logo">
             <img src={LogoPrimary} alt="sitezy" width="55px" />
           </div>
-          <div className="form__top-title">Customize Your Account</div>
-          <div className="form__top-subtitle">
-            Create your own admin design for better experirnce!
+          <div className="form__top-text">
+            <div className="form__top-title">Customize Your Account</div>
+            <div className="form__top-subtitle">
+              Create your own admin design for better experirnce!
+            </div>
           </div>
         </div>
 
@@ -179,13 +182,35 @@ const Profile = () => {
             <div className="color__selector-container">
               <div className="color__selector">
                 {colors.map((colo, index) => (
-                  <div className="color__selector-color-box" key={index} style={{ border: color === colo ? `2px solid ${colo}` : "2px solid transparent" }} >
-                    <div className="color__selector-color" key={index} onClick={() => setColor(colo)} style={{ backgroundColor: colo }} />
+                  <div
+                    className="color__selector-color-box"
+                    key={index}
+                    style={{
+                      border:
+                        color === colo
+                          ? `2px solid ${colo}`
+                          : "2px solid transparent",
+                    }}
+                  >
+                    <div
+                      className="color__selector-color"
+                      key={index}
+                      onClick={() => setColor(colo)}
+                      style={{ backgroundColor: colo }}
+                    />
                   </div>
                 ))}
               </div>
 
-              <input type="text" value={color} placeholder="#FFFFFF" style={{ width: "100px" }} onChange={(e) => { setColor(e.target.value) }} />
+              <input
+                type="text"
+                value={color}
+                placeholder="#FFFFFF"
+                style={{ width: "100px" }}
+                onChange={(e) => {
+                  setColor(e.target.value);
+                }}
+              />
             </div>
           </div>
 
@@ -194,9 +219,18 @@ const Profile = () => {
               <label htmlFor="name">Upload a profile picture</label>
 
               <div className="file-input">
-                {selectedFile && <img src={preview} alt="" className="file-input__preview" />}
-                <input type="file" id="file" className="file" onChange={onSelectFile} />
-                <label htmlFor="file" className="file-input__label" >Upload picture</label>
+                {selectedFile && (
+                  <img src={preview} alt="" className="file-input__preview" />
+                )}
+                <input
+                  type="file"
+                  id="file"
+                  className="file"
+                  onChange={onSelectFile}
+                />
+                <label htmlFor="file" className="file-input__label">
+                  Upload picture
+                </label>
               </div>
             </div>
           </div>
@@ -204,7 +238,7 @@ const Profile = () => {
           <div className="form__input-box">
             <label htmlFor="name">Chose your theme</label>
 
-            <div className="form__input__select__image-container" >
+            <div className="form__input__select__image-container">
               <div className="theme__box">
                 <button
                   type="button"

@@ -95,8 +95,8 @@
 }
 
 .form__top-title {
-  font-size: 33px;
-  font-weight: 500;
+  font-size: 25px;
+  font-weight: 600;
 }
 
 .form {
@@ -280,10 +280,11 @@ input[type="file"] {
 .plans__small {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 15px;
 }
 .profile__plan__button {
   border-radius: 10px;
+  width: max-content;
   border: var(--color-light-gray) 2px solid;
 }
 
@@ -297,37 +298,39 @@ input[type="file"] {
   align-items: center;
   text-align: start;
   padding: 15px;
+  width: 500px;
   border-radius: 10px;
   transition: var(--transition-default);
 }
 
 .input__plan__small-title {
-  font-size: 20px;
+  font-size: 17px;
   font-weight: 600;
 }
 
 .input__plan__small-description {
-  font-size: 15px;
+  font-size: 13px;
   color: var(--color-mid-gray);
 }
 
 .input__plan__small-price {
-  font-size: 25px;
+  font-size: 20px;
   font-weight: 600;
-  width: 33%;
   text-align: end;
   display: flex;
   flex-direction: column;
 }
 .input__plan__small-price span {
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 400;
   color: var(--color-mid-gray);
 }
 
 .form__plan__description-list {
   border-top: var(--color-light-gray) 2px solid;
-  padding-top: 15px;
+  border-bottom: var(--color-light-gray) 2px solid;
+  padding-top: 25px;
+  padding-bottom: 25px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -346,5 +349,68 @@ input[type="file"] {
 
 .form__plan__small {
   display: flex;
+  flex-direction: column;
   gap: 25px;
+}
+
+.form__plans__time {
+  margin-bottom: 25px;
+  width: 100%;
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+  font-weight: 500;
+  font-size: 15px;
+}
+
+/*----------------------------------------------------------------*/
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 55px;
+  height: 30px;
+  margin-bottom: 0 !important;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+
+  border-radius: 15px;
+
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  background-color: var(--color-light-gray);
+  transition: var(--transition-default);
+}
+
+.slider:before {
+  position: absolute;
+  border-radius: 50%;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 5px;
+  bottom: 5px;
+  background-color: var(--color-white);
+  transition: var(--transition-default);
+}
+
+input:checked + .slider {
+  background-color: var(--color-primary);
+}
+
+input:checked + .slider:before {
+  transform: translateX(25px);
 }

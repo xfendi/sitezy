@@ -78,7 +78,7 @@ const Plan = () => {
       console.log(process.env.NODE_ENV)
       window.location.replace(planLink + '?prefilled_email=' + user?.email);
     } catch (error) {
-      setError(error.message);    
+      setError(error.message);
       console.log(error.message);
     }
   };

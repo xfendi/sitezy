@@ -70,9 +70,11 @@ const SignUp = () => {
           <div className="form__logo">
             <img src={LogoPrimary} alt="sitezy" width="55px" />
           </div>
-          <div className="form__top-title">Sign up</div>
-          <div className="form__top-subtitle">
-            Enter your details below to create your account and get started!
+          <div className="form__top-text">
+            <div className="form__top-title">Sign up</div>
+            <div className="form__top-subtitle">
+              Enter your details below to create your account and get started!
+            </div>
           </div>
         </div>
         <div className="form__socials">

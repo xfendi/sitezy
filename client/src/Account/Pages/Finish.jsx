@@ -1,7 +1,7 @@
 import React from "react";
 import ConfettiExplosion from "react-confetti-explosion";
 
-import LogoPrimary from '../../Assets/logo-primary.png';
+import LogoPrimary from "../../Assets/logo-primary.png";
 import useWindowSize from "react-use/lib/useWindowSize";
 
 const Finish = () => {
@@ -16,13 +16,21 @@ const Finish = () => {
         data-aos-delay="100"
       >
         <div className="form__top">
-          <ConfettiExplosion height={height} width={width} zIndex={1} duration={2500} />
+          <ConfettiExplosion
+            height={height}
+            width={width}
+            zIndex={1}
+            duration={2500}
+          />
           <div className="form__logo">
             <img src={LogoPrimary} alt="sitezy" width="55px" />
           </div>
-          <div className="form__top-title">Your Sitezy Account is Ready!</div>
-          <div className="form__top-subtitle">
-            Congratulations! You've successfully created your Sitezy account. Now, let's start building your website or store
+          <div className="form__top-text">
+            <div className="form__top-title">Your Sitezy Account is Ready!</div>
+            <div className="form__top-subtitle">
+              Congratulations! You've successfully created your Sitezy account.
+              Now, let's start building your website or store
+            </div>
           </div>
         </div>
 
