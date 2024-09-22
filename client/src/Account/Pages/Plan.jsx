@@ -98,16 +98,6 @@ const Plan = () => {
   const { user } = UserAuth();
   const userId = user.uid;
 
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        console.log("user jest");
-      } else {
-        console.log("user nie jest");
-      }
-    });
-  }, [userId]);
-
   const HandleSubmit = async (plan) => {
     if (!selectedPlan) {
       setError("Choose Your Plan");
@@ -116,9 +106,7 @@ const Plan = () => {
       setError("Free Plan Selected");
       return;
     }
-    console.log(selectedPlan.name, " - ", selectedPlan.type);
-
-    console.log(plan, userId);
+    console.log("Plan:", selectedPlan.name, "| Type:", selectedPlan.type);
 
     fetch("http://localhost:5000/api/v1/create-subscription-checkout-session", {
       method: "POST",
@@ -130,7 +118,6 @@ const Plan = () => {
     })
       .then((res) => {
         if (res.ok) return res.json();
-        console.log(res);
         return res.json().then((json) => Promise.reject(json));
       })
       .then(({ session }) => {
@@ -149,7 +136,6 @@ const Plan = () => {
   const HandleToggle = () => {
     setIsTime(!isTime);
     setSelectedPlan(null);
-    console.log(isTime);
   };
 
   const findProfileByUserId = async (userId) => {
@@ -171,30 +157,21 @@ const Plan = () => {
 
   useEffect(() => {
     const fetchProfile = async () => {
-      const user = auth.currentUser;
-
-      if (user) {
-        try {
-          const userProfile = await findProfileByUserId(userId);
-          if (userProfile) {
-            console.log(userProfile);
-            setProfile(userProfile);
-          } else {
-            console.log("Profil użytkownika nie został znaleziony.");
-            setProfile(false);
-          }
-        } catch (err) {
-          console.log("Błąd podczas wyszukiwania profilu.");
+      try {
+        const userProfile = await findProfileByUserId(userId);
+        if (userProfile) {
+          console.log(userProfile);
+          setProfile(userProfile);
+        } else {
+          setProfile(false);
         }
-      } else {
-        console.log("Użytkownik nie jest zalogowany.");
+      } catch (err) {
+        console.log("Błąd podczas wyszukiwania profilu: ", err);
       }
     };
 
     fetchProfile();
   }, [userId]);
-
-  console.log(profile);
 
   if (profile) {
     return <Navigate to="/account/setup/profile" />;
