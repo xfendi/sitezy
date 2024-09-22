@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { UserAuth } from "../../Context/AuthContext";
-import { auth, db, storage } from "../../firebase";
+import { auth, db, database } from "../../firebase";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { Navigate, useNavigate } from "react-router-dom";
+import { onValue, ref } from "firebase/database";
 
 import LogoPrimary from "../../Assets/logo-primary.png";
 
 import FreeDescription from "./Plan/FreeDescription";
 import ProDescription from "./Plan/ProDescription";
 import BusinessDescription from "./Plan/BusinessDescription";
+import { onAuthStateChanged } from "firebase/auth";
 
 export const plans = [
   {
@@ -91,43 +93,52 @@ const Plan = () => {
   const [selectedPlan, setSelectedPlan] = useState();
   const [isTime, setIsTime] = useState(false);
   const [error, setError] = useState("");
+  const [planType, setPlanType] = useState("");
 
-  const monthPlans = plans.filter((plan) => plan.type === "month");
-  const yearPlans = plans.filter((plan) => plan.type === "year");
-
-  const navigate = useNavigate();
   const { user } = UserAuth();
   const userId = user.uid;
 
-  const HandleSubmit = async (e) => {
-    e.preventDefault();
-    setError("");
-    try {
-      if (selectedPlan.link === undefined) {
-        setError("Choose Your Plan");
-        return;
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        console.log("user jest");
+      } else {
+        console.log("user nie jest");
       }
-      console.log(selectedPlan.name, " - ", selectedPlan.type);
+    });
+  }, [userId]);
 
-      fetch("https://localhost:5000/api/v1/create-subscription-checkout-session", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          plan: Number(selectedPlan.price),
-          customer: userId,
-        }),
-      }).then((res) => {
+  const HandleSubmit = async (plan) => {
+    if (!selectedPlan) {
+      setError("Choose Your Plan");
+      return;
+    } else if (selectedPlan.link === undefined) {
+      setError("Free Plan Selected");
+      return;
+    }
+    console.log(selectedPlan.name, " - ", selectedPlan.type);
+
+    console.log(plan, userId);
+
+    fetch("http://localhost:5000/api/v1/create-subscription-checkout-session", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      mode: "cors",
+      body: JSON.stringify({ plan: plan, customer: userId }),
+    })
+      .then((res) => {
         if (res.ok) return res.json();
         console.log(res);
         return res.json().then((json) => Promise.reject(json));
-      }).then(({ session }) => window.location = session.url).catch((e) => console.log(e.error));
-
-    } catch (error) {
-      setError(error.message);
-      console.log(error.message);
-    }
+      })
+      .then(({ session }) => {
+        window.location = session.url;
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
 
   const HandlePlanClick = (plan) => {
@@ -405,7 +416,11 @@ const Plan = () => {
           </div>
 
           {error && <div className="form__error">{error}</div>}
-          <button onClick={HandleSubmit} type="submit" className="btn-dark">
+          <button
+            onClick={() => HandleSubmit(Number(selectedPlan.price))}
+            type="submit"
+            className="btn-dark"
+          >
             Proceed to payment
           </button>
         </div>

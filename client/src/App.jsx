@@ -11,6 +11,7 @@ import Admin from "./Apps/Admin";
 import Auth from "./Apps/Auth";
 import Account from "./Apps/Account";
 import Error from "./Error/Error";
+import Home from "./sass/Home";
 
 import ProtectedRoute from './Components/ProtectedRoute'
 
@@ -23,6 +24,7 @@ const App = () => {
     <AuthContextProvider>
       <Routes>
         <Route path="/*" element={<Site />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/auth/*" element={<Auth />} />
         <Route path="/account/*" element={<ProtectedRoute><Account /></ProtectedRoute>} />
         <Route path="/admin/*" element={<ProtectedRoute><Admin /></ProtectedRoute>} />

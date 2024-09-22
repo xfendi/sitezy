@@ -12,7 +12,7 @@ Sitezy allows users to:
 
 ### Current Development Stage
 - **Version**: 0.1 (Beta)
-- **Ongoing Development**: The core functionality of website creation is implemented. We're currently expanding the dashboard features and user management capabilities.
+- **Ongoing Development**: The core functionality of website creation is implemented. We're currently expanding user management and setup capabilities.
 
 ### Future Plans
 - **Template Marketplace**: A marketplace for users to buy and sell custom templates.
@@ -32,7 +32,7 @@ Sitezy is built using a modern web development stack:
 ### Backend (To be developed)
 - **Node.js / Express**: Planned backend framework for API development and server-side logic.
 - **MongoDB / Firebase**: Planned database to store user data, site content, and templates.
-- **JWT / OAuth**: Authentication and authorization methods for user accounts.
+- **Firebase Auth**: Authentication and authorization methods for user accounts.
 
 ### API Design
 The API will be designed to:

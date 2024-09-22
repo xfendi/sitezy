@@ -28,11 +28,61 @@ admin.initializeApp({
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "http://localhost:3000",
   })
 );
 
-const stripe = require("stripe")(process.env.STRIPE_PRIVATE_APIKEY)
+const stripe = require("stripe")(process.env.STRIPE_PRIVATE_APIKEY);
+
+const stripeSession = async (plan) => {
+  try {
+    const session = await stripe.checkout.sessions.create({
+      mode: "subscription",
+      payment_method_types: ["card"],
+      line_items: [
+        {
+          price: plan,
+          quantity: 1,
+        },
+      ],
+      success_url: "http://localhost:3000/account/setup/plan/success",
+      cancel_url: "http://localhost:3000/account/setup/plan/success",
+    });
+    return session;
+  } catch (e) {
+    return e;
+  }
+};
+
+app.post("/api/v1/create-subscription-checkout-session", async (req, res) => {
+  const { plan, customer } = req.body;
+  let planId = null;
+  if (plan == 15) planId = proMonth;
+  else if (plan == 35) planId = businessMonth;
+  else if (plan == 150) planId = proYear;
+  else if (plan == 350) planId = businessYear;
+
+  try {
+    console.log(planId);
+    const session = await stripeSession(planId);
+    const user = await admin.auth().getUser(customer);
+
+    console.log(session.id);
+    await admin
+      .database()
+      .ref("users")
+      .child(user.uid)
+      .update({
+        subscription: {
+          sessionId: session.id,
+        },
+      });
+    return res.json({ session });
+  } catch (e) {
+    res.send(e);
+    console.error(e);
+  }
+});
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
