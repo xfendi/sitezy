@@ -3,13 +3,19 @@ import { UserAuth } from "../../../Context/AuthContext";
 import { getDatabase, ref, onValue } from "firebase/database";
 import { useNavigate } from "react-router-dom";
 
+import ConfettiExplosion from "react-confetti-explosion";
+import useWindowSize from "react-use/lib/useWindowSize";
+
+import LogoPrimary from "../../../Assets/logo-primary.png";
+
 const Success = () => {
   const [sessionId, setSessionId] = useState();
 
+  const { width, height } = useWindowSize();
+  const navigate = useNavigate();
+
   const { user } = UserAuth();
   const userId = user.uid;
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     const db = getDatabase();
@@ -47,13 +53,46 @@ const Success = () => {
   };
 
   return (
-    <div>
-      <h1>Subscribed successfully!</h1>
-      <p>Your subscription ID is: {sessionId}</p>
-      <p>Please remember it for future reference.</p>
-      <p>Thank you for choosing Sitezy!</p>
-      <button onClick={() => HandleSuccess()}>Procees</button>
-    </div>
+    <section className="form__section">
+      <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]"></div>
+      <div
+        className="form__box"
+        data-aos="fade-up"
+        data-aos-easing="ease-out-back"
+        data-aos-delay="100"
+      >
+        <div className="form__top">
+        <ConfettiExplosion
+          force={0.6}
+          zIndex={1}
+          duration={2500}
+          style={{ position: 'absolute', left: '50%', top: '0' }}
+        />
+          <div className="form__logo">
+            <img src={LogoPrimary} alt="sitezy" width="55px" />
+          </div>
+          <div className="form__top-text">
+            <div className="form__top-title" style={{ color: 'green' }} >Payment Successful!</div>
+            <div className="form__top-subtitle">
+              Your purchase has been completed. <br />
+              Welcome to your new plan on Sitezy!
+            </div>
+          </div>
+        </div>
+
+        <form className="form">
+          <a href="/account/setup/profile" className="btn-dark">
+            Continue
+          </a>
+
+          <div className="form__footer">
+            <div className="form__footer-text">
+              Learn More About Plans! <a href="/help">Help</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
   );
 };
 

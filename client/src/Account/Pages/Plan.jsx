@@ -149,9 +149,9 @@ const Plan = () => {
         console.log("Dokument profilu nie istnieje");
         return null;
       }
-    } catch (error) {
-      console.error("Błąd podczas pobierania profilu:", error);
-      throw error;
+    } catch (e) {
+      console.error("Błąd podczas pobierania profilu:", e.message);
+      throw e;
     }
   };
 
@@ -160,13 +160,13 @@ const Plan = () => {
       try {
         const userProfile = await findProfileByUserId(userId);
         if (userProfile) {
-          console.log(userProfile);
+          console.log("User profile:", userProfile);
           setProfile(userProfile);
         } else {
           setProfile(false);
         }
-      } catch (err) {
-        console.log("Błąd podczas wyszukiwania profilu: ", err);
+      } catch (e) {
+        console.log("Błąd podczas wyszukiwania profilu:", e.message);
       }
     };
 

@@ -78,9 +78,9 @@ const Profile = () => {
       });
 
       navigate("/account/setup/company");
-    } catch (error) {
-      setError(error.message);
-      console.log(error.message);
+    } catch (e) {
+      setError(e.message);
+      console.log(e.message);
     }
   };
 
@@ -97,17 +97,12 @@ const Profile = () => {
         photoURL: "https://i.imgur.com/4tBUxz7.png",
       });
       navigate("/account/setup/company");
-    } catch (error) {
-      setError(error.message);
-      console.log(error.message);
+    } catch (e) {
+      setError(e.message);
+      console.log(e.message);
     }
   };
-
-  const HandleThemeClick = (theme) => {
-    setTheme(theme);
-    setActiveButton(theme);
-  };
-
+  
   const findProfileByUserId = async (userId) => {
     const profileRef = doc(db, "profiles", userId);
 
@@ -244,11 +239,11 @@ const Profile = () => {
                   type="button"
                   id="dark"
                   className={
-                    activeButton === "dark"
+                    theme === "dark"
                       ? "active profile__theme__button profile__theme__button-dark"
                       : "profile__theme__button profile__theme__button-dark"
                   }
-                  onClick={() => HandleThemeClick("dark")}
+                  onClick={() => setTheme("dark")}
                 >
                   <img src={Dark} alt="" />
                 </button>
@@ -260,11 +255,11 @@ const Profile = () => {
                   type="button"
                   id="light"
                   className={
-                    activeButton === "light"
+                    theme === "light"
                       ? "active profile__theme__button profile__theme__button-light"
                       : "profile__theme__button profile__theme__button-light"
                   }
-                  onClick={() => HandleThemeClick("light")}
+                  onClick={() => setTheme("light")}
                 >
                   <img src={Light} alt="" />
                 </button>
@@ -276,11 +271,11 @@ const Profile = () => {
                   type="button"
                   id="system"
                   className={
-                    activeButton === "system"
+                    theme === "system"
                       ? "active profile__theme__button profile__theme__button-system"
                       : "profile__theme__button profile__theme__button-system"
                   }
-                  onClick={() => HandleThemeClick("system")}
+                  onClick={() => setTheme("system")}
                 >
                   <img src={System} alt="" />
                 </button>
