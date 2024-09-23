@@ -2,18 +2,14 @@ import React, { useEffect, useState } from "react";
 import { UserAuth } from "../../../Context/AuthContext";
 import { getDatabase, ref, onValue } from "firebase/database";
 import { useNavigate } from "react-router-dom";
-
 import ConfettiExplosion from "react-confetti-explosion";
-import useWindowSize from "react-use/lib/useWindowSize";
 
 import LogoPrimary from "../../../Assets/logo-primary.png";
 
 const Success = () => {
   const [sessionId, setSessionId] = useState();
 
-  const { width, height } = useWindowSize();
   const navigate = useNavigate();
-
   const { user } = UserAuth();
   const userId = user.uid;
 
@@ -30,16 +26,17 @@ const Success = () => {
     });
   }, [userId, sessionId]);
 
-  const HandleSuccess = () => {
+  const handlePaymentSuccess = (e) => {
+    e.preventDefault();
     fetch("http://localhost:5000/api/v1/payment-success", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      mode: "cors",
       body: JSON.stringify({ sessionId: sessionId, firebaseId: userId }),
     })
       .then((res) => {
+        console.log("response received");
         if (res.ok) return res.json();
         return res.json().then((json) => Promise.reject(json));
       })
@@ -48,7 +45,7 @@ const Success = () => {
         navigate("/account/setup/profile");
       })
       .catch((e) => {
-        console.log(e);
+        console.log(e.error);
       });
   };
 
@@ -62,17 +59,19 @@ const Success = () => {
         data-aos-delay="100"
       >
         <div className="form__top">
-        <ConfettiExplosion
-          force={0.6}
-          zIndex={1}
-          duration={2500}
-          style={{ position: 'absolute', left: '50%', top: '0' }}
-        />
+          <ConfettiExplosion
+            force={0.6}
+            zIndex={1}
+            duration={2500}
+            style={{ position: "absolute", left: "50%", top: "0" }}
+          />
           <div className="form__logo">
             <img src={LogoPrimary} alt="sitezy" width="55px" />
           </div>
           <div className="form__top-text">
-            <div className="form__top-title" style={{ color: 'green' }} >Payment Successful!</div>
+            <div className="form__top-title" style={{ color: "green" }}>
+              Payment Successful!
+            </div>
             <div className="form__top-subtitle">
               Your purchase has been completed. <br />
               Welcome to your new plan on Sitezy!
@@ -81,9 +80,9 @@ const Success = () => {
         </div>
 
         <form className="form">
-          <a href="/account/setup/profile" className="btn-dark">
+          <button onClick={(e) => handlePaymentSuccess(e)} className="btn-dark">
             Continue
-          </a>
+          </button>
 
           <div className="form__footer">
             <div className="form__footer-text">

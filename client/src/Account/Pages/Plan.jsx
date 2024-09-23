@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { UserAuth } from "../../Context/AuthContext";
-import { auth, db, database } from "../../firebase";
-import { doc, getDoc, setDoc } from "firebase/firestore";
-import { Navigate, useNavigate } from "react-router-dom";
-import { onValue, ref } from "firebase/database";
+import { db } from "../../firebase";
+import { doc, getDoc } from "firebase/firestore";
+import { Navigate } from "react-router-dom";
 
 import LogoPrimary from "../../Assets/logo-primary.png";
 
 import FreeDescription from "./Plan/FreeDescription";
 import ProDescription from "./Plan/ProDescription";
 import BusinessDescription from "./Plan/BusinessDescription";
-import { onAuthStateChanged } from "firebase/auth";
 
 export const plans = [
   {
@@ -91,9 +89,8 @@ export const plans = [
 const Plan = () => {
   const [profile, setProfile] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState();
-  const [isTime, setIsTime] = useState(false);
+  const [isTime, setIsTime] = useState();
   const [error, setError] = useState("");
-  const [planType, setPlanType] = useState("");
 
   const { user } = UserAuth();
   const userId = user.uid;
@@ -124,7 +121,7 @@ const Plan = () => {
         window.location = session.url;
       })
       .catch((e) => {
-        console.log(e);
+        console.log(e.message);
       });
   };
 
@@ -160,7 +157,7 @@ const Plan = () => {
       try {
         const userProfile = await findProfileByUserId(userId);
         if (userProfile) {
-          console.log("User profile:", userProfile);
+          console.log(userProfile);
           setProfile(userProfile);
         } else {
           setProfile(false);

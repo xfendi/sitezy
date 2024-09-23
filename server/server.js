@@ -83,48 +83,74 @@ app.post("/api/v1/create-subscription-checkout-session", async (req, res) => {
 });
 
 app.post("/api/v1/payment-success", async (req, res) => {
+  console.log(req.body);
   const { sessionId, firebaseId } = req.body;
 
   try {
     const session = await stripe.checkout.sessions.retrieve(sessionId);
 
-    if (session.payment_status === 'paid') {
-        const subscriptionId = session.subscription;
-        try {
-          const subscription = await stripe.subscriptions.retrieve(subscriptionId);
-          const user = await admin.auth().getUser(firebaseId);
-          const planId = subscription.plan.id;
-          const planType = "";
-          if (subscription.plan.amount == 15) planType = "Pro Month";
-          else if (subscription.plan.amount == 35) planType = "Business Month";
-          else if (subscription.plan.amount == 150) planType = "Pro Year";
-          else if (subscription.plan.amount == 350) planType = "Business Year";
-          const startDate = moment.unix(subscription.current_period_start).format('DD-MM-YYYY');
-          const endDate = moment.unix(subscription.current_period_end).format('DD-MM-YYYY');
-          const durationInSeconds = subscription.current_period_end - subscription.current_period_start;
-          const durationInDays = moment.duration(durationInSeconds, 'seconds').asDays();
-          await admin.database().ref("users").child(user.uid).update({ 
-              subscription: {
-                sessionId: null,
-                planId: planId,
-                planType: planType,
-                planStartDate: startDate,
-                planEndDate: endDate,
-                planDuration: durationInDays
-              }});
-
-            
-          } catch (error) {
-            console.error('Error retrieving subscription:', error);
-          }
-        return res.json({ message: "Payment successful" });
-      } else {
-        return res.json({ message: "Payment failed" });
+    if (session.payment_status === "paid") {
+      const subscriptionId = session.subscription;
+      try {
+        const subscription = await stripe.subscriptions.retrieve(
+          subscriptionId
+        );
+        const user = await admin.auth().getUser(firebaseId);
+        const planId = subscription.plan.id;
+        let planType = "";
+        let planName = "";
+        if (subscription.plan.amount == 1500) {
+          planName = "Pro";
+          planType = "month";
+        } else if (subscription.plan.amount == 3500) {
+          planName = "Business";
+          planType = "month";
+        } else if (subscription.plan.amount == 15000) {
+          planName = "Pro";
+          planType = "Year";
+        } else if (subscription.plan.amount == 35000) {
+          planName = "Business"
+          planType = "Year";
+        }
+        const startDate = moment
+          .unix(subscription.current_period_start)
+          .format("DD-MM-YYYY");
+        const endDate = moment
+          .unix(subscription.current_period_end)
+          .format("DD-MM-YYYY");
+        const durationInSeconds =
+          subscription.current_period_end - subscription.current_period_start;
+        const durationInDays = moment
+          .duration(durationInSeconds, "seconds")
+          .asDays();
+        await admin
+          .database()
+          .ref("users")
+          .child(user.uid)
+          .update({
+            subscription: {
+              sessionId: null,
+              planId: planId,
+              planType: planType,
+              planName: planName,
+              planStartDate: startDate,
+              planEndDate: endDate,
+              planDuration: durationInDays,
+            },
+          });
+        console.log("Subscription updated");
+      } catch (error) {
+        console.log("Error retrieving subscription:", error);
       }
-    } catch (error) {
-      res.send(error);
+      console.log("Payment successful");
+      return res.json({ message: "Payment successful" });
+    } else {
+      return res.json({ message: "Payment failed" });
     }
-  });
+  } catch (error) {
+    res.send(error);
+  }
+});
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

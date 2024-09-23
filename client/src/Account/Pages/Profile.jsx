@@ -14,8 +14,6 @@ import System from "../../Assets/system.png";
 const Profile = () => {
   const [profile, setProfile] = useState(false);
 
-  const [activeButton, setActiveButton] = useState("");
-
   const colors = [
     "#000000",
     "#3F3FBF",
@@ -102,7 +100,7 @@ const Profile = () => {
       console.log(e.message);
     }
   };
-  
+
   const findProfileByUserId = async (userId) => {
     const profileRef = doc(db, "profiles", userId);
 
