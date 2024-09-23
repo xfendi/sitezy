@@ -1,4 +1,4 @@
-# Sitezy
+# Sitezy × Website and Store Builder
 
 **Sitezy** is a web application designed to simplify website and e-commerce store creation. Its goal is to provide users with an intuitive interface to build professional websites without needing extensive technical knowledge. Sitezy includes a powerful dashboard for managing users, teams, content, and more.
 
@@ -11,8 +11,8 @@ Sitezy allows users to:
 - **Responsive Designs**: Every website created with Sitezy is optimized for all screen sizes.
 
 ### Current Development Stage
-- **Version**: 0.1 (Beta)
-- **Ongoing Development**: The core functionality of website creation is implemented. We're currently expanding user management and setup capabilities.
+- **Version**: 0.2 (Beta)
+- **Recent Update**: We have just implemented account creation and profile management, allowing users to register and set up their own accounts and companies.
 
 ### Future Plans
 - **Template Marketplace**: A marketplace for users to buy and sell custom templates.
@@ -29,7 +29,7 @@ Sitezy is built using a modern web development stack:
 - **Context API**: Manages global state across different parts of the application.
 - **CSS Modules / Tailwind**: For modular and scalable styling.
 
-### Backend (To be developed)
+### Backend
 - **Node.js / Express**: Planned backend framework for API development and server-side logic.
 - **MongoDB / Firebase**: Planned database to store user data, site content, and templates.
 - **Firebase Auth**: Authentication and authorization methods for user accounts.
