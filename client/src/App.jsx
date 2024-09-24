@@ -3,7 +3,6 @@ import React, { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
-import { AuthContextProvider } from "./Context/AuthContext";
 import { Route, Routes } from "react-router-dom";
 
 import Site from "./Apps/Site";
@@ -21,7 +20,6 @@ const App = () => {
   }, []);
 
   return (
-    <AuthContextProvider>
       <Routes>
         <Route path="/*" element={<Site />} />
         <Route path="/home" element={<Home />} />
@@ -32,7 +30,6 @@ const App = () => {
         <Route path="/404" element={<Error />} />
         <Route path="*" element={<Error />} />
       </Routes>
-    </AuthContextProvider>
   );
 };
 
