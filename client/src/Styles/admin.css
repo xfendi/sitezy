@@ -104,12 +104,13 @@
   font-size: 14px;
   transition: var(--transition-default);
   border-radius: 7px;
+  border: 1px solid transparent;
 }
 .sidebar__nav-link:hover {
   color: var(--color-dark);
   background-color: var(--color-light-gray);
 }
-.sidebar__nav-link.focus {
+.sidebar__nav-link.active {
   color: var(--color-dark);
   border: var(--color-light) 1px solid;
   background-color: var(--color-white);

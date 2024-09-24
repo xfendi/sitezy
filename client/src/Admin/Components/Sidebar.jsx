@@ -12,9 +12,12 @@ import LanguageRoundedIcon from '@mui/icons-material/LanguageRounded';
 import AddchartRoundedIcon from '@mui/icons-material/AddchartRounded';
 import LibraryBooksRoundedIcon from '@mui/icons-material/LibraryBooksRounded';
 import { UserAuth } from "../../Context/AuthContext";
+import { NavLink } from "react-router-dom";
 
 const Sidebar = () => {
   const { user } = UserAuth();
+
+  const isActive = (path) => window.location.pathname === path;
   return (
     <aside className="h-full">
       <nav className="sidebar h-full rounded-xl flex flex-col p-3">
@@ -44,53 +47,53 @@ const Sidebar = () => {
               <input type="text" id="search" placeholder="Search" />
             </li>
             <li>
-              <a href="/admin" className="sidebar__nav-link focus">
+              <NavLink to="/admin" className="sidebar__nav-link">
                 <HomeRoundedIcon fontSize="small" /> <p>Dashboard</p>
-              </a>
+              </NavLink>
             </li>
             <li>
-              <a href="/admin/accounts" className="sidebar__nav-link">
+              <NavLink to="/admin/accounts" className="sidebar__nav-link">
                 <SupervisorAccountRoundedIcon fontSize="small" /> <p>Accounts</p>
-              </a>
+              </NavLink>
             </li>
             <li>
-              <a href="/admin/analytics" className="sidebar__nav-link">
+              <NavLink to="/admin/analytics" className="sidebar__nav-link">
                 <AssessmentRoundedIcon fontSize="small" /> <p>Analytics</p>
-              </a>
+              </NavLink>
             </li>
             <li>
-              <a href="/admin/templates" className="sidebar__nav-link">
+              <NavLink to="/admin/templates" className="sidebar__nav-link">
                 <AppRegistrationRoundedIcon fontSize="small" /> <p>Templates</p>
-              </a>
+              </NavLink>
             </li>
             <li>
-              <a href="/admin/blog" className="sidebar__nav-link">
+              <NavLink to="/admin/blog" className="sidebar__nav-link">
                 <LibraryBooksRoundedIcon fontSize="small" /> <p>Blog</p>
-              </a>
+              </NavLink>
             </li>
             <li>
-              <a href="/admin/integrations" className="sidebar__nav-link">
+              <NavLink to="/admin/integrations" className="sidebar__nav-link">
                 <AddchartRoundedIcon fontSize="small" /> <p>Integrations</p>
-              </a>
+              </NavLink>
             </li>
             <li>
-              <a href="/admin/website" className="sidebar__nav-link">
+              <NavLink to="/admin/website" className="sidebar__nav-link">
                 <LanguageRoundedIcon fontSize="small" /> <p>Website</p>
-              </a>
+              </NavLink>
             </li>
           </ul>
         </div>
         <div className="sidebar__nav">
           <ul>
             <li>
-              <a href="/admin/settings" className="sidebar__nav-link">
+              <NavLink to="/admin/settings" className="sidebar__nav-link">
                 <TuneRoundedIcon fontSize="small" /> <p>Settings</p>
-              </a>
+              </NavLink>
             </li>
             <li>
-              <a href="/admin/help" className="sidebar__nav-link">
+              <NavLink to="/admin/help" className="sidebar__nav-link">
                 <QuizRoundedIcon fontSize="small" /> <p>Help</p>
-              </a>
+              </NavLink>
             </li>
           </ul>
         </div>
