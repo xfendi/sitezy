@@ -1,28 +1,58 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { UserAuth } from "../../../Context/AuthContext";
 import { collection, addDoc } from "firebase/firestore";
 
-import { db } from "../../../firebase";
+import { db, storage } from "../../../firebase";
 
 import LogoPrimary from "../../../Assets/logo-primary.png";
 
 import { useNavigate } from "react-router-dom";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 const Create = () => {
   const [name, setName] = useState("");
   const [error, setError] = useState("");
+  const [selectedFile, setSelectedFile] = useState();
+  const [preview, setPreview] = useState();
 
   const { user } = UserAuth();
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (!selectedFile) {
+      setPreview(undefined);
+      return;
+    }
+
+    const objectUrl = URL.createObjectURL(selectedFile);
+    setPreview(objectUrl);
+
+    return () => URL.revokeObjectURL(objectUrl);
+  }, [selectedFile]);
+
+  const onSelectFile = (e) => {
+    if (!e.target.files || e.target.files.length === 0) {
+      setSelectedFile(undefined);
+      return;
+    }
+
+    setSelectedFile(e.target.files[0]);
+  };
+
   const HandleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     try {
+      const fileRef = ref(storage, `companies/${name}`);
+      await uploadBytes(fileRef, selectedFile);
+      const photoURL =
+        (await getDownloadURL(fileRef)) || "https://i.imgur.com/4tBUxz7.png";
+
       await addDoc(collection(db, "companies"), {
         name: name,
         createdAt: new Date(),
+        photoURL: photoURL,
         members: {
           [user.uid]: "owner", // Użytkownik jest właścicielem nowej firmy
         },
@@ -57,7 +87,7 @@ const Create = () => {
 
         <form onSubmit={HandleSubmit} className="form">
           <div className="form__input-box">
-            <label htmlFor="name">Name</label>
+            <label htmlFor="name">Company Name</label>
             <input
               type="name"
               name="name"
@@ -68,6 +98,27 @@ const Create = () => {
               }}
               required
             />
+          </div>
+
+          <div className="form__cont">
+            <div className="form__input-box">
+              <label htmlFor="name">Upload a company picture</label>
+
+              <div className="file-input">
+                {selectedFile && (
+                  <img src={preview} alt="" className="file-input__preview" />
+                )}
+                <input
+                  type="file"
+                  id="file"
+                  className="file"
+                  onChange={onSelectFile}
+                />
+                <label htmlFor="file" className="file-input__label">
+                  Upload picture
+                </label>
+              </div>
+            </div>
           </div>
 
           {error && <div className="form__error">{error}</div>}
