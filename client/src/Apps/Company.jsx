@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Setup from '../Company/Routes/Setup'
-import Settings from '../Company/routes/Settings'
+import Settings from '../Company/Routes/Settings'
 
 const Company = () => {
   return (
