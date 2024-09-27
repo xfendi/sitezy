@@ -15,7 +15,7 @@
 }
 
 .theme-light {
-  --color-main: #101828;
+  --color-main: #ffffff;
   --color-opacity: rgba(0, 0, 0, 0.03);
 
   --text-primary: #101828;
@@ -48,7 +48,7 @@
 }
 
 .theme-dark {
-  --color-main: #ffffff;
+  --color-main: #000000;
   --color-opacity: rgba(255, 255, 255, 0.03);
 
   --text-primary: #f5f5f6;
@@ -90,7 +90,8 @@
 }
 
 .main {
-  background-color: var(--color-white);
+  background-color: var(--color-main);
+  color: var(--text-primary);
   border: var(--border-secondary) 1px solid;
   padding: 15px;
   border-radius: 15px;
@@ -101,8 +102,9 @@
 }
 
 .sidebar__profile {
+  color: var(--text-primary);
   display: flex;
-  background-color: var(--color-white);
+  background-color: var(--color-main);
   border: var(--border-secondary) 1px solid;
   border-radius: 10px;
   padding: 10px;
@@ -121,7 +123,7 @@
   gap: 5px;
   padding: 8px;
   border-radius: 10px;
-  color: var(--color-mid);
+  color: var(--text-tertiary);
   font-weight: 400;
   font-size: 14px;
   margin-bottom: 5px;
@@ -164,7 +166,7 @@
 .sidebar__nav-link.active {
   color: var(--text-primary);
   border: var(--border-secondary) 1px solid;
-  background-color: var(--color-white);
+  background-color: var(--color-main);
 
   -webkit-box-shadow: 10px 10px 24px -25px rgba(0, 0, 0, 1);
   -moz-box-shadow: 10px 10px 24px -25px rgba(0, 0, 0, 1);
@@ -172,6 +174,7 @@
 }
 
 .error {
+  color: var(--text-primary);
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -192,7 +195,7 @@
 
 .error-link {
   font-size: 15px;
-  color: var(--color-mid);
+  color: var(--text-tertiary);
 }
 
 .error-link a {
@@ -211,8 +214,30 @@
 
 .sidebar__profile-text-email {
   font-size: 12px;
-  width: 100%; /* Ustaw szerokość kontenera */
-  white-space: nowrap; /* Nie pozwala na zawijanie tekstu */
-  overflow: hidden; /* Ukrywa tekst, który wykracza poza szerokość */
-  text-overflow: ellipsis; /* Zastępuje ucięty tekst "..." */
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dropdown__menu {
+  top: 77px;
+  right: 0;
+  width: 250px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  left: 10px;
+  background-color: var(--color-main);
+  padding: 10px;
+  border: var(--border-secondary) 1px solid;
+  border-radius: 10px;
+  transition: var(--transition-default);
+}
+
+.dropdown__menu ul {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }

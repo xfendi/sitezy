@@ -12,7 +12,7 @@ const LogIn = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const { login, googleAuth, githubAuth } = UserAuth();
+  const { login } = UserAuth();
   const navigate = useNavigate();
 
   const HandleSubmit = async (e) => {
@@ -21,28 +21,6 @@ const LogIn = () => {
     try {
       await login(email, password);
       navigate("/admin");
-    } catch (error) {
-      setError(error.message);
-      console.log(error.message);
-    }
-  };
-
-  const HandleGoogleAuth = async (e) => {
-    e.preventDefault();
-    setError("");
-    try {
-      await googleAuth();
-    } catch (error) {
-      setError(error.message);
-      console.log(error.message);
-    }
-  };
-
-  const HandleGitHubAuth = async (e) => {
-    e.preventDefault();
-    setError("");
-    try {
-      await githubAuth();
     } catch (error) {
       setError(error.message);
       console.log(error.message);
@@ -70,7 +48,7 @@ const LogIn = () => {
           </div>
         </div>
 
-        <div className="form__socials">
+        {/*<div className="form__socials">
           <button className="form__socials-social" onClick={HandleGoogleAuth}>
             <FcGoogle size={15} />
             Continue with Google
@@ -79,7 +57,7 @@ const LogIn = () => {
             <FaGithub size={15} />
             Continue with GitHub
           </button>
-        </div>
+        </div>*/}
 
         <form onSubmit={HandleSubmit} className="form">
           <div className="form__input-box">

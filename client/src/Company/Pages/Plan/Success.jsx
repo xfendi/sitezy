@@ -36,13 +36,12 @@ const Success = () => {
       body: JSON.stringify({ sessionId: sessionId, firebaseId: userId }),
     })
       .then((res) => {
-        console.log("response received");
         if (res.ok) return res.json();
         return res.json().then((json) => Promise.reject(json));
       })
       .then((data) => {
         console.log(data.message);
-        navigate("/account/setup/profile");
+        navigate("/account/setup/finish");
       })
       .catch((e) => {
         console.log(e.error);

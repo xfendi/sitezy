@@ -10,17 +10,22 @@ import {
   updateProfile,
 } from "firebase/auth";
 
-import { auth } from "../firebase";
+import { auth, db } from "../firebase";
+import { doc, setDoc } from "firebase/firestore";
 
 const UserContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState({});
 
-  const createUser = async (email, password, name) => {
+  const createUser = async (email, password, name, type) => {
     await createUserWithEmailAndPassword(auth, email, password).then(function() {
       console.log("Successfully created new user.")
-      return updateProfile(auth.currentUser, {
+      setDoc(doc(db, "profiles", auth.currentUser?.uid), {
+        type: type,
+        createdAt: new Date(),
+      });
+      updateProfile(auth.currentUser, {
         displayName: name
       })
     })

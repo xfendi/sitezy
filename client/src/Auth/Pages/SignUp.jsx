@@ -3,8 +3,6 @@ import { UserAuth } from "../../Context/AuthContext";
 
 import LogoPrimary from "../../Assets/logo-primary.png";
 
-import { FcGoogle } from "react-icons/fc";
-import { FaGithub } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
@@ -12,45 +10,28 @@ const SignUp = () => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [type, setType] = useState("");
   const [error, setError] = useState("");
 
-  const { createUser, googleAuth, githubAuth } = UserAuth();
+  const { createUser } = UserAuth();
 
   const navigate = useNavigate();
+
+  const HandleCheck = (e) => {
+    setType(e.target.value);
+  };
 
   const HandleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     try {
       if (password === confirmPassword) {
-        await createUser(email, password, name);
-        navigate("/account/setup/plan");
+        await createUser(email, password, name, type);
+        navigate("/account/setup/profile");
       } else {
         setError("Passwords do not match");
         return;
       }
-    } catch (error) {
-      setError(error.message);
-      console.log(error.message);
-    }
-  };
-
-  const HandleGoogleAuth = async (e) => {
-    e.preventDefault();
-    setError("");
-    try {
-      await googleAuth();
-    } catch (error) {
-      setError(error.message);
-      console.log(error.message);
-    }
-  };
-
-  const HandleGitHubAuth = async (e) => {
-    e.preventDefault();
-    setError("");
-    try {
-      await githubAuth();
     } catch (error) {
       setError(error.message);
       console.log(error.message);
@@ -77,7 +58,7 @@ const SignUp = () => {
             </div>
           </div>
         </div>
-        <div className="form__socials">
+        {/*<div className="form__socials">
           <button className="form__socials-social" onClick={HandleGoogleAuth}>
             <FcGoogle size={15} />
             Continue with Google
@@ -86,7 +67,7 @@ const SignUp = () => {
             <FaGithub size={15} />
             Continue with GitHub
           </button>
-        </div>
+        </div>*/}
         <form onSubmit={HandleSubmit} className="form">
           <div className="form__input-box">
             <label htmlFor="name">Full Name</label>
@@ -139,6 +120,32 @@ const SignUp = () => {
               }}
               required
             />
+          </div>
+          <div className="form__input-box">
+            <label htmlFor="">Account Type</label>
+            <div className="form__radio-container">
+              <label>
+                <input
+                  type="radio"
+                  name="type"
+                  required
+                  value="individual"
+                  onChange={HandleCheck}
+                  checked={type === "individual"}
+                ></input>
+                Individual
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="type"
+                  value="work"
+                  onChange={HandleCheck}
+                  checked={type === "work"}
+                ></input>
+                Work
+              </label>
+            </div>
           </div>
 
           {error && <div className="form__error">{error}</div>}

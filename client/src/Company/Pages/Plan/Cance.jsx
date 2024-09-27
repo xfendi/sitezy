@@ -26,7 +26,7 @@ const Cancel = () => {
         </div>
 
         <form className="form">
-          <a href="/account/setup/plan" className="btn-dark">
+          <a href="/company/setup/plan" className="btn-dark">
             Try Again
           </a>
 

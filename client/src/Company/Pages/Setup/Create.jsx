@@ -57,7 +57,7 @@ const Create = () => {
           [user.uid]: "owner", // Użytkownik jest właścicielem nowej firmy
         },
       });
-      navigate("/account/setup/finish");
+      navigate("/company/setup/plan");
     } catch (error) {
       setError(error.message);
       console.log(error.message);

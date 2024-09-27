@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { UserAuth } from "../../Context/AuthContext";
-import { db } from "../../firebase";
-import { doc, getDoc } from "firebase/firestore";
+import { UserDocs } from "../../Context/UserDocsContext";
 import { Navigate } from "react-router-dom";
 
 import LogoPrimary from "../../Assets/logo-primary.png";
@@ -87,11 +86,11 @@ export const plans = [
 ];
 
 const Plan = () => {
-  const [profile, setProfile] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState();
   const [isTime, setIsTime] = useState();
   const [error, setError] = useState("");
 
+  const { subscription } = UserDocs();
   const { user } = UserAuth();
   const userId = user.uid;
 
@@ -135,43 +134,9 @@ const Plan = () => {
     setSelectedPlan(null);
   };
 
-  const findProfileByUserId = async (userId) => {
-    const profileRef = doc(db, "profiles", userId);
-
-    try {
-      const docSnap = await getDoc(profileRef);
-      if (docSnap.exists()) {
-        return { id: docSnap.id, ...docSnap.data() };
-      } else {
-        console.log("Dokument profilu nie istnieje");
-        return null;
-      }
-    } catch (e) {
-      console.error("Błąd podczas pobierania profilu:", e.message);
-      throw e;
-    }
-  };
-
-  useEffect(() => {
-    const fetchProfile = async () => {
-      try {
-        const userProfile = await findProfileByUserId(userId);
-        if (userProfile) {
-          console.log(userProfile);
-          setProfile(userProfile);
-        } else {
-          setProfile(false);
-        }
-      } catch (e) {
-        console.log("Błąd podczas wyszukiwania profilu:", e.message);
-      }
-    };
-
-    fetchProfile();
-  }, [userId]);
-
-  if (profile) {
-    return <Navigate to="/account/setup/profile" />;
+  if (subscription) {
+    console.log("Subscription:", subscription);
+    // return <Navigate to="/admin" />;
   }
 
   const MonthPlansComponent = () => {

@@ -14,7 +14,7 @@ export const UserDocsContextProvider = ({ children }) => {
 
   const { user } = UserAuth();
 
-  const userId = user.uid;
+  const userId = user?.uid;
 
   const findUserCompany = async (userId) => {
     const companiesRef = collection(db, "companies");
@@ -45,7 +45,7 @@ export const UserDocsContextProvider = ({ children }) => {
 
   const findUserSubscription = async (userId) => {
     try {
-      const subRef = ref(database, "users/" + userId + "/subscription");
+      const subRef = ref(database, "companies/" + userId + "/subscription");
       onValue(subRef, (snapshot) => {
         const data = snapshot.val();
         if (data) {

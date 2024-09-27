@@ -45,8 +45,8 @@ const stripeSession = async (plan) => {
           quantity: 1,
         },
       ],
-      success_url: "http://localhost:3000/account/setup/plan/success",
-      cancel_url: "http://localhost:3000/account/setup/plan/success",
+      success_url: "http://localhost:3000/company/setup/plan/success",
+      cancel_url: "http://localhost:3000/company/setup/plan/success",
     });
     return session;
   } catch (e) {
@@ -68,7 +68,7 @@ app.post("/api/v1/create-subscription-checkout-session", async (req, res) => {
 
     await admin
       .database()
-      .ref("users")
+      .ref("companies")
       .child(user.uid)
       .update({
         subscription: {
@@ -125,7 +125,7 @@ app.post("/api/v1/payment-success", async (req, res) => {
           .asDays();
         await admin
           .database()
-          .ref("users")
+          .ref("companies")
           .child(user.uid)
           .update({
             subscription: {

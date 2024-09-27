@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { UserAuth } from "../../Context/AuthContext";
 import { auth, db, storage } from "../../firebase";
-import { getDoc, doc, setDoc } from "firebase/firestore";
+import { getDoc, doc, setDoc, updateDoc } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { updateProfile } from "firebase/auth";
 import { Navigate, useNavigate } from "react-router-dom";
@@ -14,6 +14,14 @@ import System from "../../Assets/system.png";
 const Profile = () => {
   const [profile, setProfile] = useState(false);
 
+  const [color, setColor] = useState("");
+  const [theme, setTheme] = useState("");
+
+  const [selectedFile, setSelectedFile] = useState();
+  const [preview, setPreview] = useState();
+
+  const [error, setError] = useState("");
+
   const colors = [
     "#000000",
     "#3F3FBF",
@@ -23,14 +31,6 @@ const Profile = () => {
     "#008080",
     "#00FF00",
   ];
-
-  const [color, setColor] = useState("");
-  const [theme, setTheme] = useState("");
-
-  const [selectedFile, setSelectedFile] = useState();
-  const [preview, setPreview] = useState();
-
-  const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
@@ -67,15 +67,14 @@ const Profile = () => {
       const photoURL =
         (await getDownloadURL(fileRef)) || "https://i.imgur.com/4tBUxz7.png";
 
-      updateProfile(user, { photoURL });
-
-      await setDoc(doc(db, "profiles", userId), {
+      await updateDoc(doc(db, "profiles", userId), {
         color: color || "#6e48eb",
         theme: theme || "light",
-        createdAt: new Date(),
       });
 
-      navigate("/account/setup/company");
+      await updateProfile(user, { photoURL });
+
+      navigate(profile.type === "work" ? "/company/setup" : "/account/setup/finish");
     } catch (e) {
       setError(e.message);
       console.log(e.message);
@@ -86,15 +85,14 @@ const Profile = () => {
     e.preventDefault();
     setError("");
     try {
-      await setDoc(doc(db, "profiles", userId), {
+      await updateDoc(doc(db, "profiles", userId), {
         color: "#6e48eb",
         theme: "light",
-        createdAt: new Date(),
       });
-      await updateProfile(auth.currentUser, {
+      await updateProfile(user, {
         photoURL: "https://i.imgur.com/4tBUxz7.png",
       });
-      navigate("/account/setup/company");
+      navigate(profile.type === "work" ? "/company/setup" : "/account/setup/finish");
     } catch (e) {
       setError(e.message);
       console.log(e.message);
@@ -144,7 +142,7 @@ const Profile = () => {
   }, [userId]);
 
   if (profile.color) {
-    return <Navigate to="/account/setup/company" />;
+    return <Navigate to={profile.type === "work" ? "/company/setup" : "/account/setup/finish"} />;
   }
 
   return (
@@ -163,14 +161,14 @@ const Profile = () => {
           <div className="form__top-text">
             <div className="form__top-title">Customize Your Account</div>
             <div className="form__top-subtitle">
-              Create your own admin design for better experirnce!
+              Create your own dashboard design for better experirnce!
             </div>
           </div>
         </div>
 
         <form onSubmit={HandleSubmit} className="form">
           <div className="form__input-box">
-            <label>Chose your color</label>
+            <label>Chose Primary Color</label>
 
             <div className="color__selector-container">
               <div className="color__selector">
@@ -209,7 +207,7 @@ const Profile = () => {
 
           <div className="form__cont">
             <div className="form__input-box">
-              <label htmlFor="name">Upload a profile picture</label>
+              <label htmlFor="name">Upload a Profile Picture</label>
 
               <div className="file-input">
                 {selectedFile && (
@@ -229,7 +227,7 @@ const Profile = () => {
           </div>
 
           <div className="form__input-box">
-            <label htmlFor="name">Chose your theme</label>
+            <label htmlFor="name">Chose Your Theme</label>
 
             <div className="form__input__select__image-container">
               <div className="theme__box">
@@ -243,7 +241,7 @@ const Profile = () => {
                   }
                   onClick={() => setTheme("dark")}
                 >
-                  <img src={Dark} alt="" />
+                  <img src={Dark} alt="" width="100px" />
                 </button>
                 <label htmlFor="dark">Dark</label>
               </div>
@@ -259,7 +257,7 @@ const Profile = () => {
                   }
                   onClick={() => setTheme("light")}
                 >
-                  <img src={Light} alt="" />
+                  <img src={Light} alt="" width="100px" />
                 </button>
                 <label htmlFor="light">Light</label>
               </div>
@@ -275,7 +273,7 @@ const Profile = () => {
                   }
                   onClick={() => setTheme("system")}
                 >
-                  <img src={System} alt="" />
+                  <img src={System} alt="" width="100px" />
                 </button>
                 <label htmlFor="system">System</label>
               </div>
@@ -284,7 +282,7 @@ const Profile = () => {
 
           {error && <div className="auth__form__error">{error}</div>}
           <button type="submit" className="btn-dark">
-            Create
+            Submit
           </button>
         </form>
 

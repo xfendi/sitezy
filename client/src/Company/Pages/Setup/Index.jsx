@@ -71,10 +71,10 @@ const Index = () => {
           </div>
         </div>
         <div className="form__buttons">
-          <a href="/account/setup/company/join" className="btn-dark">
+          <a href="/company/setup/join" className="btn-dark">
             Join
           </a>
-          <a href="/account/setup/company/create" className="btn-primary">
+          <a href="/company/setup/create" className="btn-primary">
             Create
           </a>
         </div>
