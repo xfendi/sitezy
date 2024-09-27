@@ -13,6 +13,7 @@ import LanguageRoundedIcon from "@mui/icons-material/LanguageRounded";
 import AddchartRoundedIcon from "@mui/icons-material/AddchartRounded";
 import LibraryBooksRoundedIcon from "@mui/icons-material/LibraryBooksRounded";
 import SettingsIcon from "@mui/icons-material/Settings";
+import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
 
 import { UserAuth } from "../../Context/AuthContext";
 import { Link, NavLink } from "react-router-dom";
@@ -35,22 +36,22 @@ const Sidebar = () => {
       <nav className="sidebar h-full rounded-xl flex flex-col">
         <div className="sidebar__profile">
           <img
-            src={company.photoURL}
+            src={user.photoURL}
             alt="Profile Pic"
             style={{ borderRadius: "5px" }}
             className="w-9 h-9 rounded-md"
           />
           <div className="sidebar__profile__main flex justify-between items-center overflow-hidden transition-all w-full">
             <div className="sidebar__profile-text leading-4">
-              <div className="sidebar__profile-text-email text-xs text-gray-600">
-                Team
+            <div className="sidebar__profile-text-name">
+                {user.displayName}
               </div>
-              <div className="sidebar__profile-text-name font-semibold">
-                {company.name}
+              <div className="sidebar__profile-text-email">
+                {user.email}
               </div>
             </div>
             <div className="sidebar__profile-settings">
-              <MoreVertRoundedIcon fontSize="small" />
+              <KeyboardArrowDownRoundedIcon fontSize="small" />
             </div>
           </div>
         </div>
