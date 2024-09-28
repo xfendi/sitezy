@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import { UserAuth } from "../../Context/AuthContext";
-import { UserDocs } from "../../Context/UserDocsContext";
+import { UserAuth } from "../../../Context/AuthContext";
+import { UserDocs } from "../../../Context/UserDocsContext";
 
-import LogoPrimary from "../../Assets/logo-primary.png";
+import LogoPrimary from "../../../Assets/logo-primary.png";
 
 import FreeDescription from "./Plan/FreeDescription";
 import ProDescription from "./Plan/ProDescription";
 import BusinessDescription from "./Plan/BusinessDescription";
+import { Navigate } from "react-router-dom";
 
 export const plans = [
   {
@@ -133,9 +134,9 @@ const Plan = () => {
     setSelectedPlan(null);
   };
 
-  if (subscription) {
-    console.log("Subscription:", subscription);
-    // return <Navigate to="/admin" />;
+  if (subscription.planName) {
+    console.log("Existing subscription:", subscription);
+    return <Navigate to="/admin" />;
   }
 
   const MonthPlansComponent = () => {

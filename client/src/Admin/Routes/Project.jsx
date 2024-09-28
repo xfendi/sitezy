@@ -7,7 +7,7 @@ import Error from "../Pages/Error";
 
 const Project = () => {
   return (
-    <div className="admin__app">
+    <div className="app admin">
       <Sidebar />
       <Routes>
         <Route path="/" element={<Main />} />

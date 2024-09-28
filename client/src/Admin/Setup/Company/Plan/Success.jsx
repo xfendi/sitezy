@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { UserAuth } from "../../../Context/AuthContext";
+import { UserAuth } from "../../../../Context/AuthContext";
 import { getDatabase, ref, onValue } from "firebase/database";
 import { useNavigate } from "react-router-dom";
 import ConfettiExplosion from "react-confetti-explosion";
 
-import LogoPrimary from "../../../Assets/logo-primary.png";
+import LogoPrimary from "../../../../Assets/logo-primary.png";
 
 const Success = () => {
   const [sessionId, setSessionId] = useState();
@@ -40,8 +40,8 @@ const Success = () => {
         return res.json().then((json) => Promise.reject(json));
       })
       .then((data) => {
-        // console.log(data.message);
-        navigate("/account/setup/finish");
+        console.log(data.message);
+        navigate("/admin");
       })
       .catch((e) => {
         console.log(e.error);
@@ -85,7 +85,7 @@ const Success = () => {
 
           <div className="form__footer">
             <div className="form__footer-text">
-              Learn More About Plans! <a href="/help">Help</a>
+              Learn More About Plans! <a href="/admin/help">Help</a>
             </div>
           </div>
         </form>

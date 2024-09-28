@@ -74,7 +74,7 @@ const Profile = () => {
 
       await updateProfile(user, { photoURL });
 
-      navigate(profile.type === "work" ? "/company/setup" : "/account/setup/finish");
+      navigate("/account/setup/finish");
     } catch (e) {
       setError(e.message);
       console.log(e.message);
@@ -92,7 +92,7 @@ const Profile = () => {
       await updateProfile(user, {
         photoURL: "https://i.imgur.com/4tBUxz7.png",
       });
-      navigate(profile.type === "work" ? "/company/setup" : "/account/setup/finish");
+      navigate("/account/setup/finish");
     } catch (e) {
       setError(e.message);
       console.log(e.message);

@@ -15,12 +15,13 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import KeyboardArrowDownRoundedIcon from "@mui/icons-material/KeyboardArrowDownRounded";
 
 import { UserAuth } from "../../../Context/AuthContext";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useParams } from "react-router-dom";
 
 const Sidebar = () => {
   const [active, setActive] = useState("");
   const [isProfile, setIsProfile] = useState(false);
   const { user, logout } = UserAuth();
+  const { id } = useParams();
   // const { profile, company, subscription } = UserDocs();
 
   const HandleClick = (name) => {
@@ -62,7 +63,7 @@ const Sidebar = () => {
           <ul>
             <li>
               <Link
-                to="/admin/profile"
+                to="/account/settings"
                 className="sidebar__nav-link"
                 onClick={() => HandleClick("settings")}
               >
@@ -71,7 +72,7 @@ const Sidebar = () => {
             </li>
             <li>
               <Link
-                to="/admin/logout"
+                to="/account/logout"
                 className="sidebar__nav-link"
                 onClick={() => HandleLogout()}
               >
@@ -88,7 +89,7 @@ const Sidebar = () => {
             </li>
             <li>
               <Link
-                to="/admin"
+                to={`/admin/project/${id}`}
                 className={
                   active === ""
                     ? "sidebar__nav-link active"
@@ -101,7 +102,7 @@ const Sidebar = () => {
             </li>
             <li>
               <NavLink
-                to="/admin/accounts"
+                to={`/admin/project/${id}/accounts`}
                 className="sidebar__nav-link"
                 onClick={() => HandleClick("accounts")}
               >
@@ -111,7 +112,7 @@ const Sidebar = () => {
             </li>
             <li>
               <NavLink
-                to="/admin/analytics"
+                to={`/admin/project/${id}/analytics`}
                 className="sidebar__nav-link"
                 onClick={() => HandleClick("analytics")}
               >
@@ -120,7 +121,7 @@ const Sidebar = () => {
             </li>
             <li>
               <NavLink
-                to="/admin/templates"
+                to={`/admin/project/${id}/templates`}
                 className="sidebar__nav-link"
                 onClick={() => HandleClick("templates")}
               >
@@ -129,7 +130,7 @@ const Sidebar = () => {
             </li>
             <li>
               <NavLink
-                to="/admin/blog"
+                to={`/admin/project/${id}/blog`}
                 className="sidebar__nav-link"
                 onClick={() => HandleClick("blog")}
               >
@@ -138,7 +139,7 @@ const Sidebar = () => {
             </li>
             <li>
               <NavLink
-                to="/admin/integrations"
+                to={`/admin/project/${id}/integrations`}
                 className="sidebar__nav-link"
                 onClick={() => HandleClick("integrations")}
               >
@@ -147,7 +148,7 @@ const Sidebar = () => {
             </li>
             <li>
               <NavLink
-                to="/admin/website"
+                to={`/admin/project/${id}/website`}
                 className="sidebar__nav-link"
                 onClick={() => HandleClick("website")}
               >
@@ -160,7 +161,7 @@ const Sidebar = () => {
           <ul>
             <li>
               <NavLink
-                to="/admin/settings"
+                to={`/admin/project/${id}/settings`}
                 className="sidebar__nav-link"
                 onClick={() => HandleClick("settings")}
               >

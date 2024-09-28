@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import LogoPrimary from "../../../Assets/logo-primary.png";
 
 const Join = () => {
-  // const [code, setCode] = useState("");
+  const [code, setCode] = useState("");
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
@@ -13,7 +13,7 @@ const Join = () => {
     e.preventDefault();
     setError("");
     try {
-      navigate("/account/setup/finish");
+      navigate("/admin");
     } catch (error) {
       setError(error.message);
       console.log(error.message);
@@ -49,7 +49,7 @@ const Join = () => {
               id="code"
               placeholder="code here..."
               onChange={(e) => {
-                // setCode(e.target.value);
+                setCode(e.target.value);
               }}
               required
             />

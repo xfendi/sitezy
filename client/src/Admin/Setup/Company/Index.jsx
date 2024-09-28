@@ -1,13 +1,21 @@
 import React from "react";
+import { Link, Navigate } from "react-router-dom";
 
 import LogoPrimary from "../../../Assets/logo-primary.png";
+import { UserDocs } from "../../../Context/UserDocsContext";
 
-const Cancel = () => {
+const Index = () => {
+  const { company } = UserDocs();
+
+  if (company) {
+    return <Navigate to="/admin" />;
+  }
+
   return (
-    <section className="form__section">
+    <section className="auth" id="auth">
       <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]"></div>
       <div
-        className="form__box"
+        className="form form__box"
         data-aos="fade-up"
         data-aos-easing="ease-out-back"
         data-aos-delay="100"
@@ -17,28 +25,23 @@ const Cancel = () => {
             <img src={LogoPrimary} alt="sitezy" width="55px" />
           </div>
           <div className="form__top-text">
-            <div className="form__top-title" style={{ color: 'red' }} >Payment Failed</div>
+            <div className="form__top-title">Your Company</div>
             <div className="form__top-subtitle">
-              Oops! Something went wrong. <br />
-              Please try again or contact support for assistance.
+              Join existing company or crete new one!
             </div>
           </div>
         </div>
-
-        <form className="form">
-          <a href="/company/setup/plan" className="btn-dark">
-            Try Again
-          </a>
-
-          <div className="form__footer">
-            <div className="form__footer-text">
-              Contact support for assistance! <a href="/contact">Support</a>
-            </div>
-          </div>
-        </form>
+        <div className="form__buttons">
+          <Link to="/admin/company/setup/join" className="btn-dark">
+            Join
+          </Link>
+          <Link to="/admin/company/setup/create" className="btn-primary">
+            Create
+          </Link>
+        </div>
       </div>
     </section>
   );
 };
 
-export default Cancel;
+export default Index;

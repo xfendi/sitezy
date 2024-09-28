@@ -6,7 +6,7 @@ import Error from "../Pages/Error";
 
 const Company = () => {
   return (
-    <div className="admin__app">
+    <div className="app admin">
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="*" element={<Error />} />

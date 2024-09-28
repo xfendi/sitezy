@@ -80,6 +80,10 @@
   --utility-gray-900: #F0F1F1;
 }
 
+.admin__app {
+  height: 100vh;
+}
+
 .app.admin {
   padding: 0;
   display: grid;
@@ -174,6 +178,7 @@
 }
 
 .error {
+  height: 100%;
   color: var(--text-primary);
   text-align: center;
   display: flex;

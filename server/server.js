@@ -45,8 +45,8 @@ const stripeSession = async (plan) => {
           quantity: 1,
         },
       ],
-      success_url: "http://localhost:3000/company/setup/plan/success",
-      cancel_url: "http://localhost:3000/company/setup/plan/success",
+      success_url: "http://localhost:3000/admin/setup/company/plan/success",
+      cancel_url: "http://localhost:3000/admin/setup/company/plan/success",
     });
     return session;
   } catch (e) {
