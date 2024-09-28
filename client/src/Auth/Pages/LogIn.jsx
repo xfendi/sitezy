@@ -2,8 +2,6 @@ import React, { useState } from "react";
 
 import LogoPrimary from "../../Assets/logo-primary.png";
 
-import { FcGoogle } from "react-icons/fc";
-import { FaGithub } from "react-icons/fa";
 import { UserAuth } from "../../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
 

@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { UserAuth } from "../../Context/AuthContext";
 import { UserDocs } from "../../Context/UserDocsContext";
-import { Navigate } from "react-router-dom";
 
 import LogoPrimary from "../../Assets/logo-primary.png";
 

@@ -1,56 +1,84 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+
+// import { UserDocs } from "../../Context/UserDocsContext";
 
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import AssessmentRoundedIcon from "@mui/icons-material/AssessmentRounded";
 import SupervisorAccountRoundedIcon from "@mui/icons-material/SupervisorAccountRounded";
-import TuneRoundedIcon from "@mui/icons-material/TuneRounded";
 import QuizRoundedIcon from "@mui/icons-material/QuizRounded";
 import AppRegistrationRoundedIcon from "@mui/icons-material/AppRegistrationRounded";
-import MoreVertRoundedIcon from "@mui/icons-material/MoreVertRounded";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import LanguageRoundedIcon from "@mui/icons-material/LanguageRounded";
 import AddchartRoundedIcon from "@mui/icons-material/AddchartRounded";
 import LibraryBooksRoundedIcon from "@mui/icons-material/LibraryBooksRounded";
-import SettingsIcon from '@mui/icons-material/Settings';
+import SettingsIcon from "@mui/icons-material/Settings";
+import KeyboardArrowDownRoundedIcon from "@mui/icons-material/KeyboardArrowDownRounded";
 
-import { UserAuth } from "../../Context/AuthContext";
+import { UserAuth } from "../../../Context/AuthContext";
 import { Link, NavLink } from "react-router-dom";
 
 const Sidebar = () => {
   const [active, setActive] = useState("");
-  const { user } = UserAuth();
+  const [isProfile, setIsProfile] = useState(false);
+  const { user, logout } = UserAuth();
+  // const { profile, company, subscription } = UserDocs();
 
   const HandleClick = (name) => {
     setActive(name);
   };
 
-  if (active != "" && window.location.pathname === "/admin") {
+  const HandleLogout = () => {
+    logout();
+  };
+
+  if (active !== "" && window.location.pathname === "/admin") {
     setActive("");
   }
 
   return (
     <aside className="h-full">
-      <nav className="sidebar h-full rounded-xl flex flex-col p-3">
-        <div className="sidebar__profile">
+      <nav className="sidebar h-full rounded-xl flex flex-col">
+        <div className="sidebar__profile" onClick={() => setIsProfile(!isProfile)}>
           <img
             src={user.photoURL}
             alt="Profile Pic"
             style={{ borderRadius: "5px" }}
-            className="w-10 h-10 rounded-md"
+            className="w-9 h-9 rounded-md"
           />
           <div className="sidebar__profile__main flex justify-between items-center overflow-hidden transition-all w-full">
             <div className="sidebar__profile-text leading-4">
-              <div className="sidebar__profile-text-name font-semibold">
+              <div className="sidebar__profile-text-name">
                 {user.displayName}
               </div>
-              <div className="sidebar__profile-text-email text-xs text-gray-600">
-                {user.email}
-              </div>
+              <div className="sidebar__profile-text-email">{user.email}</div>
             </div>
             <div className="sidebar__profile-settings">
-              <MoreVertRoundedIcon fontSize="small" />
+              <KeyboardArrowDownRoundedIcon fontSize="small" />
             </div>
           </div>
+        </div>
+        <div className="dropdown__menu" style={{ display: isProfile ? "block" : "none"}}>
+          {user.displayName}
+          <ul>
+            <li>
+              <Link
+                to="/admin/profile"
+                className="sidebar__nav-link"
+                onClick={() => HandleClick("settings")}
+              >
+                <SettingsIcon fontSize="small" /> <p>Setting</p>
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/admin/logout"
+                className="sidebar__nav-link"
+                onClick={() => HandleLogout()}
+              >
+                <SettingsIcon fontSize="small" /> <p>Log out</p>
+              </Link>
+            </li>
+          </ul>
         </div>
         <div className="sidebar__nav flex-1">
           <ul>

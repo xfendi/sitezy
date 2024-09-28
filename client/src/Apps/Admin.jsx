@@ -1,23 +1,20 @@
 import React from "react";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { UserDocs } from "../Context/UserDocsContext";
 
 import "../Styles/admin.css";
 
-import Sidebar from "../Admin/Components/Sidebar";
-
-import Main from "../Admin/Pages/Main";
 import Error from "../Admin/Pages/Error";
+import Company from "../Admin/Routes/Company";
+import Project from "../Admin/Routes/Project";
 
 const Admin = () => {
-  const { profile, company, subscription } = UserDocs();
-
-  const navigate = useNavigate()
+  const { profile } = UserDocs();
   return (
     <div className={`admin app ${profile.theme === "light" ? "theme-light" : "theme-dark"}`}>
-      <Sidebar />
       <Routes>
-        <Route path="/" element={<Main />} />
+        <Route path="/company/:id" element={<Company />} />
+        <Route path="/project/:id" element={<Project />} />
         <Route path="*" element={<Error />} />
       </Routes>
     </div>

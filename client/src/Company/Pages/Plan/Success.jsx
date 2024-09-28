@@ -15,7 +15,7 @@ const Success = () => {
 
   useEffect(() => {
     const db = getDatabase();
-    const starCountRef = ref(db, "users/" + userId);
+    const starCountRef = ref(db, "companies/" + userId);
     onValue(starCountRef, (snapshot) => {
       const userVal = snapshot.val();
       if (userVal) {
@@ -40,7 +40,7 @@ const Success = () => {
         return res.json().then((json) => Promise.reject(json));
       })
       .then((data) => {
-        console.log(data.message);
+        // console.log(data.message);
         navigate("/account/setup/finish");
       })
       .catch((e) => {

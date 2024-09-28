@@ -9,6 +9,7 @@ const UserDocsContext = createContext();
 
 export const UserDocsContextProvider = ({ children }) => {
   const [company, setCompany] = useState({});
+  const [companyId, setCompanyId] = useState();
   const [profile, setProfile] = useState({});
   const [subscription, setSubscription] = useState({});
 
@@ -22,8 +23,10 @@ export const UserDocsContextProvider = ({ children }) => {
       const querySnapshot = await getDocs(companiesRef);
       querySnapshot.forEach((doc) => {
         const companyData = doc.data();
+        const companyId = doc.id;
         if (companyData.members && companyData.members[userId]) {
-          console.log("User company:", companyData);
+          console.log("User company:", companyData, "User company ID:", companyId);
+          setCompanyId(companyId)
           setCompany(companyData);
         }
       });
@@ -36,8 +39,11 @@ export const UserDocsContextProvider = ({ children }) => {
     const profileRef = doc(db, "profiles", userId);
     try {
       const docSnap = await getDoc(profileRef);
-      console.log("User profile:", docSnap.data());
-      setProfile(docSnap.data());
+      const data = docSnap.data();
+      if (data) {
+        console.log("User profile:", data);
+        setProfile(data);
+      }
     } catch (e) {
       console.error("Błąd podczas wyszukiwania profilu:", e.message);
     }
@@ -89,7 +95,7 @@ export const UserDocsContextProvider = ({ children }) => {
   }, [userId]);
 
   return (
-    <UserDocsContext.Provider value={{ profile, company, subscription }} >
+    <UserDocsContext.Provider value={{ profile, company, companyId, subscription }}>
       {children}
     </UserDocsContext.Provider>
   );

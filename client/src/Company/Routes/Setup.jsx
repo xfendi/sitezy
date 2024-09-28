@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 
 import Plan from "../Pages/Plan";
-import Cancel from "../Pages/Plan/Cance";
+import Cancel from "../Pages/Plan/Cancel";
 import Success from "../Pages/Plan/Success";
 
 import Index from "../Pages/Setup/Index";
