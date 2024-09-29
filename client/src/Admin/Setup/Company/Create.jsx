@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { UserAuth } from "../../../Context/AuthContext";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, where, query, getDocs } from "firebase/firestore";
 
 import { db, storage } from "../../../firebase";
 
@@ -40,10 +40,30 @@ const Create = () => {
     setSelectedFile(e.target.files[0]);
   };
 
+  const GenerateCode = async () => {
+    let isUnique = false;
+    let verificationCode;
+
+    while (!isUnique) {
+      verificationCode = Math.floor(100000 + Math.random() * 900000);
+
+      const q = query(collection(db, "companies"), where("code", "==", verificationCode))
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        console.log(doc.id, " => ", doc.data());
+      });
+      if (querySnapshot.empty) {
+        isUnique = true;
+      }
+    }
+
+    return verificationCode;
+  };
+
   const HandleSubmit = async (e) => {
-    e.preventDefault();
     setError("");
     try {
+      const verificationCode = await GenerateCode();
       const fileRef = ref(storage, `companies/${name}`);
       await uploadBytes(fileRef, selectedFile);
       const photoURL =
@@ -53,14 +73,15 @@ const Create = () => {
         name: name,
         createdAt: new Date(),
         photoURL: photoURL,
+        code: verificationCode,
         members: {
-          [user.uid]: "owner", // Użytkownik jest właścicielem nowej firmy
+          [user.uid]: "owner",
         },
       });
-      navigate("/admin/company/setup/plan");
-    } catch (error) {
-      setError(error.message);
-      console.log(error.message);
+      navigate("/admin/setup/company/plan");
+    } catch (e) {
+      setError(e.message);
+      console.log(e.message);
     }
   };
 

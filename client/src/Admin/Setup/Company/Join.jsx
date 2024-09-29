@@ -2,21 +2,46 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import LogoPrimary from "../../../Assets/logo-primary.png";
+import { auth, db } from "../../../firebase";
+import { collection, getDocs, query, updateDoc, where } from "firebase/firestore";
 
 const Join = () => {
   const [code, setCode] = useState("");
   const [error, setError] = useState("");
 
+  const userId = auth.currentUser?.uid;
+
   const navigate = useNavigate();
 
   const HandleSubmit = async (e) => {
-    e.preventDefault();
     setError("");
     try {
+      const q = query(
+        collection(db, "companies"),
+        where("code", "==", parseInt(code))
+      );
+      const querySnapshot = await getDocs(q);
+
+      console.log(code);
+
+      if (querySnapshot.empty) {
+        setError("Invalid code entered!");
+        console.log("Invalid code entered!");
+        return;
+      }
+
+      const companyDoc = querySnapshot.docs[0];
+      const companyRef = companyDoc.ref;
+
+      await updateDoc(companyRef, {
+        [`members.${userId}`]: "member",
+      });
+
+      console.log("Pomyslnie dołączono do firmy!");
       navigate("/admin");
-    } catch (error) {
-      setError(error.message);
-      console.log(error.message);
+    } catch (e) {
+      setError(e.message);
+      console.error("Błąd podczas dołączania do firmy:", e);
     }
   };
   return (
@@ -44,10 +69,11 @@ const Join = () => {
           <div className="form__input-box">
             <label htmlFor="code">Code</label>
             <input
-              type="name"
+              type="text"
               name="code"
               id="code"
               placeholder="code here..."
+              value={code}
               onChange={(e) => {
                 setCode(e.target.value);
               }}

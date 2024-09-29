@@ -10,10 +10,9 @@ import LogoPrimary from "../../Assets/logo-primary.png";
 import Light from "../../Assets/light.png";
 import Dark from "../../Assets/dark.png";
 import System from "../../Assets/system.png";
+import { UserDocs } from "../../Context/UserDocsContext";
 
 const Profile = () => {
-  const [profile, setProfile] = useState(false);
-
   const [color, setColor] = useState("");
   const [theme, setTheme] = useState("");
 
@@ -35,6 +34,7 @@ const Profile = () => {
   const navigate = useNavigate();
 
   const { user } = UserAuth();
+  const { profile } = UserDocs();
   const userId = user.uid;
 
   useEffect(() => {
@@ -99,50 +99,8 @@ const Profile = () => {
     }
   };
 
-  const findProfileByUserId = async (userId) => {
-    const profileRef = doc(db, "profiles", userId);
-
-    try {
-      const docSnap = await getDoc(profileRef);
-      if (docSnap.exists()) {
-        return { id: docSnap.id, ...docSnap.data() };
-      } else {
-        console.log("Dokument profilu nie istnieje");
-        return null;
-      }
-    } catch (error) {
-      console.error("Błąd podczas pobierania profilu:", error);
-      throw error;
-    }
-  };
-
-  useEffect(() => {
-    const fetchProfile = async () => {
-      const user = auth.currentUser;
-
-      if (user) {
-        try {
-          const userProfile = await findProfileByUserId(userId);
-          if (userProfile) {
-            console.log(userProfile);
-            setProfile(userProfile);
-          } else {
-            console.log("Profil użytkownika nie został znaleziony.");
-            setProfile(false);
-          }
-        } catch (err) {
-          console.log("Błąd podczas wyszukiwania profilu.");
-        }
-      } else {
-        console.log("Użytkownik nie jest zalogowany.");
-      }
-    };
-
-    fetchProfile();
-  }, [userId]);
-
   if (profile.color) {
-    return <Navigate to={profile.type === "work" ? "/company/setup" : "/account/setup/finish"} />;
+    return <Navigate to={profile.type === "work" ? "/admin/setup/company" : "/admin"} />;
   }
 
   return (

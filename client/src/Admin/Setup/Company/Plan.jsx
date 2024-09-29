@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { UserAuth } from "../../../Context/AuthContext";
 import { UserDocs } from "../../../Context/UserDocsContext";
 
 import LogoPrimary from "../../../Assets/logo-primary.png";
@@ -90,9 +89,9 @@ const Plan = () => {
   const [isTime, setIsTime] = useState();
   const [error, setError] = useState("");
 
-  const { subscription } = UserDocs();
-  const { user } = UserAuth();
-  const userId = user.uid;
+  const { subscription, companyId } = UserDocs();
+
+  console.log(companyId);
 
   const HandleSubmit = async (plan) => {
     if (!selectedPlan) {
@@ -110,7 +109,7 @@ const Plan = () => {
         "Content-Type": "application/json",
       },
       mode: "cors",
-      body: JSON.stringify({ plan: plan, customer: userId }),
+      body: JSON.stringify({ plan: plan, companyId: companyId }),
     })
       .then((res) => {
         if (res.ok) return res.json();
@@ -135,7 +134,6 @@ const Plan = () => {
   };
 
   if (subscription.planName) {
-    console.log("Existing subscription:", subscription);
     return <Navigate to="/admin" />;
   }
 

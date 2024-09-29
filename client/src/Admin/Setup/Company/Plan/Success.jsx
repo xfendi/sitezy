@@ -1,30 +1,32 @@
 import React, { useEffect, useState } from "react";
-import { UserAuth } from "../../../../Context/AuthContext";
 import { getDatabase, ref, onValue } from "firebase/database";
 import { useNavigate } from "react-router-dom";
 import ConfettiExplosion from "react-confetti-explosion";
 
 import LogoPrimary from "../../../../Assets/logo-primary.png";
+import { auth } from "../../../../firebase";
+import { UserDocs } from "../../../../Context/UserDocsContext";
 
 const Success = () => {
   const [sessionId, setSessionId] = useState();
 
+  const { companyId } = UserDocs();
   const navigate = useNavigate();
-  const { user } = UserAuth();
-  const userId = user.uid;
+  const userId = auth.currentUser?.uid;
 
   useEffect(() => {
     const db = getDatabase();
-    const starCountRef = ref(db, "companies/" + userId);
+    const starCountRef = ref(db, "companies/" + companyId);
     onValue(starCountRef, (snapshot) => {
       const userVal = snapshot.val();
       if (userVal) {
-        setSessionId(userVal.subscription.sessionId);
+        setSessionId(userVal.subscription?.sessionId);
+        console.log("session")
       } else {
         setSessionId("");
       }
     });
-  }, [userId, sessionId]);
+  }, [userId, companyId]);
 
   const handlePaymentSuccess = (e) => {
     e.preventDefault();
@@ -33,7 +35,7 @@ const Success = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ sessionId: sessionId, firebaseId: userId }),
+      body: JSON.stringify({ sessionId: sessionId, companyId: companyId }),
     })
       .then((res) => {
         if (res.ok) return res.json();

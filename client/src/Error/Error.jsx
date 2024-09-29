@@ -1,14 +1,16 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Error = () => {
-  const navigate = useNavigate();
-
-  if (!window.location.pathname === "/404") {
-    navigate("/404");
-    return
-  }
-  return <div>404</div>;
+  return (
+    <div className="error">
+      <div className="error-title">404</div>
+      <div className="error-description">Page not found</div>
+      <div className="error-link">
+        Go back? <Link to="/admin">Landing Page</Link>
+      </div>
+    </div>
+  );
 };
 
 export default Error;

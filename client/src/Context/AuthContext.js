@@ -19,16 +19,18 @@ export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState({});
 
   const createUser = async (email, password, name, type) => {
-    await createUserWithEmailAndPassword(auth, email, password).then(function() {
-      console.log("Successfully created new user.")
-      setDoc(doc(db, "profiles", auth.currentUser?.uid), {
-        type: type,
-        createdAt: new Date(),
-      });
-      updateProfile(auth.currentUser, {
-        displayName: name
-      })
-    })
+    await createUserWithEmailAndPassword(auth, email, password).then(
+      function () {
+        console.log("Successfully created new user.");
+        setDoc(doc(db, "profiles", auth.currentUser?.uid), {
+          type: type,
+          createdAt: new Date(),
+        });
+        updateProfile(auth.currentUser, {
+          displayName: name,
+        });
+      }
+    );
   };
 
   const login = (email, password) => {
@@ -39,7 +41,7 @@ export const AuthContextProvider = ({ children }) => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider).then(async (result) => {
       if (result.user) {
-        window.location.href = '/account/setup/plan';
+        window.location.href = "/account/setup/plan";
       }
     });
   };
@@ -48,10 +50,10 @@ export const AuthContextProvider = ({ children }) => {
     const provider = new GithubAuthProvider();
     signInWithPopup(auth, provider).then(async (result) => {
       if (result.user) {
-        window.location.href = '/account/setup/plan';
+        window.location.href = "/account/setup/plan";
       }
     });
-  }
+  };
 
   const logout = () => {
     return signOut(auth);
@@ -59,8 +61,8 @@ export const AuthContextProvider = ({ children }) => {
 
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
       if (currentUser) console.log("User Auth:", currentUser);
+      setUser(currentUser);
     });
   }, []);
 

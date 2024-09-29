@@ -55,8 +55,11 @@ const stripeSession = async (plan) => {
 };
 
 app.post("/api/v1/create-subscription-checkout-session", async (req, res) => {
-  const { plan, customer } = req.body;
+  const { plan, companyId } = req.body;
+  console.log(req.body);
+
   let planId = null;
+
   if (plan == 15) planId = proMonth;
   else if (plan == 35) planId = businessMonth;
   else if (plan == 150) planId = proYear;
@@ -64,12 +67,11 @@ app.post("/api/v1/create-subscription-checkout-session", async (req, res) => {
 
   try {
     const session = await stripeSession(planId);
-    const user = await admin.auth().getUser(customer);
 
     await admin
       .database()
       .ref("companies")
-      .child(user.uid)
+      .child(companyId)
       .update({
         subscription: {
           sessionId: session.id,
@@ -83,8 +85,8 @@ app.post("/api/v1/create-subscription-checkout-session", async (req, res) => {
 });
 
 app.post("/api/v1/payment-success", async (req, res) => {
+  const { sessionId, companyId } = req.body;
   console.log(req.body);
-  const { sessionId, firebaseId } = req.body;
 
   try {
     const session = await stripe.checkout.sessions.retrieve(sessionId);
@@ -95,7 +97,6 @@ app.post("/api/v1/payment-success", async (req, res) => {
         const subscription = await stripe.subscriptions.retrieve(
           subscriptionId
         );
-        const user = await admin.auth().getUser(firebaseId);
         const planId = subscription.plan.id;
         let planType = "";
         let planName = "";
@@ -109,7 +110,7 @@ app.post("/api/v1/payment-success", async (req, res) => {
           planName = "Pro";
           planType = "Year";
         } else if (subscription.plan.amount == 35000) {
-          planName = "Business"
+          planName = "Business";
           planType = "Year";
         }
         const startDate = moment
@@ -126,7 +127,7 @@ app.post("/api/v1/payment-success", async (req, res) => {
         await admin
           .database()
           .ref("companies")
-          .child(user.uid)
+          .child(companyId)
           .update({
             subscription: {
               sessionId: null,

@@ -5,9 +5,9 @@ import LogoPrimary from "../../../Assets/logo-primary.png";
 import { UserDocs } from "../../../Context/UserDocsContext";
 
 const Index = () => {
-  const { company } = UserDocs();
+  const { companyId } = UserDocs();
 
-  if (company) {
+  if (companyId) {
     return <Navigate to="/admin" />;
   }
 
@@ -32,10 +32,10 @@ const Index = () => {
           </div>
         </div>
         <div className="form__buttons">
-          <Link to="/admin/company/setup/join" className="btn-dark">
+          <Link to="/admin/setup/company/join" className="btn-dark">
             Join
           </Link>
-          <Link to="/admin/company/setup/create" className="btn-primary">
+          <Link to="/admin/setup/company/create" className="btn-primary">
             Create
           </Link>
         </div>
