@@ -45,8 +45,8 @@ const stripeSession = async (plan) => {
           quantity: 1,
         },
       ],
-      success_url: "http://localhost:3000/admin/setup/company/plan/success",
-      cancel_url: "http://localhost:3000/admin/setup/company/plan/success",
+      success_url: "http://localhost:3000/admin/setup/project/plan/success",
+      cancel_url: "http://localhost:3000/admin/setup/project/plan/cancel",
     });
     return session;
   } catch (e) {
@@ -55,10 +55,10 @@ const stripeSession = async (plan) => {
 };
 
 app.post("/api/v1/create-subscription-checkout-session", async (req, res) => {
-  const { plan, companyId } = req.body;
+  const { plan, projectId } = req.body;
   console.log(req.body);
 
-  let planId = null;
+  let planId;
 
   if (plan == 15) planId = proMonth;
   else if (plan == 35) planId = businessMonth;
@@ -67,11 +67,11 @@ app.post("/api/v1/create-subscription-checkout-session", async (req, res) => {
 
   try {
     const session = await stripeSession(planId);
-
+    console.log(projectId, planId, plan)
     await admin
       .database()
-      .ref("companies")
-      .child(companyId)
+      .ref("projects")
+      .child(projectId)
       .update({
         subscription: {
           sessionId: session.id,
@@ -85,7 +85,7 @@ app.post("/api/v1/create-subscription-checkout-session", async (req, res) => {
 });
 
 app.post("/api/v1/payment-success", async (req, res) => {
-  const { sessionId, companyId } = req.body;
+  const { sessionId, projectId } = req.body;
   console.log(req.body);
 
   try {
@@ -98,8 +98,8 @@ app.post("/api/v1/payment-success", async (req, res) => {
           subscriptionId
         );
         const planId = subscription.plan.id;
-        let planType = "";
-        let planName = "";
+        let planType;
+        let planName;
         if (subscription.plan.amount == 1500) {
           planName = "Pro";
           planType = "month";
@@ -126,8 +126,8 @@ app.post("/api/v1/payment-success", async (req, res) => {
           .asDays();
         await admin
           .database()
-          .ref("companies")
-          .child(companyId)
+          .ref("projects")
+          .child(projectId)
           .update({
             subscription: {
               sessionId: null,

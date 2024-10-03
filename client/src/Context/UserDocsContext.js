@@ -1,37 +1,53 @@
 import { useContext, useEffect, useState, createContext } from "react";
 
-import { UserAuth } from "./AuthContext";
-import { db, database } from "../firebase";
+import { db, database, auth } from "../firebase";
 import { collection, getDoc, getDocs, doc } from "firebase/firestore";
 import { onValue, ref } from "firebase/database";
 
 const UserDocsContext = createContext();
 
 export const UserDocsContextProvider = ({ children }) => {
-  const [company, setCompany] = useState({});
-  const [companyId, setCompanyId] = useState("");
+  const [projects, setProjects] = useState([]);
+  const [selectedProject, setSelectedProject] = useState({});
+  const [projectId, setProjectId] = useState();
   const [profile, setProfile] = useState({});
   const [subscription, setSubscription] = useState({});
 
-  const { user } = UserAuth();
+  const userId = auth.currentUser?.uid;
 
-  const userId = user?.uid;
-
-  const findUserCompany = async (userId) => {
-    const companiesRef = collection(db, "companies");
+  const findProjects = async (userId) => {
+    const projectsRef = collection(db, "projects");
     try {
-      const querySnapshot = await getDocs(companiesRef);
+      const querySnapshot = await getDocs(projectsRef);
+      const projectsArray = [];
       querySnapshot.forEach((doc) => {
-        const companyData = doc.data();
-        const id = doc.id;
-        if (companyData.members && companyData.members[userId]) {
-          console.log("User company:", companyData, "User company ID:", id);
-          setCompanyId(id);
-          setCompany(companyData);
+        const projectData = doc.data();
+        if (projectData.members && projectData.members[userId]) {
+          projectsArray.push({ ...doc.data() });
+          console.log("User Projects:", projectsArray);
         }
       });
+      setProjects(projectsArray);
     } catch (e) {
-      console.error("Błąd podczas wyszukiwania firmy:", e.message);
+      console.error(
+        "Błąd podczas wyszukiwania projektow uzytkownika:",
+        e.message
+      );
+    }
+  };
+
+  const findSelectedProject = async (projectId) => {
+    const projectRef = doc(db, "projects", projectId);
+    try {
+      const docSnap = await getDoc(projectRef);
+      const data = docSnap.data();
+      if (data) {
+        console.log("Selected Project:", data);
+        console.log("Selected Project ID:", data.id);
+        setSelectedProject(data);
+      }
+    } catch (e) {
+      console.error("Błąd podczas wyszukiwania projektu:", e.message);
     }
   };
 
@@ -41,7 +57,7 @@ export const UserDocsContextProvider = ({ children }) => {
       const docSnap = await getDoc(profileRef);
       const data = docSnap.data();
       if (data) {
-        console.log("User profile:", data);
+        console.log("User Profile:", data);
         setProfile(data);
       }
     } catch (e) {
@@ -49,19 +65,25 @@ export const UserDocsContextProvider = ({ children }) => {
     }
   };
 
-  const findCompanySubscription = async (companyId) => {
+  const findSubscription = async (projectId) => {
     try {
-      const subRef = ref(database, "companies/" + companyId + "/subscription");
+      const subRef = ref(database, "projects/" + projectId + "/subscription");
       onValue(subRef, (snapshot) => {
         const data = snapshot.val();
         if (data) {
-          console.log("Company subscription:", data);
+          console.log("Selected Project Subscription:", data);
           setSubscription(data);
         }
       });
     } catch (e) {
       console.error("Błąd podczas wyszukiwania subskrybcji:", e.message);
     }
+  };
+
+  const updateProjectId = (newProjectId) => {
+    console.log("Aktualizuję projectId:", newProjectId);
+    setProjectId(newProjectId);
+    localStorage.setItem("projectId", newProjectId);
   };
 
   useEffect(() => {
@@ -73,32 +95,56 @@ export const UserDocsContextProvider = ({ children }) => {
       }
     };
 
-    const fetchCompany = async () => {
+    const fetchProjects = async () => {
       try {
-        await findUserCompany(userId);
+        await findProjects(userId);
       } catch (e) {
-        console.error("Błąd podczas pobierania firmy:", e.message);
+        console.log("Błąd podczas pobierania projektow:", e.message);
       }
     };
 
-    fetchCompany();
+    fetchProjects();
     fetchProfile();
   }, [userId]);
 
   useEffect(() => {
+    const storedProjectId = localStorage.getItem("projectId");
+    if (storedProjectId) {
+      setProjectId(storedProjectId);
+    }
+  }, []);
+
+  useEffect(() => {
     const fetchSubscription = async () => {
       try {
-        await findCompanySubscription(companyId);
+        await findSubscription(projectId);
       } catch (e) {
-        console.error("Błąd podczas pobierania subskrybcji:", e.message);
+        console.error("Błąd podczas pobierania subskrypcji:", e.message);
       }
     };
+
+    const fetchProject = async () => {
+      try {
+        await findSelectedProject(projectId);
+      } catch (e) {
+        console.error("Błąd podczas pobierania projektu:", e.message);
+      }
+    };
+
+    fetchProject();
     fetchSubscription();
-  }, [companyId]);
+  }, [projectId]);
 
   return (
     <UserDocsContext.Provider
-      value={{ profile, company, companyId, subscription }}
+      value={{
+        profile,
+        projects,
+        subscription,
+        selectedProject,
+        projectId,
+        updateProjectId,
+      }}
     >
       {children}
     </UserDocsContext.Provider>

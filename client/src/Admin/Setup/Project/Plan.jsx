@@ -89,7 +89,7 @@ const Plan = () => {
   const [isTime, setIsTime] = useState();
   const [error, setError] = useState("");
 
-  const { subscription, companyId } = UserDocs();
+  const { subscription, selectedProject } = UserDocs();
 
   const HandleSubmit = async (plan) => {
     if (!selectedPlan) {
@@ -107,7 +107,7 @@ const Plan = () => {
         "Content-Type": "application/json",
       },
       mode: "cors",
-      body: JSON.stringify({ plan: plan, companyId: companyId }),
+      body: JSON.stringify({ plan: plan, projectId: selectedProject.id }),
     })
       .then((res) => {
         if (res.ok) return res.json();
@@ -127,9 +127,11 @@ const Plan = () => {
   };
 
   const HandleToggle = () => {
-    setIsTime(!isTime);
+    setIsTime((prev) => !prev);
     setSelectedPlan(null);
   };
+
+  console.log(selectedProject.id)
 
   if (subscription.planName) {
     return <Navigate to="/admin" />;

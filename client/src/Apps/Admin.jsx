@@ -5,10 +5,10 @@ import { UserDocs } from "../Context/UserDocsContext";
 import "../Styles/admin.css";
 
 import Error from "../Admin/Pages/Error";
-import Company from "../Admin/Routes/Company";
 import Project from "../Admin/Routes/Project";
 import Setup from "../Admin/Routes/Setup";
 import Index from "../Admin/Pages/Index";
+import Projects from "../Admin/Pages/Projects";
 
 const Admin = () => {
   const { profile } = UserDocs();
@@ -16,9 +16,9 @@ const Admin = () => {
     <div className={`admin__app ${profile.theme === "light" ? "theme-light" : "theme-dark"}`}>
       <Routes>
         <Route path="/" element={<Index />} />
-        <Route path="/company/:id/*" element={<Company />} />
         <Route path="/project/:id/*" element={<Project />} />
         <Route path="/setup/*" element={<Setup />} />
+        <Route path="/projects" element={<Projects />} />
         <Route path="*" element={<Error />} />
       </Routes>
     </div>

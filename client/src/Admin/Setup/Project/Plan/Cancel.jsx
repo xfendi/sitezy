@@ -5,7 +5,7 @@ import { UserDocs } from "../../../../Context/UserDocsContext";
 import { Navigate } from "react-router-dom";
 
 const Cancel = () => {
-  const { companyId, subscription } = UserDocs();
+  const { subscription } = UserDocs();
 
   if (subscription.planName) {
     return <Navigate to="/admin" />;
@@ -36,7 +36,7 @@ const Cancel = () => {
         </div>
 
         <form className="form">
-          <a href="/admin/setup/company/plan" className="btn-dark">
+          <a href="/admin/setup/project/plan" className="btn-dark">
             Try Again
           </a>
 

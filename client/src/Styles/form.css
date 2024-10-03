@@ -82,6 +82,7 @@
 }
 
 .form__top {
+  width: max-content;
   display: flex;
   justify-content: start;
   align-items: center;
@@ -128,7 +129,7 @@
 
 .form-name {
   display: flex;
-  gap: 15px;
+  gap: 10px;
   width: 100%;
 }
 
@@ -155,7 +156,7 @@
 .form__socials {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 10px;
 }
 
 .form__socials-social {
@@ -176,7 +177,7 @@
 
 .form__buttons {
   display: flex;
-  gap: 15px;
+  gap: 10px;
   width: 100%;
 }
 
@@ -186,7 +187,7 @@
 
 .form__cont {
   display: flex;
-  gap: 15px;
+  gap: 10px;
 }
 .form__cont img {
   border-radius: 50%;
@@ -274,13 +275,13 @@ input[type="file"] {
 .form__left {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 10px;
 }
 
 .plans__small {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 10px;
 }
 .profile__plan__button {
   border-radius: 10px;
@@ -357,7 +358,7 @@ input[type="file"] {
   margin-bottom: 25px;
   width: 100%;
   display: flex;
-  gap: 15px;
+  gap: 10px;
   justify-content: center;
   align-items: center;
   font-weight: 500;
@@ -464,4 +465,34 @@ input[type="radio"]:checked {
 
 input[type="radio"]:checked::before {
   transform: scale(1);
+}
+
+.input__project {
+  display: flex;
+  align-items: center;
+  text-align: start;
+  padding: 10px;
+  width: 100%;
+  border-radius: 10px;
+  transition: var(--transition-default);
+  gap: 10px;
+  border: var(--color-light-gray) 2px solid;
+}
+.input__project:hover {
+  gap: 20px;
+  border: var(--color-primary) 2px solid;
+}
+
+.input__project-name {
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.input__project-id {
+  font-size: 13px;
+  color: var(--color-mid-gray);
+}
+
+.input__project-text {
+  line-height: 20px;
 }

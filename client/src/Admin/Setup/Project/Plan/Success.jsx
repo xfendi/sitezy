@@ -10,23 +10,22 @@ import { UserDocs } from "../../../../Context/UserDocsContext";
 const Success = () => {
   const [sessionId, setSessionId] = useState();
 
-  const { companyId, subscription } = UserDocs();
+  const { projectId } = UserDocs();
   const navigate = useNavigate();
   const userId = auth.currentUser?.uid;
 
   useEffect(() => {
     const db = getDatabase();
-    const starCountRef = ref(db, "companies/" + companyId);
+    const starCountRef = ref(db, "projects/" + projectId);
     onValue(starCountRef, (snapshot) => {
       const userVal = snapshot.val();
       if (userVal) {
         setSessionId(userVal.subscription?.sessionId);
-        console.log("session");
       } else {
         setSessionId("");
       }
     });
-  }, [userId, companyId]);
+  }, [userId, projectId]);
 
   const handlePaymentSuccess = (e) => {
     e.preventDefault();
@@ -35,7 +34,10 @@ const Success = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ sessionId: sessionId, companyId: companyId }),
+      body: JSON.stringify({
+        sessionId: sessionId,
+        projectId: projectId,
+      }),
     })
       .then((res) => {
         if (res.ok) return res.json();
@@ -43,16 +45,12 @@ const Success = () => {
       })
       .then((data) => {
         console.log(data.message);
-        navigate("/admin");
+        navigate(`/admin/project/${projectId}`);
       })
       .catch((e) => {
         console.log(e.error);
       });
   };
-
-  if (subscription.planName) {
-    return <Navigate to="/admin" />;
-  }
 
   return (
     <section className="form__section">

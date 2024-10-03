@@ -1,23 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { UserAuth } from "../../../Context/AuthContext";
-import { collection, addDoc, where, query, getDocs } from "firebase/firestore";
+import { getDoc, doc, setDoc } from "firebase/firestore";
 
 import { db, storage } from "../../../firebase";
 
 import LogoPrimary from "../../../Assets/logo-primary.png";
 
-import { Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { UserDocs } from "../../../Context/UserDocsContext";
 
-const Create = () => {
+const ProjectCreate = () => {
   const [name, setName] = useState("");
   const [error, setError] = useState("");
   const [selectedFile, setSelectedFile] = useState();
   const [preview, setPreview] = useState();
+  const [type, setType] = useState("");
 
   const { user } = UserAuth();
-  const { companyId } = UserDocs();
+  const { updateProjectId } = UserDocs();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -43,56 +44,58 @@ const Create = () => {
 
   const GenerateCode = async () => {
     let isUnique = false;
-    let verificationCode;
+    let codeid;
 
     while (!isUnique) {
-      verificationCode = Math.floor(100000 + Math.random() * 900000);
+      const code = Math.floor(Math.random() * 0xffffff)
+        .toString(16)
+        .padStart(6, "0");
 
-      const q = query(
-        collection(db, "companies"),
-        where("code", "==", verificationCode)
-      );
-      const querySnapshot = await getDocs(q);
-      querySnapshot.forEach((doc) => {
-        console.log(doc.id, " => ", doc.data());
-      });
-      if (querySnapshot.empty) {
+      codeid = code;
+
+      const docRef = doc(db, "projects", "SF");
+      const docSnap = await getDoc(docRef);
+      const data = docSnap.data();
+      if (!data) {
         isUnique = true;
       }
     }
 
-    return verificationCode;
+    console.log(codeid);
+    return codeid;
   };
 
   const HandleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     try {
-      const verificationCode = await GenerateCode();
-      const fileRef = ref(storage, `companies/${name}`);
+      const codeid = await GenerateCode();
+      console.log("Generated codeId:", codeid);
+      const fileRef = ref(storage, `projects/${codeid}`);
       await uploadBytes(fileRef, selectedFile);
       const photoURL =
         (await getDownloadURL(fileRef)) || "https://i.imgur.com/4tBUxz7.png";
 
-      await addDoc(collection(db, "companies"), {
+      await setDoc(doc(db, "projects", codeid), {
         name: name,
+        active: true,
         createdAt: new Date(),
         photoURL: photoURL,
-        code: verificationCode,
+        id: codeid,
         members: {
           [user.uid]: "owner",
         },
       });
-      navigate("/admin/setup/company/plan");
+      console.log("Project document created successfully with codeId:", codeid);
+
+      updateProjectId(codeid);
+
+      navigate("/admin/setup/project/plan");
     } catch (e) {
       setError(e.message);
       console.log(e.message);
     }
   };
-
-  if (companyId) {
-    return <Navigate to="/admin" />;
-  }
 
   return (
     <section className="form__section">
@@ -108,16 +111,16 @@ const Create = () => {
             <img src={LogoPrimary} alt="sitezy" width="55px" />
           </div>
           <div className="form__top-text">
-            <div className="form__top-title">Create Your Company</div>
+            <div className="form__top-title">Create Your Project</div>
             <div className="form__top-subtitle">
-              Enter details to create your first company!
+              Enter details to create your new project!
             </div>
           </div>
         </div>
 
         <form onSubmit={(e) => HandleSubmit(e)} className="form">
           <div className="form__input-box">
-            <label htmlFor="name">Company Name</label>
+            <label htmlFor="name">Project Name</label>
             <input
               type="name"
               name="name"
@@ -132,7 +135,7 @@ const Create = () => {
 
           <div className="form__cont">
             <div className="form__input-box">
-              <label htmlFor="name">Upload a company picture</label>
+              <label htmlFor="name">Upload a project picture</label>
 
               <div className="file-input">
                 {selectedFile && (
@@ -151,6 +154,33 @@ const Create = () => {
             </div>
           </div>
 
+          <div className="form__input-box">
+            <label htmlFor="">Project Type</label>
+            <div className="form__radio-container">
+              <label>
+                <input
+                  type="radio"
+                  name="type"
+                  required
+                  value="web"
+                  onChange={(e) => setType(e.target.value)}
+                  checked={type === "web"}
+                ></input>
+                Website
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="type"
+                  value="store"
+                  onChange={(e) => setType(e.target.value)}
+                  checked={type === "store"}
+                ></input>
+                Store
+              </label>
+            </div>
+          </div>
+
           {error && <div className="form__error">{error}</div>}
           <button type="submit" className="btn-dark">
             Create
@@ -158,8 +188,8 @@ const Create = () => {
 
           <div className="form__footer">
             <div className="form__footer-text">
-              Want to join existing company?{" "}
-              <a href="/account/setup/company/join">Join</a>
+              Want to join existing project?{" "}
+              <Link to="/admin/setup/project/join">Join</Link>
             </div>
           </div>
         </form>
@@ -168,4 +198,4 @@ const Create = () => {
   );
 };
 
-export default Create;
+export default ProjectCreate;

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 import LogoPrimary from "../../../Assets/logo-primary.png";
 import { auth, db } from "../../../firebase";
@@ -16,45 +16,38 @@ const Join = () => {
   const [code, setCode] = useState("");
   const [error, setError] = useState("");
 
-  const { companyId } = UserDocs();
+  const { updateProjectId } = UserDocs();
   const userId = auth.currentUser?.uid;
   const navigate = useNavigate();
 
   const HandleSubmit = async (e) => {
+    e.preventDefault();
     setError("");
     try {
-      const q = query(
-        collection(db, "companies"),
-        where("code", "==", parseInt(code))
-      );
+      const q = query(collection(db, "projects"), where("invite", "==", code));
       const querySnapshot = await getDocs(q);
-
-      console.log(code);
 
       if (querySnapshot.empty) {
         setError("Invalid code entered!");
-        console.log("Invalid code entered!");
         return;
       }
 
-      const companyDoc = querySnapshot.docs[0];
-      const companyRef = companyDoc.ref;
+      const projectDoc = querySnapshot.docs[0];
+      const data = projectDoc.data();
+      const projectRef = projectDoc.ref;
 
-      await updateDoc(companyRef, {
+      await updateDoc(projectRef, {
         [`members.${userId}`]: "member",
       });
 
-      console.log("Pomyslnie dołączono do firmy!");
-      navigate("/admin");
+      updateProjectId(data.id);
+
+      navigate(`/admin/project/${data.id}`);
     } catch (e) {
       setError(e.message);
-      console.error("Błąd podczas dołączania do firmy:", e);
+      console.error("Błąd podczas dołączania do firmy:", e.message);
     }
   };
-
-  if (companyId) {
-    return <Navigate to="/admin" />;
-  }
 
   return (
     <section className="form__section">
@@ -70,9 +63,9 @@ const Join = () => {
             <img src={LogoPrimary} alt="sitezy" width="55px" />
           </div>
           <div className="form__top-text">
-            <div className="form__top-title">Join Existing Company</div>
+            <div className="form__top-title">Join Existing Project</div>
             <div className="form__top-subtitle">
-              Enter invite code to join existing company!
+              Enter invite code to join new project!
             </div>
           </div>
         </div>
@@ -100,8 +93,8 @@ const Join = () => {
 
           <div className="form__footer">
             <div className="form__footer-text">
-              Want to create new company?{" "}
-              <a href="/account/setup/company/create">Create</a>
+              Want to create own project?{" "}
+              <Link to="/admin/setup/project/create">Create</Link>
             </div>
           </div>
         </form>

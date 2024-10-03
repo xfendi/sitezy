@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { UserAuth } from "../../Context/AuthContext";
-import { auth, db, storage } from "../../firebase";
-import { getDoc, doc, updateDoc } from "firebase/firestore";
+import { db, storage } from "../../firebase";
+import { doc, updateDoc } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { updateProfile } from "firebase/auth";
 import { Navigate, useNavigate } from "react-router-dom";
@@ -100,7 +100,7 @@ const Profile = () => {
   };
 
   if (profile.color) {
-    return <Navigate to={profile.type === "work" ? "/admin/setup/company" : "/admin"} />;
+    return <Navigate to="/admin" />;
   }
 
   return (
@@ -247,7 +247,7 @@ const Profile = () => {
         <div className="form__footer">
           <div className="form__footer-text">
             Do it later and use default deisgn!{" "}
-            <button onClick={HandleSkip} href="/account/setup/company">
+            <button onClick={HandleSkip} href="/account/setup/finish">
               Skip
             </button>
           </div>

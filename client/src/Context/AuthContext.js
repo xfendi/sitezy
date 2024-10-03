@@ -18,12 +18,11 @@ const UserContext = createContext();
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState({});
 
-  const createUser = async (email, password, name, type) => {
+  const createUser = async (email, password, name) => {
     await createUserWithEmailAndPassword(auth, email, password).then(
       function () {
         console.log("Successfully created new user.");
         setDoc(doc(db, "profiles", auth.currentUser?.uid), {
-          type: type,
           createdAt: new Date(),
         });
         updateProfile(auth.currentUser, {

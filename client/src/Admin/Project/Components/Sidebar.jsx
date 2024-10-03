@@ -22,7 +22,6 @@ const Sidebar = () => {
   const [isProfile, setIsProfile] = useState(false);
   const { user, logout } = UserAuth();
   const { id } = useParams();
-  // const { profile, company, subscription } = UserDocs();
 
   const HandleClick = (name) => {
     setActive(name);
