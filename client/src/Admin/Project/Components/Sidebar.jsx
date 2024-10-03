@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 // import { UserDocs } from "../../Context/UserDocsContext";
 
@@ -13,14 +13,21 @@ import AddchartRoundedIcon from "@mui/icons-material/AddchartRounded";
 import LibraryBooksRoundedIcon from "@mui/icons-material/LibraryBooksRounded";
 import SettingsIcon from "@mui/icons-material/Settings";
 import KeyboardArrowDownRoundedIcon from "@mui/icons-material/KeyboardArrowDownRounded";
+import KeyboardArrowUpRoundedIcon from "@mui/icons-material/KeyboardArrowUpRounded";
+import WindowRoundedIcon from "@mui/icons-material/WindowRounded";
 
 import { UserAuth } from "../../../Context/AuthContext";
 import { Link, NavLink, useParams } from "react-router-dom";
+import { UserDocs } from "../../../Context/UserDocsContext";
 
 const Sidebar = () => {
   const [active, setActive] = useState("");
   const [isProfile, setIsProfile] = useState(false);
+  const [activeProjects, setActiveProjects] = useState([]);
+  const [inactiveProjects, setInactiveProjects] = useState([]);
+
   const { user, logout } = UserAuth();
+  const { selectedProject, projects } = UserDocs();
   const { id } = useParams();
 
   const HandleClick = (name) => {
@@ -35,12 +42,26 @@ const Sidebar = () => {
     setActive("");
   }
 
+  useEffect(() => {
+    if (projects.length > 0) {
+      setActiveProjects(projects.filter((project) => project.active === true));
+      setInactiveProjects(
+        projects.filter((project) => project.active === false)
+      );
+    } else {
+      console.log("Brak projektów do filtrowania");
+    }
+  }, [projects]);
+
   return (
     <aside className="h-full">
       <nav className="sidebar h-full rounded-xl flex flex-col">
-        <div className="sidebar__profile" onClick={() => setIsProfile(!isProfile)}>
+        <div
+          className="sidebar__profile"
+          onClick={() => setIsProfile(!isProfile)}
+        >
           <img
-            src={user.photoURL}
+            src={selectedProject.photoURL}
             alt="Profile Pic"
             style={{ borderRadius: "5px" }}
             className="w-9 h-9 rounded-md"
@@ -48,34 +69,48 @@ const Sidebar = () => {
           <div className="sidebar__profile__main flex justify-between items-center overflow-hidden transition-all w-full">
             <div className="sidebar__profile-text leading-4">
               <div className="sidebar__profile-text-name">
-                {user.displayName}
+                {selectedProject.name}
               </div>
-              <div className="sidebar__profile-text-email">{user.email}</div>
+              <div className="sidebar__profile-text-email">
+                {selectedProject.id}
+              </div>
             </div>
             <div className="sidebar__profile-settings">
-              <KeyboardArrowDownRoundedIcon fontSize="small" />
+              {isProfile ? (
+                <KeyboardArrowDownRoundedIcon fontSize="small" />
+              ) : (
+                <KeyboardArrowUpRoundedIcon fontSize="small" />
+              )}
             </div>
           </div>
         </div>
-        <div className="dropdown__menu" style={{ display: isProfile ? "block" : "none"}}>
-          {user.displayName}
+        <div
+          className="dropdown__menu"
+          style={{ display: isProfile ? "block" : "none" }}
+        >
           <ul>
+            {activeProjects.map((project) => (
+              <li key={project.id}>
+                <a
+                  href={`/admin/project/${project.id}`}
+                  className="sidebar__nav-link"
+                >
+                  <img
+                    src={project.photoURL}
+                    alt=""
+                    className="w-6 h-6 rounded-md"
+                  />
+                  <p style={{ fontWeight: 600 }}>{project.name}</p>
+                </a>
+              </li>
+            ))}
             <li>
               <Link
-                to="/account/settings"
+                to="/admin/projects"
                 className="sidebar__nav-link"
                 onClick={() => HandleClick("settings")}
               >
-                <SettingsIcon fontSize="small" /> <p>Setting</p>
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/account/logout"
-                className="sidebar__nav-link"
-                onClick={() => HandleLogout()}
-              >
-                <SettingsIcon fontSize="small" /> <p>Log out</p>
+                <WindowRoundedIcon fontSize="small" /> <p>All Projects</p>
               </Link>
             </li>
           </ul>

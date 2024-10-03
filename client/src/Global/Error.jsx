@@ -7,7 +7,7 @@ const Error = () => {
       <div className="error-title">404</div>
       <div className="error-description">Page not found</div>
       <div className="error-link">
-        Go back? <Link to="/admin">Landing Page</Link>
+        Go back? <Link to="/">Landing Page</Link>
       </div>
     </div>
   );

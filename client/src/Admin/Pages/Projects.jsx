@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 import LogoPrimary from "../../Assets/logo-primary.png";
 import { UserDocs } from "../../Context/UserDocsContext";
@@ -13,19 +13,18 @@ const Projects = () => {
   const navigate = useNavigate();
 
   const HandleProjectClick = (id) => {
-    console.log("Kliknięto:", id);
     navigate(`/admin/project/${id}`);
   };
 
   useEffect(() => {
     if (projects.length > 0) {
-      console.log("Filtrowanie projektów...");
       setActiveProjects(projects.filter((project) => project.active === true));
       setInactiveProjects(
         projects.filter((project) => project.active === false)
       );
     } else {
       console.log("Brak projektów do filtrowania");
+      return <Navigate to="/admin" />;
     }
   }, [projects]);
 
@@ -122,6 +121,10 @@ const Projects = () => {
             {isActive ? <InactiveProjects /> : <ActiveProjects />}
           </div>
         </div>
+
+        <Link to="/admin/setup/project" className="btn-dark">
+          Create Project
+        </Link>
       </div>
     </section>
   );

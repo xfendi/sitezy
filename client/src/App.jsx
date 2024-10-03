@@ -9,7 +9,7 @@ import Site from "./Apps/Site";
 import Admin from "./Apps/Admin";
 import Auth from "./Apps/Auth";
 import Account from "./Apps/Account";
-import Error from "./Error/Error";
+import Error from "./Global/Error";
 
 import ProtectedRoute from './Components/ProtectedRoute'
 
