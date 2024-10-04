@@ -226,14 +226,11 @@
 }
 
 .dropdown__menu {
-  top: 77px;
-  right: 0;
   width: 250px;
   text-align: center;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  left: 10px;
   background-color: var(--color-main);
   padding: 10px;
   border: var(--border-secondary) 1px solid;
@@ -245,4 +242,21 @@
   display: flex;
   flex-direction: column;
   gap: 5px;
+}
+
+.sidebar__profile-nobg {
+  color: var(--text-primary);
+  display: flex;
+  padding: 5px;
+  gap: 10px;
+  transition: var(--transition-default);
+}
+
+.sidebar__copyright {
+  font-size: 12px;
+  color: var(--text-disabled);
+  width: 100%;
+  text-align: center;
+  border-top: var(--border-secondary) 1px solid;
+  padding-top: 10px;
 }

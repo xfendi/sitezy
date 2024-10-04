@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getDatabase, ref, onValue } from "firebase/database";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import ConfettiExplosion from "react-confetti-explosion";
 
 import LogoPrimary from "../../../../Assets/logo-primary.png";

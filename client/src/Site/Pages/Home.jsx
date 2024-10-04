@@ -16,29 +16,37 @@ import { FaStar } from "react-icons/fa";
 const Home = () => {
   return (
     <>
-      <section className="section landing" data-aos="fade-up" data-aos-easing="ease-out-back" data-aos-delay="200" >
+      <section
+        className="section landing"
+        data-aos="fade-up"
+        data-aos-easing="ease-out-back"
+        data-aos-delay="200"
+      >
         <div className="landing__text">
+          <div className="landing__tag">Build Websites Fast!</div>
           <div className="section__title">Build Websites Fast with Sitezy!</div>
           <div className="section__description">
             Effortlessly create professional websites and online stores with our
             user-friendly platform. No coding required, just drag, drop, and
             launch!
           </div>
-          <div className="section__buttons">
-            <a href="/auth/signup" className="btn-primary">
-              Get Started
-            </a>
-            <a href="/about" className="btn-light">
-              How it Works
-            </a>
-          </div>
         </div>
-        <div className="landing__image">
-          <img src={Dashboard} alt="dashboard" className="landing__image-img" />
+        <div className="section__buttons">
+          <a href="/auth/signup" className="btn-primary">
+            Get Started
+          </a>
+          <a href="/about" className="btn-light">
+            How it Works
+          </a>
         </div>
       </section>
       <section className="section features" id="features">
-        <div className="section__top" data-aos="fade-up" data-aos-easing="ease-out-back" data-aos-delay="100" >
+        <div
+          className="section__top"
+          data-aos="fade-up"
+          data-aos-easing="ease-out-back"
+          data-aos-delay="100"
+        >
           <div className="section__tag">Features</div>
           <div className="section__title">
             Powerful Features to Build <br />
@@ -50,7 +58,12 @@ const Home = () => {
           </div>
         </div>
         <div className="section__main features__container">
-          <div className="features__feature" data-aos="fade-up" data-aos-easing="ease-out-back" data-aos-delay="200">
+          <div
+            className="features__feature"
+            data-aos="fade-up"
+            data-aos-easing="ease-out-back"
+            data-aos-delay="200"
+          >
             <div className="feature__icon">
               <LuMousePointerClick size={33} />
             </div>
@@ -61,7 +74,12 @@ const Home = () => {
             </div>
           </div>
 
-          <div className="features__feature" data-aos="fade-up" data-aos-easing="ease-out-back" data-aos-delay="300">
+          <div
+            className="features__feature"
+            data-aos="fade-up"
+            data-aos-easing="ease-out-back"
+            data-aos-delay="300"
+          >
             <div className="feature__icon">
               <LuMonitorSmartphone size={33} />
             </div>
@@ -72,7 +90,12 @@ const Home = () => {
             </div>
           </div>
 
-          <div className="features__feature" data-aos="fade-up" data-aos-easing="ease-out-back" data-aos-delay="400">
+          <div
+            className="features__feature"
+            data-aos="fade-up"
+            data-aos-easing="ease-out-back"
+            data-aos-delay="400"
+          >
             <div className="feature__icon">
               <LuPaintbrush size={33} />
             </div>
@@ -83,7 +106,12 @@ const Home = () => {
             </div>
           </div>
 
-          <div className="features__feature" data-aos="fade-up" data-aos-easing="ease-out-back" data-aos-delay="500">
+          <div
+            className="features__feature"
+            data-aos="fade-up"
+            data-aos-easing="ease-out-back"
+            data-aos-delay="500"
+          >
             <div className="feature__icon">
               <LuPlug size={33} />
             </div>
@@ -94,7 +122,12 @@ const Home = () => {
             </div>
           </div>
 
-          <div className="features__feature" data-aos="fade-up" data-aos-easing="ease-out-back" data-aos-delay="600">
+          <div
+            className="features__feature"
+            data-aos="fade-up"
+            data-aos-easing="ease-out-back"
+            data-aos-delay="600"
+          >
             <div className="feature__icon">
               <LuText size={33} />
             </div>
@@ -105,7 +138,12 @@ const Home = () => {
             </div>
           </div>
 
-          <div className="features__feature" data-aos="fade-up" data-aos-easing="ease-out-back" data-aos-delay="700">
+          <div
+            className="features__feature"
+            data-aos="fade-up"
+            data-aos-easing="ease-out-back"
+            data-aos-delay="700"
+          >
             <div className="feature__icon">
               <LuShoppingCart size={33} />
             </div>
@@ -118,12 +156,22 @@ const Home = () => {
         </div>
       </section>
       <section className="section templates" id="templates">
-        <div className="section__top" data-aos="fade-up" data-aos-easing="ease-out-back" data-aos-delay="100" >
+        <div
+          className="section__top"
+          data-aos="fade-up"
+          data-aos-easing="ease-out-back"
+          data-aos-delay="100"
+        >
           <div className="section__tag">Templates</div>
           <div className="section__title">Choose Your Perfect Template</div>
         </div>
         <div className="section__main templates__container">
-          <div className="features__feature" data-aos="fade-up" data-aos-easing="ease-out-back" data-aos-delay="200">
+          <div
+            className="features__feature"
+            data-aos="fade-up"
+            data-aos-easing="ease-out-back"
+            data-aos-delay="200"
+          >
             <div className="template__image">
               <img src={Dashboard} alt="" />
             </div>
@@ -134,7 +182,12 @@ const Home = () => {
             </div>
           </div>
 
-          <div className="features__feature" data-aos="fade-up" data-aos-easing="ease-out-back" data-aos-delay="300">
+          <div
+            className="features__feature"
+            data-aos="fade-up"
+            data-aos-easing="ease-out-back"
+            data-aos-delay="300"
+          >
             <div className="template__image">
               <img src={Dashboard} alt="" />
             </div>
@@ -145,7 +198,12 @@ const Home = () => {
             </div>
           </div>
 
-          <div className="features__feature" data-aos="fade-up" data-aos-easing="ease-out-back" data-aos-delay="400">
+          <div
+            className="features__feature"
+            data-aos="fade-up"
+            data-aos-easing="ease-out-back"
+            data-aos-delay="400"
+          >
             <div className="template__image">
               <img src={Dashboard} alt="" />
             </div>
@@ -156,7 +214,12 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <div className="section__bottom" data-aos="fade-up" data-aos-easing="ease-out-back" data-aos-delay="300" >
+        <div
+          className="section__bottom"
+          data-aos="fade-up"
+          data-aos-easing="ease-out-back"
+          data-aos-delay="300"
+        >
           <div className="section__description">
             Professionally designed templates tailored to your needs—whether
             you're building a store, blog, or portfolio.
@@ -169,7 +232,13 @@ const Home = () => {
         </div>
       </section>
       <section className="section pricing" id="pricing">
-        <div className="section__top" data-aos="fade-up" data-aos-easing="ease-out-back" data-aos-delay="100" >
+        <div
+          className="section__top"
+          data-aos="fade-up"
+          data-aos-easing="ease-out-back"
+          data-aos-delay="100"
+        >
+          <div className="landing__tag">Choose the Perfect Plan</div>
           <div className="section__title">
             Choose the Perfect Plan for Your Needs
           </div>
@@ -179,7 +248,12 @@ const Home = () => {
           </div>
         </div>
         <div className="section__main pricing__container">
-          <div className="pricing__plan" data-aos="fade-up" data-aos-easing="ease-out-back" data-aos-delay="200">
+          <div
+            className="pricing__plan"
+            data-aos="fade-up"
+            data-aos-easing="ease-out-back"
+            data-aos-delay="200"
+          >
             <div className="pricing__plan-name">Free</div>
             <div className="pricing__plan-price">
               <h1>FREE</h1>
@@ -204,7 +278,7 @@ const Home = () => {
                 <div className="icon-circle">
                   <LuCheck size={15} />
                 </div>{" "}
-                Basic Email Support (Mon-Fri, 9am-5pm)
+                Basic Email Support
               </li>
               <li>
                 <div className="icon-circle">
@@ -232,11 +306,18 @@ const Home = () => {
               </li>
             </ul>
             <div className="pricing__plan-button">
-              <button href="/auth/signup" className="btn-light">Get Started</button>
+              <button href="/auth/signup" className="btn-light">
+                Get Started
+              </button>
             </div>
           </div>
 
-          <div className="pricing__plan pricing__plan__middle" data-aos="fade-up" data-aos-easing="ease-out-back" data-aos-delay="300">
+          <div
+            className="pricing__plan pricing__plan__middle"
+            data-aos="fade-up"
+            data-aos-easing="ease-out-back"
+            data-aos-delay="300"
+          >
             <div className="pricing__plan-name">Pro</div>
             <div className="pricing__plan-price">
               <h1>$15</h1>
@@ -256,7 +337,7 @@ const Home = () => {
                 <div className="icon-circle">
                   <LuCheck size={15} />
                 </div>{" "}
-                Priority email support (Mon-Sun, 8am-8pm)
+                Priority email support
               </li>
               <li>
                 <div className="icon-circle">
@@ -268,13 +349,13 @@ const Home = () => {
                 <div className="icon-circle">
                   <LuCheck size={15} />
                 </div>{" "}
-                Advanced SEO tools (meta tags, keywords)
+                Advanced SEO tools
               </li>
               <li>
                 <div className="icon-circle">
                   <LuCheck size={15} />
                 </div>{" "}
-                Advanced analytics dashboard (traffic sources, user behavior)
+                Advanced analytics dashboard
               </li>
               <li>
                 <div className="icon-circle">
@@ -286,15 +367,22 @@ const Home = () => {
                 <div className="icon-circle">
                   <LuCheck size={15} />
                 </div>{" "}
-                Full customization options (fonts, colors, layout tweaks)
+                Full customization options
               </li>
             </ul>
             <div className="pricing__plan-button">
-              <button href="/auth/signup" className="btn-dark">Get Started</button>
+              <button href="/auth/signup" className="btn-dark">
+                Get Started
+              </button>
             </div>
           </div>
 
-          <div className="pricing__plan" data-aos="fade-up" data-aos-easing="ease-out-back" data-aos-delay="400">
+          <div
+            className="pricing__plan"
+            data-aos="fade-up"
+            data-aos-easing="ease-out-back"
+            data-aos-delay="400"
+          >
             <div className="pricing__plan-name">Business</div>
             <div className="pricing__plan-price">
               <h1>$35</h1>
@@ -315,7 +403,7 @@ const Home = () => {
                 <div className="icon-circle">
                   <LuCheck size={15} />
                 </div>{" "}
-                VIP priority support (chat and email 24/7)
+                VIP priority support
               </li>
               <li>
                 <div className="icon-circle">
@@ -327,47 +415,54 @@ const Home = () => {
                 <div className="icon-circle">
                   <LuCheck size={15} />
                 </div>{" "}
-                Full SEO suite (advanced optimization, backlink tracking)
+                Full SEO suite
               </li>
               <li>
                 <div className="icon-circle">
                   <LuCheck size={15} />
                 </div>{" "}
-                Comprehensive analytics (conversion tracking, heatmaps)
+                Comprehensive analytics
               </li>
               <li>
                 <div className="icon-circle">
                   <LuCheck size={15} />
                 </div>{" "}
-                E-commerce integration (unlimited products, payment gateways)
+                E-commerce integration
               </li>
               <li>
                 <div className="icon-circle">
                   <LuCheck size={15} />
                 </div>{" "}
-                Team collaboration (multi-user accounts, role management)
+                Team collaboration
               </li>
               <li>
                 <div className="icon-circle">
                   <LuCheck size={15} />
                 </div>{" "}
-                Full design customization (CSS and HTML access)
+                Full design customization
               </li>
               <li>
                 <div className="icon-circle">
                   <LuCheck size={15} />
                 </div>{" "}
-                Custom performance optimization (dedicated resources)
+                Custom performance optimization
               </li>
             </ul>
             <div className="pricing__plan-button">
-              <button href="/auth/signup" className="btn-light">Get Started</button>
+              <button href="/auth/signup" className="btn-light">
+                Get Started
+              </button>
             </div>
           </div>
         </div>
       </section>
       <section className="section customers" id="customers">
-        <div className="section__top" data-aos="fade-up" data-aos-easing="ease-out-back" data-aos-delay="100" >
+        <div
+          className="section__top"
+          data-aos="fade-up"
+          data-aos-easing="ease-out-back"
+          data-aos-delay="100"
+        >
           <div className="section__tag">Customers</div>
           <div className="section__title">
             See What Our Customers <br />
@@ -378,7 +473,12 @@ const Home = () => {
           </div>
         </div>
         <div className="section__main customers__container">
-          <div className="customers__customer" data-aos="fade-up" data-aos-easing="ease-out-back" data-aos-delay="200" >
+          <div
+            className="customers__customer"
+            data-aos="fade-up"
+            data-aos-easing="ease-out-back"
+            data-aos-delay="200"
+          >
             <div className="customer__stars">
               <FaStar size={20} />
               <FaStar size={20} />
@@ -406,7 +506,12 @@ const Home = () => {
               </div>
             </div>
           </div>
-          <div className="customers__customer" data-aos="fade-up" data-aos-easing="ease-out-back" data-aos-delay="300" >
+          <div
+            className="customers__customer"
+            data-aos="fade-up"
+            data-aos-easing="ease-out-back"
+            data-aos-delay="300"
+          >
             <div className="customer__stars">
               <FaStar size={20} />
               <FaStar size={20} />
@@ -434,7 +539,12 @@ const Home = () => {
               </div>
             </div>
           </div>
-          <div className="customers__customer" data-aos="fade-up" data-aos-easing="ease-out-back" data-aos-delay="400" >
+          <div
+            className="customers__customer"
+            data-aos="fade-up"
+            data-aos-easing="ease-out-back"
+            data-aos-delay="400"
+          >
             <div className="customer__stars">
               <FaStar size={20} />
               <FaStar size={20} />
@@ -462,7 +572,12 @@ const Home = () => {
               </div>
             </div>
           </div>
-          <div className="customers__customer" data-aos="fade-up" data-aos-easing="ease-out-back" data-aos-delay="500" >
+          <div
+            className="customers__customer"
+            data-aos="fade-up"
+            data-aos-easing="ease-out-back"
+            data-aos-delay="500"
+          >
             <div className="customer__stars">
               <FaStar size={20} />
               <FaStar size={20} />
@@ -490,7 +605,12 @@ const Home = () => {
               </div>
             </div>
           </div>
-          <div className="customers__customer" data-aos="fade-up" data-aos-easing="ease-out-back" data-aos-delay="600" >
+          <div
+            className="customers__customer"
+            data-aos="fade-up"
+            data-aos-easing="ease-out-back"
+            data-aos-delay="600"
+          >
             <div className="customer__stars">
               <FaStar size={20} />
               <FaStar size={20} />
@@ -518,7 +638,12 @@ const Home = () => {
               </div>
             </div>
           </div>
-          <div className="customers__customer" data-aos="fade-up" data-aos-easing="ease-out-back" data-aos-delay="700" >
+          <div
+            className="customers__customer"
+            data-aos="fade-up"
+            data-aos-easing="ease-out-back"
+            data-aos-delay="700"
+          >
             <div className="customer__stars">
               <FaStar size={20} />
               <FaStar size={20} />
@@ -548,7 +673,12 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <section className="section hero" data-aos="fade-up" data-aos-easing="ease-out-back" data-aos-delay="100" >
+      <section
+        className="section hero"
+        data-aos="fade-up"
+        data-aos-easing="ease-out-back"
+        data-aos-delay="100"
+      >
         <div className="section__title">
           Ready to Take Your Business to the <br />
           Next Level?

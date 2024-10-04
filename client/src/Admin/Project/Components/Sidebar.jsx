@@ -86,7 +86,7 @@ const Sidebar = () => {
         </div>
         <div
           className="dropdown__menu"
-          style={{ display: isProfile ? "block" : "none" }}
+          style={{ display: isProfile ? "flex" : "none" }}
         >
           <ul>
             {activeProjects.map((project) => (
@@ -212,6 +212,30 @@ const Sidebar = () => {
               </NavLink>
             </li>
           </ul>
+        </div>
+        <div className="sidebar__profile-nobg">
+          <img
+            src={user.photoURL}
+            alt="Profile Pic"
+            style={{ borderRadius: "5px" }}
+            className="w-9 h-9 rounded-md"
+          />
+          <div className="sidebar__profile__main flex justify-between items-center overflow-hidden transition-all w-full">
+            <div className="sidebar__profile-text leading-4">
+              <div className="sidebar__profile-text-name">
+                {user.displayName}
+              </div>
+              <div className="sidebar__profile-text-email">{user.email}</div>
+            </div>
+            <div className="sidebar__profile-settings">
+              <Link to="/account/settings" className="sidebar__nav-link">
+                <SettingsIcon fontSize="small" />
+              </Link>
+            </div>
+          </div>
+        </div>
+        <div className="sidebar__copyright">
+          &copy; 2024 Sitezy by fendziorr
         </div>
       </nav>
     </aside>

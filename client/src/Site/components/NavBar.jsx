@@ -20,6 +20,8 @@ const NavBar = () => {
             <LuMenu size={33} />
           </div>
         </div>
+      </div>
+      <div className="navbar__middle">
         <ul className={isOpen ? "navbar__links navbar-open" : "navbar__links"}>
           <li>
             <a href="/#features" className="navbar__links-link">
@@ -46,11 +48,28 @@ const NavBar = () => {
               Contact
             </a>
           </li>
+          <div
+            className={
+              isOpen
+                ? "navbar__links-buttons navbar-open"
+                : "navbar__links-buttons"
+            }
+          >
+            <a
+              href="/auth/login"
+              className="navbar__buttons-button btn-outline"
+            >
+              Log In
+            </a>{" "}
+            <a href="/auth/signup" className="navbar__buttons-button btn-dark">
+              Get Started
+            </a>
+          </div>
         </ul>
       </div>
       <div className={isOpen ? "navbar__right navbar-open" : "navbar__right"}>
         <div className="navbar__buttons">
-          <a href="/auth/login" className="navbar__buttons-button">
+          <a href="/auth/login" className="navbar__buttons-button btn-outline">
             Log In
           </a>
           <a href="/auth/signup" className="navbar__buttons-button btn-dark">
