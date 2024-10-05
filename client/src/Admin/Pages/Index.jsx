@@ -6,24 +6,23 @@ import Loading from "./Loading";
 const Index = () => {
   const [loading, setLoading] = useState(true);
 
-  const { profile, projects, subscription, projectId } = UserDocs();
+  const { profile, projects, projectId } = UserDocs();
 
   useEffect(() => {
-    if (profile.color && projects && subscription.planName && projectId) {
+    console.log(profile.color, projects);
+    if (profile.color && projects.length > 0) {
       setLoading(false);
     }
-  }, [profile, projects, subscription, projectId]);
-
-  if (loading) {
-    return <Loading />;
-  }
+  }, [profile, projects]);
 
   if (!profile.color) {
     return <Navigate to="/account/setup/profile" />;
   } else if (projects.length === 0) {
     return <Navigate to="/admin/setup/project" />;
-  } else if (!subscription.planName) {
-    return <Navigate to="/admin/setup/project/plan" />;
+  }
+
+  if (loading) {
+    return <Loading />;
   } else if (projectId) {
     return <Navigate to={`/admin/project/${projectId}`} />;
   } else {

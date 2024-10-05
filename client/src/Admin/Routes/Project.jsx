@@ -1,9 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { Route, Routes, useNavigate, useParams } from "react-router-dom";
+import {
+  Navigate,
+  Route,
+  Routes,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 
 import Loading from "../Pages/Loading";
 
 import Sidebar from "../Project/Components/Sidebar";
+import Header from "../Project/Components/Header";
 import Main from "../Project/Pages/Main";
 import Error from "../Pages/Error";
 import { UserDocs } from "../../Context/UserDocsContext";
@@ -50,6 +57,7 @@ const Project = () => {
 
   return (
     <div className="app admin">
+      <Header />
       <Sidebar />
       <Routes>
         <Route path="/" element={<Main />} />

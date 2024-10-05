@@ -154,7 +154,7 @@
 .section {
   margin-bottom: 77px;
   border-radius: 20px;
-  padding: 55px;
+  padding: 50px;
 }
 
 .section__top {
@@ -220,7 +220,6 @@
   align-items: center;
   text-align: center;
   gap: 20px;
-  padding: 77px;
 }
 
 .landing__tag {
@@ -298,7 +297,6 @@
 /* PRICING */
 
 .pricing {
-  padding: 77px;
   background: rgb(15, 15, 18);
   background: linear-gradient(
     90deg,
@@ -446,7 +444,6 @@
     rgba(15, 15, 18, 1) 100%
   );
   color: var(--color-white);
-  padding: 77px;
   margin-bottom: 15px;
 }
 

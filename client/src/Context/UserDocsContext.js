@@ -108,11 +108,15 @@ export const UserDocsContextProvider = ({ children }) => {
   }, [userId]);
 
   useEffect(() => {
+    if (!auth.currentUser) {
+      setProjectId("");
+      localStorage.removeItem("projectId");
+    }
     const storedProjectId = localStorage.getItem("projectId");
     if (storedProjectId) {
       setProjectId(storedProjectId);
     }
-  }, []);
+  }, [userId]);
 
   useEffect(() => {
     const fetchSubscription = async () => {

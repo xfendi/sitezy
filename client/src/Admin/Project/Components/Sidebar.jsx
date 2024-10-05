@@ -16,7 +16,6 @@ import KeyboardArrowDownRoundedIcon from "@mui/icons-material/KeyboardArrowDownR
 import KeyboardArrowUpRoundedIcon from "@mui/icons-material/KeyboardArrowUpRounded";
 import WindowRoundedIcon from "@mui/icons-material/WindowRounded";
 
-import { UserAuth } from "../../../Context/AuthContext";
 import { Link, NavLink, useParams } from "react-router-dom";
 import { UserDocs } from "../../../Context/UserDocsContext";
 
@@ -26,16 +25,11 @@ const Sidebar = () => {
   const [activeProjects, setActiveProjects] = useState([]);
   const [inactiveProjects, setInactiveProjects] = useState([]);
 
-  const { user, logout } = UserAuth();
   const { selectedProject, projects } = UserDocs();
   const { id } = useParams();
 
   const HandleClick = (name) => {
     setActive(name);
-  };
-
-  const HandleLogout = () => {
-    logout();
   };
 
   if (active !== "" && window.location.pathname === "/admin") {
@@ -54,66 +48,69 @@ const Sidebar = () => {
   }, [projects]);
 
   return (
-    <aside className="h-full">
+    <aside>
       <nav className="sidebar h-full rounded-xl flex flex-col">
-        <div
-          className="sidebar__profile"
-          onClick={() => setIsProfile(!isProfile)}
-        >
-          <img
-            src={selectedProject.photoURL}
-            alt="Profile Pic"
-            style={{ borderRadius: "5px" }}
-            className="w-9 h-9 rounded-md"
-          />
-          <div className="sidebar__profile__main flex justify-between items-center overflow-hidden transition-all w-full">
-            <div className="sidebar__profile-text leading-4">
-              <div className="sidebar__profile-text-name">
-                {selectedProject.name}
+        <div className="sidebar__profile-container relative">
+          <div
+            className="sidebar__profile"
+            onClick={() => setIsProfile(!isProfile)}
+          >
+            <img
+              src={selectedProject.photoURL}
+              alt="Profile Pic"
+              style={{ borderRadius: "5px" }}
+              className="w-9 h-9 rounded-md"
+            />
+            <div className="sidebar__profile__main flex justify-between items-center overflow-hidden transition-all w-full">
+              <div className="sidebar__profile-text leading-4">
+                <div className="sidebar__profile-text-name">
+                  {selectedProject.name}
+                </div>
+                <div className="sidebar__profile-text-email">
+                  {selectedProject.id}
+                </div>
               </div>
-              <div className="sidebar__profile-text-email">
-                {selectedProject.id}
+              <div className="sidebar__profile-settings">
+                {isProfile ? (
+                  <KeyboardArrowDownRoundedIcon fontSize="small" />
+                ) : (
+                  <KeyboardArrowUpRoundedIcon fontSize="small" />
+                )}
               </div>
-            </div>
-            <div className="sidebar__profile-settings">
-              {isProfile ? (
-                <KeyboardArrowDownRoundedIcon fontSize="small" />
-              ) : (
-                <KeyboardArrowUpRoundedIcon fontSize="small" />
-              )}
             </div>
           </div>
-        </div>
-        <div
-          className="dropdown__menu"
-          style={{ display: isProfile ? "flex" : "none" }}
-        >
-          <ul>
-            {activeProjects.map((project) => (
-              <li key={project.id}>
-                <a
-                  href={`/admin/project/${project.id}`}
+          <div
+            className="dropdown__menu"
+            style={{ scale: isProfile ? "1" : "0" }}
+          >
+            <ul>
+              {activeProjects.map((project) => (
+                <li key={project.id}>
+                  <a
+                    href={`/admin/project/${project.id}`}
+                    className="sidebar__nav-link"
+                  >
+                    <img
+                      src={project.photoURL}
+                      alt=""
+                      className="w-6 h-6 rounded-md"
+                    />
+                    <p style={{ fontWeight: 600 }}>{project.name}</p>
+                  </a>
+                </li>
+              ))}
+              <div className="menu__divider"></div>
+              <li>
+                <Link
+                  to="/admin/projects"
                   className="sidebar__nav-link"
+                  onClick={() => HandleClick("settings")}
                 >
-                  <img
-                    src={project.photoURL}
-                    alt=""
-                    className="w-6 h-6 rounded-md"
-                  />
-                  <p style={{ fontWeight: 600 }}>{project.name}</p>
-                </a>
+                  <WindowRoundedIcon fontSize="small" /> <p>All Projects</p>
+                </Link>
               </li>
-            ))}
-            <li>
-              <Link
-                to="/admin/projects"
-                className="sidebar__nav-link"
-                onClick={() => HandleClick("settings")}
-              >
-                <WindowRoundedIcon fontSize="small" /> <p>All Projects</p>
-              </Link>
-            </li>
-          </ul>
+            </ul>
+          </div>
         </div>
         <div className="sidebar__nav flex-1">
           <ul>
@@ -213,27 +210,20 @@ const Sidebar = () => {
             </li>
           </ul>
         </div>
-        <div className="sidebar__profile-nobg">
-          <img
-            src={user.photoURL}
-            alt="Profile Pic"
-            style={{ borderRadius: "5px" }}
-            className="w-9 h-9 rounded-md"
-          />
-          <div className="sidebar__profile__main flex justify-between items-center overflow-hidden transition-all w-full">
-            <div className="sidebar__profile-text leading-4">
-              <div className="sidebar__profile-text-name">
-                {user.displayName}
-              </div>
-              <div className="sidebar__profile-text-email">{user.email}</div>
-            </div>
-            <div className="sidebar__profile-settings">
-              <Link to="/account/settings" className="sidebar__nav-link">
-                <SettingsIcon fontSize="small" />
-              </Link>
+        {/*<div className="sidebar__container flex justify-between items-center overflow-hidden transition-all w-full">
+          <div className="sidebar__profile-text leading-4">
+            <div className="sidebar__profile-text-name">Plan</div>
+            <div className="sidebar__profile-text-email">
+              {subscription.planName}
             </div>
           </div>
-        </div>
+          <Link
+            to={`/admin/project/${id}/settings/plan`}
+            className="btn-primary"
+          >
+            Upgrade
+          </Link>
+        </div>*/}
         <div className="sidebar__copyright">
           &copy; 2024 Sitezy by fendziorr
         </div>

@@ -1,13 +1,9 @@
-import React from 'react'
-import { useParams } from 'react-router-dom'
+import React from "react";
+import { useParams } from "react-router-dom";
 
 const Main = () => {
   const { id } = useParams();
-  return (
-    <div className="main">
-      Main content goes here... {id}
-    </div>
-  )
-}
+  return <section className="main">{id}</section>;
+};
 
-export default Main
+export default Main;

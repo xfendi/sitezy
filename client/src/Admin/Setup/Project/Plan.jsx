@@ -133,7 +133,7 @@ const Plan = () => {
 
   console.log(selectedProject.id)
 
-  if (subscription.planName) {
+  if (subscription.planName || !selectedProject.id) {
     return <Navigate to="/admin" />;
   }
 
