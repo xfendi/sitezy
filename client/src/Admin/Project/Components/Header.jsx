@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import { UserAuth } from "../../../Context/AuthContext";
 import { Link } from "react-router-dom";
@@ -9,6 +9,22 @@ import LogoutIcon from "@mui/icons-material/Logout";
 const Header = () => {
   const [isProfile, setIsProfile] = useState(false);
   const { user, logout } = UserAuth();
+
+  const profileMenuRef = useRef();
+
+  useEffect(() => {
+    const handler = (e) => {
+      if (!profileMenuRef?.current.contains(e.target)) {
+        setIsProfile(false);
+      }
+    };
+    document.addEventListener("mousedown", handler)
+
+    return () => {
+      document.removeEventListener("mousedown", handler)
+    }
+  })
+
   const HandleLogout = () => {
     logout(user);
   };
@@ -19,7 +35,7 @@ const Header = () => {
       </div>
       <div className="header__right">
         <div className="header__right-buttons"></div>
-        <div className="header__right-profile relative">
+        <div className="header__right-profile relative" ref={profileMenuRef} >
           <div className="header__right-prifile__img">
             <img
               src={user.photoURL}

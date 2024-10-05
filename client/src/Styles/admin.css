@@ -239,6 +239,7 @@ aside {
 }
 
 .sidebar__profile-text-name {
+  color: var(--text-primary);
   font-weight: 600;
   width: max-content;
   font-size: 15px;
@@ -266,6 +267,11 @@ aside {
   border: var(--border-secondary) 1px solid;
   border-radius: 10px;
   transition: var(--transition-default);
+}
+
+.dropdown__menu.search {
+  left: 10px;
+  top: 125px;
 }
 
 .dropdown__menu ul {
@@ -320,4 +326,9 @@ aside {
 .menu__divider {
   border-top: var(--border-secondary) 1px solid;
   margin: 10px 0;
+}
+
+.header__left-title {
+  font-size: 17px;
+  font-weight: 500;
 }

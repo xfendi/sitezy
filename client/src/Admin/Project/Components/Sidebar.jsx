@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 // import { UserDocs } from "../../Context/UserDocsContext";
 
@@ -21,6 +21,7 @@ import { UserDocs } from "../../../Context/UserDocsContext";
 
 const Sidebar = () => {
   const [active, setActive] = useState("");
+  const [search, setSearch] = useState("");
   const [isProfile, setIsProfile] = useState(false);
   const [activeProjects, setActiveProjects] = useState([]);
   const [inactiveProjects, setInactiveProjects] = useState([]);
@@ -36,6 +37,21 @@ const Sidebar = () => {
     setActive("");
   }
 
+  const profileMenuRef = useRef();
+
+  useEffect(() => {
+    const handler = (e) => {
+      if (!profileMenuRef?.current.contains(e.target)) {
+        setIsProfile(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
+  });
+
   useEffect(() => {
     if (projects.length > 0) {
       setActiveProjects(projects.filter((project) => project.active === true));
@@ -50,7 +66,10 @@ const Sidebar = () => {
   return (
     <aside>
       <nav className="sidebar h-full rounded-xl flex flex-col">
-        <div className="sidebar__profile-container relative">
+        <div
+          className="sidebar__profile-container relative"
+          ref={profileMenuRef}
+        >
           <div
             className="sidebar__profile"
             onClick={() => setIsProfile(!isProfile)}
@@ -116,7 +135,25 @@ const Sidebar = () => {
           <ul>
             <li className="sidebar__search">
               <SearchRoundedIcon fontSize="small" />
-              <input type="text" id="search" placeholder="Search" />
+              <input
+                type="text"
+                id="search"
+                placeholder="Search"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
+              <div
+                className="dropdown__menu search gap-0 text-start z-50"
+                style={{ scale: search ? "1" : "0" }}
+              >
+                <div className="sidebar__profile-text leading-4">
+                  <div className="sidebar__profile-text-name">
+                    Search Results:
+                  </div>
+                </div>
+                <div className="menu__divider"></div>
+                {search}
+              </div>
             </li>
             <li>
               <Link
