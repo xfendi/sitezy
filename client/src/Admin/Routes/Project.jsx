@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import {
-  Navigate,
   Route,
   Routes,
   useNavigate,
@@ -59,10 +58,12 @@ const Project = () => {
     <div className="app admin">
       <Header />
       <Sidebar />
-      <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="*" element={<Error />} />
-      </Routes>
+      <div className="main-container">
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="*" element={<Error />} />
+        </Routes>
+      </div>
     </div>
   );
 };
