@@ -170,3 +170,13 @@ body {
   border: 2px var(--color-primary) solid;
   transform: scale(1.03);
 }
+
+.btn-clear {
+  margin: 9px 12px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all var(--transition-default);
+}
+.btn-clear:hover {
+  text-decoration: underline;
+}

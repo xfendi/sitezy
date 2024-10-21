@@ -1,17 +1,13 @@
 import React from "react";
-import Dashboard from "../../Assets/dashboard.png";
-import Profile from "../../Assets/profile.jpg";
+import Profile from "../../Assets/male1.png";
 
 import {
   LuMousePointerClick,
   LuMonitorSmartphone,
-  LuPaintbrush,
-  LuPlug,
   LuText,
   LuShoppingCart,
   LuCheck,
 } from "react-icons/lu";
-import { FaStar } from "react-icons/fa";
 
 import PanelTest from "../../Assets/panel-test.png";
 
@@ -24,21 +20,26 @@ const Home = () => {
         data-aos-easing="ease-out-back"
         data-aos-delay="200"
       >
-        <div className="landing__text">
-          <div className="section__title">Build Websites Fast with Sitezy!</div>
-          <div className="section__description text-white">
-            Effortlessly create professional websites and online stores with our
-            user-friendly platform. No coding required, just drag, drop, and
+        <div className="landing__top">
+          {/*<div className="landing__tag">Build your Dream Website</div>*/}
+          <div className="section__title landing__title">
+            <span className="text-yellow-400">Create</span> Your{" "}
+            <span className="text-pink-400">Perfect</span> Website with a
+            Personalized <span className="text-blue-400">Builder</span> Tailored
+            Just <span className="text-green-400">for You</span>
+          </div>
+          <div className="section__description">
+            Effortlessly create professional websites and online stores with our{" "}
+            <br />
+            user-friendly platform. No coding required, just drag, drop, and{" "}
+            <br />
             launch!
           </div>
-        </div>
-        <div className="section__buttons">
-          <a href="/auth/signup" className="btn-primary">
-            Get Started
-          </a>
-          <a href="/about" className="btn-light">
-            How it Works
-          </a>
+          <div className="section__buttons">
+            <a href="/auth/signup" className="btn-dark">
+              Get Started For Free Now
+            </a>
+          </div>
         </div>
         <div className="landing__image">
           <img src={PanelTest} alt="panel" className="rounded-3xl" />
@@ -55,6 +56,11 @@ const Home = () => {
             Powerful Features to Build <br />
             Your Dream Website
           </div>
+          <div className="section__description">
+            All the Tools and Flexibility You Need to Design, Customize, and{" "}
+            <br />
+            Launch Your Perfect Website Without Any Hassle
+          </div>
         </div>
         <div className="section__main features__container">
           <div
@@ -64,24 +70,32 @@ const Home = () => {
             data-aos-delay="200"
           >
             <div className="features__feature">
-              <div className="feature__icon">
+              <div className="feature__icon bg-yellow-200">
                 <LuMousePointerClick size={33} />
               </div>
               <div className="feature__title">Drag And Drop</div>
+              <div className="feature__description">
+                Easily design your website by dragging and dropping elements, no
+                coding skills needed.
+              </div>
             </div>
           </div>
 
           <div
-            className="features__feature-container"
+            className="features__feature-containe"
             data-aos="fade-up"
             data-aos-easing="ease-out-back"
             data-aos-delay="300"
           >
             <div className="features__feature">
-              <div className="feature__icon">
+              <div className="feature__icon bg-pink-200">
                 <LuMonitorSmartphone size={33} />
               </div>
               <div className="feature__title">Responsive Templates</div>
+              <div className="feature__description">
+                Choose from templates that automatically adjust to any screen
+                size, ensuring a seamless mobile experience.
+              </div>
             </div>
           </div>
 
@@ -92,10 +106,14 @@ const Home = () => {
             data-aos-delay="400"
           >
             <div className="features__feature">
-              <div className="feature__icon">
-                <LuPaintbrush size={33} />
+              <div className="feature__icon bg-blue-200">
+                <LuShoppingCart size={33} />
               </div>
-              <div className="feature__title">Customizable Widgets</div>
+              <div className="feature__title">E-commerce Ready</div>
+              <div className="feature__description">
+                Launch your online store with ease, complete with product
+                management, secure payments, and order tracking.
+              </div>
             </div>
           </div>
 
@@ -106,43 +124,19 @@ const Home = () => {
             data-aos-delay="500"
           >
             <div className="features__feature">
-              <div className="feature__icon">
-                <LuPlug size={33} />
-              </div>
-              <div className="feature__title">Seamless Integration</div>
-            </div>
-          </div>
-
-          <div
-            className="features__feature-container"
-            data-aos="fade-up"
-            data-aos-easing="ease-out-back"
-            data-aos-delay="600"
-          >
-            <div className="features__feature">
-              <div className="feature__icon">
+              <div className="feature__icon bg-green-200">
                 <LuText size={33} />
               </div>
               <div className="feature__title">SEO Optimization Tools</div>
-            </div>
-          </div>
-
-          <div
-            className="features__feature-container"
-            data-aos="fade-up"
-            data-aos-easing="ease-out-back"
-            data-aos-delay="700"
-          >
-            <div className="features__feature">
-              <div className="feature__icon">
-                <LuShoppingCart size={33} />
+              <div className="feature__description">
+                Improve your site's visibility on search engines with built-in
+                tools designed for SEO best practices.
               </div>
-              <div className="feature__title">E-commerce Ready</div>
             </div>
           </div>
         </div>
       </section>
-      <section className="section templates" id="templates">
+      {/*<section className="section templates" id="templates">
         <div
           className="section__top"
           data-aos="fade-up"
@@ -210,7 +204,7 @@ const Home = () => {
             </a>
           </div>
         </div>
-      </section>
+      </section>*/}
       <section className="section pricing" id="pricing">
         <div
           className="section__top"
@@ -235,7 +229,7 @@ const Home = () => {
           >
             <div className="pricing__plan-name">Free</div>
             <div className="pricing__plan-price">
-              <h1>FREE</h1>
+              <h1>Free</h1>
             </div>
             <div className="pricing__plan-description">
               Perfect for getting started!
@@ -300,7 +294,7 @@ const Home = () => {
             <div className="pricing__plan-name">Pro</div>
             <div className="pricing__plan-price">
               <h1>$15</h1>
-              <span>per month</span>
+              <span>/month</span>
             </div>
             <div className="pricing__plan-description">
               Ideal for Growing businesses that need more features and support.
@@ -365,7 +359,7 @@ const Home = () => {
             <div className="pricing__plan-name">Business</div>
             <div className="pricing__plan-price">
               <h1>$35</h1>
-              <span>per month</span>
+              <span>/month</span>
             </div>
             <div className="pricing__plan-description">
               Ideal for Established businesses requiring extensive resources and
@@ -457,13 +451,6 @@ const Home = () => {
             data-aos-easing="ease-out-back"
             data-aos-delay="200"
           >
-            <div className="customer__stars">
-              <FaStar size={20} />
-              <FaStar size={20} />
-              <FaStar size={20} />
-              <FaStar size={20} />
-              <FaStar size={20} />
-            </div>
             <div className="customer__description">
               Lorem Ipsum is simply dummy text of the printing and typesetting
               industry. Lorem Ipsum has been the industry's standard dummy text
@@ -490,13 +477,6 @@ const Home = () => {
             data-aos-easing="ease-out-back"
             data-aos-delay="300"
           >
-            <div className="customer__stars">
-              <FaStar size={20} />
-              <FaStar size={20} />
-              <FaStar size={20} />
-              <FaStar size={20} />
-              <FaStar size={20} />
-            </div>
             <div className="customer__description">
               Lorem Ipsum is simply dummy text of the printing and typesetting
               industry. Lorem Ipsum has been the industry's standard dummy text
@@ -523,13 +503,6 @@ const Home = () => {
             data-aos-easing="ease-out-back"
             data-aos-delay="400"
           >
-            <div className="customer__stars">
-              <FaStar size={20} />
-              <FaStar size={20} />
-              <FaStar size={20} />
-              <FaStar size={20} />
-              <FaStar size={20} />
-            </div>
             <div className="customer__description">
               Lorem Ipsum is simply dummy text of the printing and typesetting
               industry. Lorem Ipsum has been the industry's standard dummy text
@@ -556,13 +529,6 @@ const Home = () => {
             data-aos-easing="ease-out-back"
             data-aos-delay="500"
           >
-            <div className="customer__stars">
-              <FaStar size={20} />
-              <FaStar size={20} />
-              <FaStar size={20} />
-              <FaStar size={20} />
-              <FaStar size={20} />
-            </div>
             <div className="customer__description">
               Lorem Ipsum is simply dummy text of the printing and typesetting
               industry. Lorem Ipsum has been the industry's standard dummy text
@@ -589,13 +555,6 @@ const Home = () => {
             data-aos-easing="ease-out-back"
             data-aos-delay="600"
           >
-            <div className="customer__stars">
-              <FaStar size={20} />
-              <FaStar size={20} />
-              <FaStar size={20} />
-              <FaStar size={20} />
-              <FaStar size={20} />
-            </div>
             <div className="customer__description">
               Lorem Ipsum is simply dummy text of the printing and typesetting
               industry. Lorem Ipsum has been the industry's standard dummy text
@@ -622,13 +581,6 @@ const Home = () => {
             data-aos-easing="ease-out-back"
             data-aos-delay="700"
           >
-            <div className="customer__stars">
-              <FaStar size={20} />
-              <FaStar size={20} />
-              <FaStar size={20} />
-              <FaStar size={20} />
-              <FaStar size={20} />
-            </div>
             <div className="customer__description">
               Lorem Ipsum is simply dummy text of the printing and typesetting
               industry. Lorem Ipsum has been the industry's standard dummy text
@@ -662,15 +614,13 @@ const Home = () => {
           Next Level?
         </div>
         <div className="section__description">
-          Join thousands of creators building stunning websites with ease. Get
-          started today and watch your business grow!
+          Join thousands of creators building stunning websites with ease.{" "}
+          <br />
+          Get started today and watch your business grow!
         </div>
         <div className="section__buttons">
-          <a href="/auth/signup" className="btn-primary">
-            Get Started
-          </a>
-          <a href="/about" className="btn-light">
-            How it Works
+          <a href="/auth/signup" className="btn-dark">
+            Get Started For Free Now
           </a>
         </div>
       </section>

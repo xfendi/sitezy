@@ -55,12 +55,9 @@ const NavBar = () => {
                 : "navbar__links-buttons"
             }
           >
-            <a
-              href="/auth/login"
-              className="navbar__buttons-button btn-outline"
-            >
-              Log In
-            </a>{" "}
+            <a href="/auth/login" className="navbar__buttons-button btn-clear">
+              Login
+            </a>
             <a href="/auth/signup" className="navbar__buttons-button btn-dark">
               Get Started
             </a>
@@ -69,8 +66,8 @@ const NavBar = () => {
       </div>
       <div className={isOpen ? "navbar__right navbar-open" : "navbar__right"}>
         <div className="navbar__buttons">
-          <a href="/auth/login" className="navbar__buttons-button btn-outline">
-            Log In
+          <a href="/auth/login" className="navbar__buttons-button btn-clear">
+            Login
           </a>
           <a href="/auth/signup" className="navbar__buttons-button btn-dark">
             Get Started
