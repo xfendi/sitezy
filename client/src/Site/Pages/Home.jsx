@@ -13,19 +13,20 @@ import {
 } from "react-icons/lu";
 import { FaStar } from "react-icons/fa";
 
+import PanelTest from "../../Assets/panel-test.png";
+
 const Home = () => {
   return (
     <>
       <section
-        className="section landing"
+        className="section landing rounded-3xl"
         data-aos="fade-up"
         data-aos-easing="ease-out-back"
         data-aos-delay="200"
       >
         <div className="landing__text">
-          <div className="landing__tag">Build Websites Fast!</div>
           <div className="section__title">Build Websites Fast with Sitezy!</div>
-          <div className="section__description">
+          <div className="section__description text-white">
             Effortlessly create professional websites and online stores with our
             user-friendly platform. No coding required, just drag, drop, and
             launch!
@@ -39,6 +40,9 @@ const Home = () => {
             How it Works
           </a>
         </div>
+        <div className="landing__image">
+          <img src={PanelTest} alt="panel" className="rounded-3xl" />
+        </div>
       </section>
       <section className="section features" id="features">
         <div
@@ -47,110 +51,93 @@ const Home = () => {
           data-aos-easing="ease-out-back"
           data-aos-delay="100"
         >
-          <div className="section__tag">Features</div>
           <div className="section__title">
             Powerful Features to Build <br />
             Your Dream Website
           </div>
-          <div className="section__description">
-            Explore a wide range of tools designed to make website building
-            easy, fast, and fun.
-          </div>
         </div>
         <div className="section__main features__container">
           <div
-            className="features__feature"
+            className="features__feature-container"
             data-aos="fade-up"
             data-aos-easing="ease-out-back"
             data-aos-delay="200"
           >
-            <div className="feature__icon">
-              <LuMousePointerClick size={33} />
-            </div>
-            <div className="feature__title">Example Themplate Name</div>
-            <div className="feature__description">
-              Effortlessly design your website with our intuitive drag-and-drop
-              editor. No coding required!
+            <div className="features__feature">
+              <div className="feature__icon">
+                <LuMousePointerClick size={33} />
+              </div>
+              <div className="feature__title">Drag And Drop</div>
             </div>
           </div>
 
           <div
-            className="features__feature"
+            className="features__feature-container"
             data-aos="fade-up"
             data-aos-easing="ease-out-back"
             data-aos-delay="300"
           >
-            <div className="feature__icon">
-              <LuMonitorSmartphone size={33} />
-            </div>
-            <div className="feature__title">Responsive Templates</div>
-            <div className="feature__description">
-              Choose from a variety of professionally designed, mobile-friendly
-              templates that look great on any device.
+            <div className="features__feature">
+              <div className="feature__icon">
+                <LuMonitorSmartphone size={33} />
+              </div>
+              <div className="feature__title">Responsive Templates</div>
             </div>
           </div>
 
           <div
-            className="features__feature"
+            className="features__feature-container"
             data-aos="fade-up"
             data-aos-easing="ease-out-back"
             data-aos-delay="400"
           >
-            <div className="feature__icon">
-              <LuPaintbrush size={33} />
-            </div>
-            <div className="feature__title">Customizable Widgets</div>
-            <div className="feature__description">
-              Add and personalize widgets such as contact forms, galleries, and
-              social media feeds to enhance your site’s functionality.
+            <div className="features__feature">
+              <div className="feature__icon">
+                <LuPaintbrush size={33} />
+              </div>
+              <div className="feature__title">Customizable Widgets</div>
             </div>
           </div>
 
           <div
-            className="features__feature"
+            className="features__feature-container"
             data-aos="fade-up"
             data-aos-easing="ease-out-back"
             data-aos-delay="500"
           >
-            <div className="feature__icon">
-              <LuPlug size={33} />
-            </div>
-            <div className="feature__title">Seamless Integration</div>
-            <div className="feature__description">
-              EConnect your site with popular tools and services, including
-              payment gateways, email marketing platforms, and analytics tools.
+            <div className="features__feature">
+              <div className="feature__icon">
+                <LuPlug size={33} />
+              </div>
+              <div className="feature__title">Seamless Integration</div>
             </div>
           </div>
 
           <div
-            className="features__feature"
+            className="features__feature-container"
             data-aos="fade-up"
             data-aos-easing="ease-out-back"
             data-aos-delay="600"
           >
-            <div className="feature__icon">
-              <LuText size={33} />
-            </div>
-            <div className="feature__title">SEO Optimization Tools</div>
-            <div className="feature__description">
-              Ensure your website ranks higher on search engines with built-in
-              SEO features, from meta tags to keyword optimization.
+            <div className="features__feature">
+              <div className="feature__icon">
+                <LuText size={33} />
+              </div>
+              <div className="feature__title">SEO Optimization Tools</div>
             </div>
           </div>
 
           <div
-            className="features__feature"
+            className="features__feature-container"
             data-aos="fade-up"
             data-aos-easing="ease-out-back"
             data-aos-delay="700"
           >
-            <div className="feature__icon">
-              <LuShoppingCart size={33} />
-            </div>
-            <div className="feature__title">E-commerce Ready</div>
-            <div className="feature__description">
-              Easily set up and manage an online store with integrated payment
-              gateways, product pages, and inventory management tools.
+            <div className="features__feature">
+              <div className="feature__icon">
+                <LuShoppingCart size={33} />
+              </div>
+              <div className="feature__title">E-commerce Ready</div>
             </div>
           </div>
         </div>
@@ -162,55 +149,48 @@ const Home = () => {
           data-aos-easing="ease-out-back"
           data-aos-delay="100"
         >
-          <div className="section__tag">Templates</div>
           <div className="section__title">Choose Your Perfect Template</div>
         </div>
         <div className="section__main templates__container">
           <div
-            className="features__feature"
+            className="features__feature-container"
             data-aos="fade-up"
             data-aos-easing="ease-out-back"
             data-aos-delay="200"
           >
-            <div className="template__image">
-              <img src={Dashboard} alt="" />
-            </div>
-            <div className="feature__title">Example Themplate Name</div>
-            <div className="feature__description">
-              Effortlessly design your website with our intuitive drag-and-drop
-              editor. No coding required!
+            <div className="features__feature template">
+              <div className="template__image">
+                <img src={Dashboard} alt="" />
+              </div>
+              <div className="feature__title">Example Themplate Name</div>
             </div>
           </div>
 
           <div
-            className="features__feature"
+            className="features__feature-container"
             data-aos="fade-up"
             data-aos-easing="ease-out-back"
             data-aos-delay="300"
           >
-            <div className="template__image">
-              <img src={Dashboard} alt="" />
-            </div>
-            <div className="feature__title">Example Themplate Name</div>
-            <div className="feature__description">
-              Effortlessly design your website with our intuitive drag-and-drop
-              editor. No coding required!
+            <div className="features__feature template">
+              <div className="template__image">
+                <img src={Dashboard} alt="" />
+              </div>
+              <div className="feature__title">Example Themplate Name</div>
             </div>
           </div>
 
           <div
-            className="features__feature"
+            className="features__feature-container"
             data-aos="fade-up"
             data-aos-easing="ease-out-back"
             data-aos-delay="400"
           >
-            <div className="template__image">
-              <img src={Dashboard} alt="" />
-            </div>
-            <div className="feature__title">Example Themplate Name</div>
-            <div className="feature__description">
-              Effortlessly design your website with our intuitive drag-and-drop
-              editor. No coding required!
+            <div className="features__feature template">
+              <div className="template__image">
+                <img src={Dashboard} alt="" />
+              </div>
+              <div className="feature__title">Example Themplate Name</div>
             </div>
           </div>
         </div>
@@ -238,7 +218,6 @@ const Home = () => {
           data-aos-easing="ease-out-back"
           data-aos-delay="100"
         >
-          <div className="landing__tag">Choose the Perfect Plan</div>
           <div className="section__title">
             Choose the Perfect Plan for Your Needs
           </div>
@@ -463,7 +442,6 @@ const Home = () => {
           data-aos-easing="ease-out-back"
           data-aos-delay="100"
         >
-          <div className="section__tag">Customers</div>
           <div className="section__title">
             See What Our Customers <br />
             Are Saying

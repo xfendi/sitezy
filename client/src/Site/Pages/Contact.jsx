@@ -16,7 +16,7 @@ const Contact = () => {
           to you soon.
         </div>
       </div>
-      <div className="section__main contact__container">
+      <div className="section__main m-0 contact__container">
         <form
           className="form contact__form"
           action=""

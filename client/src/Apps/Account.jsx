@@ -2,6 +2,7 @@ import React from 'react';
 import { Routes, Route } from "react-router-dom";
 
 import '../Styles/auth.css';
+import '../Styles/admin.css';
 
 import Setup from '../Account/routes/Setup';
 import Settings from '../Account/routes/Settings';

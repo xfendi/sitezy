@@ -1,10 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  Route,
-  Routes,
-  useNavigate,
-  useParams,
-} from "react-router-dom";
+import { Route, Routes, useNavigate, useParams } from "react-router-dom";
 
 import Loading from "../Pages/Loading";
 
@@ -58,12 +53,10 @@ const Project = () => {
     <div className="app admin">
       <Header />
       <Sidebar />
-      <div className="main-container">
-        <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="*" element={<Error />} />
-        </Routes>
-      </div>
+      <Routes>
+        <Route path="/" element={<Main />} />
+        <Route path="*" element={<Error />} />
+      </Routes>
     </div>
   );
 };

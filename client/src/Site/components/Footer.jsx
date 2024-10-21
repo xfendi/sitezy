@@ -80,9 +80,6 @@ const Footer = () => {
         </div>
       </div>
       <div className="footer__bottom">
-        <div className="footer__bottom-lang">
-            LANG
-        </div>
         <div className="footer__bottom-rights">
             &copy; Sitezy 2024. All Rights Reserved
         </div>
