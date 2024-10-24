@@ -117,8 +117,10 @@ const Projects = () => {
             Inactive
           </div>
 
-          <div className="projects__list">
-            {isActive ? <InactiveProjects /> : <ActiveProjects />}
+          <div className="projects__list-container">
+            <div className="projects__list scrollable-div">
+              {isActive ? <InactiveProjects /> : <ActiveProjects />}
+            </div>
           </div>
         </div>
 

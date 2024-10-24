@@ -3,6 +3,7 @@ import { useContext, useEffect, useState, createContext } from "react";
 import { db, database, auth } from "../firebase";
 import { collection, getDoc, getDocs, doc } from "firebase/firestore";
 import { onValue, ref } from "firebase/database";
+import { UserAuth } from "./AuthContext";
 
 const UserDocsContext = createContext();
 
@@ -14,6 +15,7 @@ export const UserDocsContextProvider = ({ children }) => {
   const [subscription, setSubscription] = useState({});
 
   const userId = auth.currentUser?.uid;
+  const { user } = UserAuth();
 
   const findProjects = async (userId) => {
     const projectsRef = collection(db, "projects");
@@ -24,9 +26,11 @@ export const UserDocsContextProvider = ({ children }) => {
         const projectData = doc.data();
         if (projectData.members && projectData.members[userId]) {
           projectsArray.push({ ...doc.data() });
-          console.log("User Projects:", projectsArray);
         }
       });
+      if (projectsArray.length > 0) {
+        console.log("User Projects:", projectsArray);
+      }
       setProjects(projectsArray);
     } catch (e) {
       console.error(
@@ -108,17 +112,25 @@ export const UserDocsContextProvider = ({ children }) => {
   }, [userId]);
 
   useEffect(() => {
+    console.log(auth.currentUser);
     if (!auth.currentUser) {
+      console.log("User not logged in");
       setProjectId("");
+      setSelectedProject({});
+      setSubscription({});
+      setProjects([]);
       localStorage.removeItem("projectId");
+      console.log("removed projectId");
     }
+    console.log("User logged in");
     const storedProjectId = localStorage.getItem("projectId");
     if (storedProjectId) {
       setProjectId(storedProjectId);
     }
-  }, [userId]);
+  }, []);
 
   useEffect(() => {
+    if (!projectId) return;
     const fetchSubscription = async () => {
       try {
         await findSubscription(projectId);

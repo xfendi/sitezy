@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import { FaDiscord, FaInstagram, FaFacebook } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
@@ -46,10 +47,10 @@ const Footer = () => {
         </div>
         <ul className="footer__bottom-links">
           <li>
-            <a href="/privacy">Privacy</a>
+            <Link href="/privacy">Privacy</Link>
           </li>
           <li>
-            <a href="/terms">Terms</a>
+            <Link href="/terms">Terms</Link>
           </li>
         </ul>
       </div>

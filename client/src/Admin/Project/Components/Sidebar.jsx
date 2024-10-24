@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 
 import { UserDocs } from "../../../Context/UserDocsContext";
 
-import LogoPrimary from '../../../Assets/logo-primary.png';
+import LogoPrimary from "../../../Assets/logo-primary.png";
 
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import AssessmentRoundedIcon from "@mui/icons-material/AssessmentRounded";
@@ -62,7 +62,7 @@ const Sidebar = () => {
   }, [projects]);
 
   return (
-    <aside>
+    <aside className="bg-neutral-50 dark:bg-neutral-900">
       <nav className="sidebar h-full flex flex-col">
         <div className="sidebar__top">
           <img src={LogoPrimary} alt="sitezy" width={33} />
@@ -80,7 +80,7 @@ const Sidebar = () => {
                 }
                 onClick={() => HandleClick("")}
               >
-                <HomeRoundedIcon fontSize="small" /> <p>Dashboard</p>
+                <HomeRoundedIcon fontSize="small" /> <p>Home</p>
               </Link>
             </li>
             <li>
@@ -183,7 +183,12 @@ const Sidebar = () => {
                     {selectedProject.id}
                   </div>
                 </div>
-                <div className="sidebar__profile-settings" style={{ transform: isProject ? "rotate(180deg)" : "rotate(0)"}}>
+                <div
+                  className="sidebar__profile-settings"
+                  style={{
+                    transform: isProject ? "rotate(90deg)" : "rotate(-90deg)",
+                  }}
+                >
                   <KeyboardArrowRightRoundedIcon fontSize="small" />
                 </div>
               </div>
@@ -223,13 +228,15 @@ const Sidebar = () => {
               </ul>
             </div>
           </div>
-          <a href="#" className="btn-outline-small text-center">
-            Upgrade Plan
-          </a>
+          {subscription.planName === "Free" && (
+            <Link to={`/admin/project/${id}/settings/plan`} className="btn-outline-small text-center">
+              Upgrade Plan
+            </Link>
+          )}
         </div>
-        <div className="sidebar__copyright">
+        {/*<div className="sidebar__copyright">
           &copy; 2024 Sitezy by fendziorr
-        </div>
+        </div>*/}
       </nav>
     </aside>
   );

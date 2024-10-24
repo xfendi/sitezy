@@ -1,50 +1,60 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Link, Route, Routes, NavLink } from "react-router-dom";
+
 import Index from "../Pages/Settings/Index";
+import Profile from "../Pages/Settings/Profile";
 
-import { NavLink } from "react-router-dom";
-
-import MoreVertRoundedIcon from "@mui/icons-material/MoreVertRounded";
-
-const Header = () => {
-  return (
-    <div className="main-header flex justify-between">
-      <div className="main-header_title text-2xl font-semibold">Overview</div>
-      <div className="main-header_settings header__right-icons border-none p-0">
-        <MoreVertRoundedIcon fontSize="small" />
-      </div>
-    </div>
-  );
-};
-
-const NavBar = () => {
-  return (
-    <nav className="main-nav">
-      <ul>
-        <li>
-          <NavLink to={`/account/settings`} className="main-nav_link">
-            <p>Account</p>
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to={`/account/settings/profile`} className="main-nav_link">
-            <p>Profile</p>
-          </NavLink>
-        </li>
-      </ul>
-    </nav>
-  );
-};
+import { UserDocs } from "../../Context/UserDocsContext";
+import { UserAuth } from "../../Context/AuthContext";
 
 const Settings = () => {
+  const { user } = UserAuth();
+  const { profile } = UserDocs();
   return (
-    <div className="account__app h-full">
+    <div
+      className={
+        `app account ${profile.theme === "light" ? "light" : "dark"} ` +
+        "bg-neutral-100 dark:bg-neutral-800"
+      }
+    >
+      {!user.emailVerified && (
+        <div className="banner">
+          click{" "}
+          <Link className="banner-link" to="/auth/emailverify">
+            Here
+          </Link>{" "}
+          to verify your email address and get full account access.
+        </div>
+      )}
       <div className="main-container h-full">
-        <Header />
-        <NavBar />
-        <Routes>
-          <Route path="/" element={<Index />} />
-        </Routes>
+        <div className="main-header flex justify-between">
+          <div className="main-header_title text-2xl font-semibold">
+            Account Settings
+          </div>
+        </div>
+        <nav className="main-nav">
+          <ul>
+            <li>
+              <NavLink to={`/account/settings`} className="main-nav_link">
+                <p>Account</p>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to={`/account/settings/profile`}
+                className="main-nav_link"
+              >
+                <p>Profile</p>
+              </NavLink>
+            </li>
+          </ul>
+        </nav>
+        <section className="main-section settings">
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/profile" element={<Profile />} />
+          </Routes>
+        </section>
       </div>
     </div>
   );

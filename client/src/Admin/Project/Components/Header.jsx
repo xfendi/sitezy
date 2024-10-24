@@ -35,7 +35,7 @@ const Header = () => {
   });
 
   return (
-    <header className="header">
+    <header className="header bg-neutral-50 dark:bg-neutral-900">
       <div className="header__left">
         <div className="header__left-search m-0 relative">
           <SearchRoundedIcon fontSize="small" />

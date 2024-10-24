@@ -9,7 +9,7 @@ import Settings from '../Account/routes/Settings';
 
 const Account = () => {
   return (
-    <div className="auth__app">
+    <div className="account__app">
       <Routes>
         <Route path="/setup/*" element={<Setup />} />
         <Route path="/settings/*" element={<Settings />} />

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import { LuMenu } from "react-icons/lu";
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState();
@@ -13,9 +14,9 @@ const NavBar = () => {
     >
       <div className="navbar__left">
         <div className="navbar__logo">
-          <a href="/" className="navbar__logo-text">
+          <Link to="/" className="navbar__logo-text">
             Sitezy
-          </a>
+          </Link>
           <div className="navbar__menu" onClick={() => setIsOpen(!isOpen)}>
             <LuMenu size={33} />
           </div>
@@ -24,29 +25,24 @@ const NavBar = () => {
       <div className="navbar__middle">
         <ul className={isOpen ? "navbar__links navbar-open" : "navbar__links"}>
           <li>
-            <a href="/#features" className="navbar__links-link">
+            <Link to="/#features" className="navbar__links-link">
               Features
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="/#templates" className="navbar__links-link">
-              Templates
-            </a>
-          </li>
-          <li>
-            <a href="/#pricing" className="navbar__links-link">
+            <Link to="/#pricing" className="navbar__links-link">
               Pricing
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="/#customers" className="navbar__links-link">
+            <Link to="/#customers" className="navbar__links-link">
               Customers
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="/contact" className="navbar__links-link">
+            <Link to="/contact" className="navbar__links-link">
               Contact
-            </a>
+            </Link>
           </li>
           <div
             className={
@@ -55,23 +51,23 @@ const NavBar = () => {
                 : "navbar__links-buttons"
             }
           >
-            <a href="/auth/login" className="navbar__buttons-button btn-clear">
+            <Link to="/auth/login" className="navbar__buttons-button btn-clear">
               Login
-            </a>
-            <a href="/auth/signup" className="navbar__buttons-button btn-dark">
+            </Link>
+            <Link to="/auth/signup" className="navbar__buttons-button btn-dark">
               Get Started
-            </a>
+            </Link>
           </div>
         </ul>
       </div>
       <div className={isOpen ? "navbar__right navbar-open" : "navbar__right"}>
         <div className="navbar__buttons">
-          <a href="/auth/login" className="navbar__buttons-button btn-clear">
+          <Link to="/auth/login" className="navbar__buttons-button btn-clear">
             Login
-          </a>
-          <a href="/auth/signup" className="navbar__buttons-button btn-dark">
+          </Link>
+          <Link to="/auth/signup" className="navbar__buttons-button btn-dark">
             Get Started
-          </a>
+          </Link>
         </div>
       </div>
     </nav>

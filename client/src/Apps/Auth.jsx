@@ -5,6 +5,7 @@ import '../Styles/auth.css';
 
 import LogIn from '../Auth/Pages/LogIn';
 import SignUp from '../Auth/Pages/SignUp';
+import EmailVerify from '../Auth/Pages/EmailVerify';
 
 const Auth = () => {
   return (
@@ -12,6 +13,7 @@ const Auth = () => {
       <Routes>
         <Route path="/login" element={<LogIn />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/emailverify" element={<EmailVerify />} />
       </Routes>
     </div>
   )

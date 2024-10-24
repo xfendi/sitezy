@@ -13,7 +13,7 @@ import Projects from "../Admin/Pages/Projects";
 const Admin = () => {
   const { profile } = UserDocs();
   return (
-    <div className={`admin__app ${profile.theme === "light" ? "theme-light" : "theme-dark"}`}>
+    <div className={`admin__app ${profile.theme === "light" ? "light" : "dark"} ` + "bg-neutral-100 dark:bg-neutral-800"}>
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/project/:id/*" element={<Project />} />

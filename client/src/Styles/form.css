@@ -91,6 +91,11 @@
   font-size: 15px;
 }
 
+.form__success {
+  color: green;
+  font-size: 15px;
+}
+
 .form__input__select__image-container {
   display: flex;
   gap: 25px;
@@ -439,6 +444,10 @@ input[type="radio"]:checked::before {
 .input__project-name {
   font-size: 17px;
   font-weight: 600;
+  white-space: nowrap;
+  max-width: 350px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .input__project-id {
@@ -454,4 +463,18 @@ input[type="radio"]:checked::before {
   display: flex;
   flex-direction: column;
   gap: 5px;
+}
+
+.form-modal {
+  transition: all var(--transition-default);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0); /* Start with scale(0) */
+  opacity: 0; /* Start with opacity 0 */
+  position: absolute; /* Ensure modal is positioned absolutely */
+}
+
+.form-modal.show {
+  transform: translate(-50%, -50%) scale(1); /* Scale to 1 when shown */
+  opacity: 1; /* Set opacity to 1 when shown */
 }

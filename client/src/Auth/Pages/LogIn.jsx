@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import LogoPrimary from "../../Assets/logo-primary.png";
 
 import { UserAuth } from "../../Context/AuthContext";
-import { useNavigate } from "react-router-dom";
 
 const LogIn = () => {
   const [email, setEmail] = useState("");
@@ -11,14 +10,14 @@ const LogIn = () => {
   const [error, setError] = useState("");
 
   const { login } = UserAuth();
-  const navigate = useNavigate();
 
   const HandleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     try {
       await login(email, password);
-      navigate("/admin");
+      // navigate("/admin");
+      window.location.href = "/admin";
     } catch (error) {
       setError(error.message);
       console.log(error.message);

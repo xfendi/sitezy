@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { UserDocs } from "../../../Context/UserDocsContext";
 
 import LogoPrimary from "../../../Assets/logo-primary.png";
+import dayjs from "dayjs";
 
 import FreeDescription from "./Plan/FreeDescription";
 import ProDescription from "./Plan/ProDescription";
 import BusinessDescription from "./Plan/BusinessDescription";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
+
+import { ref, set } from "firebase/database";
+import { database } from "../../../firebase";
 
 export const plans = [
   {
@@ -89,14 +93,25 @@ const Plan = () => {
   const [isTime, setIsTime] = useState();
   const [error, setError] = useState("");
 
-  const { subscription, selectedProject } = UserDocs();
+  const { subscription, selectedProject, projectId } = UserDocs();
+  console.log("ID:", selectedProject.id);
 
   const HandleSubmit = async (plan) => {
     if (!selectedPlan) {
       setError("Choose Your Plan");
       return;
-    } else if (selectedPlan.link === undefined) {
-      setError("Free Plan Selected");
+    } else if (selectedPlan.name === "Free") {
+      const date = dayjs();
+      const formattedDate = date.format("DD-MM-YYYY");
+
+      set(ref(database, "projects/" + selectedProject.id), {
+        subscription: {
+          planName: selectedPlan.name,
+          planStartDate: formattedDate,
+        },
+      })
+        .then(() => (window.location.href = `/admin/project/${projectId}`))
+        .catch((e) => console.log(e));
       return;
     }
     console.log("Plan:", selectedPlan.name, "| Type:", selectedPlan.type);
@@ -132,7 +147,9 @@ const Plan = () => {
   };
 
   if (subscription.planName || !selectedProject.id) {
-    return <Navigate to="/admin" />;
+    console.log("undefined subscription or selected project id");
+    console.log(subscription.planName, selectedProject.id);
+    //return <Navigate to="/admin" />;
   }
 
   const MonthPlansComponent = () => {
