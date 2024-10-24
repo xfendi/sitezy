@@ -7,6 +7,7 @@ import "./index.css";
 import "./Styles/form.css";
 import { AuthContextProvider } from "./Context/AuthContext";
 import { UserDocsContextProvider } from "./Context/UserDocsContext";
+import { SidebarProvider } from "./Context/SidebarContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -14,7 +15,9 @@ root.render(
     <BrowserRouter>
       <AuthContextProvider>
         <UserDocsContextProvider>
-          <App />
+          <SidebarProvider>
+            <App />
+          </SidebarProvider>
         </UserDocsContextProvider>
       </AuthContextProvider>
     </BrowserRouter>

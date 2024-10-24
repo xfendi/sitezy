@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { UserAuth } from "../../../Context/AuthContext";
-
-import { UserDocs } from "../../../Context/UserDocsContext";
 
 import Light from "../../../Assets/light.png";
 import Dark from "../../../Assets/dark.png";
@@ -32,10 +30,7 @@ const Profile = () => {
     "#00FF00",
   ];
 
-  const navigate = useNavigate();
-
   const { user } = UserAuth();
-  const { profile } = UserDocs();
   const userId = user.uid;
 
   useEffect(() => {

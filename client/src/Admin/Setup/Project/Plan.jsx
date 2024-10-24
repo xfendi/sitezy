@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { UserDocs } from "../../../Context/UserDocsContext";
 
 import LogoPrimary from "../../../Assets/logo-primary.png";
@@ -7,7 +7,6 @@ import dayjs from "dayjs";
 import FreeDescription from "./Plan/FreeDescription";
 import ProDescription from "./Plan/ProDescription";
 import BusinessDescription from "./Plan/BusinessDescription";
-import { Navigate, useNavigate } from "react-router-dom";
 
 import { ref, set } from "firebase/database";
 import { database } from "../../../firebase";

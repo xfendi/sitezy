@@ -185,7 +185,7 @@
   cursor: pointer;
   transition: var(--transition-default);
   border: 2px solid transparent;
-  border-radius: 19px;
+  border-radius: 12px;
   padding: 2px;
 }
 
@@ -195,7 +195,7 @@
 
 .profile__theme__button img {
   box-shadow: rgba(206, 210, 214, 0.2) 0px 2px 6px;
-  border-radius: 15px;
+  border-radius: 10px;
 }
 
 /* ---------------------------------------------------------------- */

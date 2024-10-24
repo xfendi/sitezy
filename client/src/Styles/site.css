@@ -628,7 +628,7 @@
 
 @media (max-width: 600px) {
   .app {
-    padding: 15px !important;
+    padding: 15px;
   }
   .section__title {
     font-size: 44px;

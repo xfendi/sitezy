@@ -2,18 +2,21 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { UserAuth } from "../../../Context/AuthContext";
+import { useSidebar } from "../../../Context/SidebarContext";
 
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
 import NotificationsNoneRoundedIcon from "@mui/icons-material/NotificationsNoneRounded";
-import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
+import AddCircleOutlineRoundedIcon from "@mui/icons-material/AddCircleOutlineRounded";
+import MenuIcon from "@mui/icons-material/Menu";
 
 const Header = () => {
   const [search, setSearch] = useState("");
   const [isProfile, setIsProfile] = useState(false);
 
   const { user, logout } = UserAuth();
+  const { toggleSidebarMobile } = useSidebar();
 
   const profileMenuRef = useRef();
 
@@ -35,7 +38,13 @@ const Header = () => {
   });
 
   return (
-    <header className="header bg-neutral-50 dark:bg-neutral-900">
+    <header className="header bg-neutral-50 dark:bg-neutral-900 justify-between">
+      <div
+        className="header__right-icons menu p-0 border-none"
+        onClick={() => toggleSidebarMobile()}
+      >
+        <MenuIcon fontSize="small" />
+      </div>
       <div className="header__left">
         <div className="header__left-search m-0 relative">
           <SearchRoundedIcon fontSize="small" />
@@ -50,11 +59,11 @@ const Header = () => {
             className="dropdown__menu search gap-0 text-start"
             style={{ scale: search ? "1" : "0" }}
           >
-            <div className="sidebar__profile-text leading-4">
-              <div className="sidebar__profile-text-name">Search Results</div>
+            <div className="sidebar__profile-text-name dropdown__menu-padding">
+              Search Results
             </div>
             <div className="menu__divider"></div>
-            {search}
+            <p className="dropdown__menu-padding">{search}</p>
           </div>
         </div>
       </div>

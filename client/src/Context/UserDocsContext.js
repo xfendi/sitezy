@@ -3,7 +3,6 @@ import { useContext, useEffect, useState, createContext } from "react";
 import { db, database, auth } from "../firebase";
 import { collection, getDoc, getDocs, doc } from "firebase/firestore";
 import { onValue, ref } from "firebase/database";
-import { UserAuth } from "./AuthContext";
 
 const UserDocsContext = createContext();
 
@@ -15,7 +14,6 @@ export const UserDocsContextProvider = ({ children }) => {
   const [subscription, setSubscription] = useState({});
 
   const userId = auth.currentUser?.uid;
-  const { user } = UserAuth();
 
   const findProjects = async (userId) => {
     const projectsRef = collection(db, "projects");

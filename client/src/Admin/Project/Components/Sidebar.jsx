@@ -1,9 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 
 import { UserDocs } from "../../../Context/UserDocsContext";
+import { useSidebar } from "../../../Context/SidebarContext";
 
 import LogoPrimary from "../../../Assets/logo-primary.png";
 
+import UnfoldMoreIcon from "@mui/icons-material/UnfoldMore";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import AssessmentRoundedIcon from "@mui/icons-material/AssessmentRounded";
 import SupervisorAccountRoundedIcon from "@mui/icons-material/SupervisorAccountRounded";
@@ -22,9 +24,10 @@ const Sidebar = () => {
   const [active, setActive] = useState("");
   const [isProject, setIsProject] = useState(false);
   const [activeProjects, setActiveProjects] = useState([]);
-  const [inactiveProjects, setInactiveProjects] = useState([]);
+  // const [inactiveProjects, setInactiveProjects] = useState([]);
 
-  const { selectedProject, projects, subscription } = UserDocs();
+  const { selectedProject, projects } = UserDocs();
+  const { isSidebarOpen, isSidebarMobile, toggleSidebar, setIsSidebarMobile } = useSidebar();
   const { id } = useParams();
 
   const HandleClick = (name) => {
@@ -53,20 +56,47 @@ const Sidebar = () => {
   useEffect(() => {
     if (projects.length > 0) {
       setActiveProjects(projects.filter((project) => project.active === true));
-      setInactiveProjects(
-        projects.filter((project) => project.active === false)
-      );
+      // setInactiveProjects(projects.filter((project) => project.active === false));
     } else {
       console.log("Brak projektów do filtrowania");
     }
   }, [projects]);
 
+  const mobileMenuRef = useRef();
+
+  useEffect(() => {
+    const handler = (e) => {
+      if (!mobileMenuRef?.current.contains(e.target)) {
+        setIsSidebarMobile(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
+  });
+
   return (
-    <aside className="bg-neutral-50 dark:bg-neutral-900">
+    <aside
+      className={`bg-neutral-50 dark:bg-neutral-900 ${
+        isSidebarOpen ? "small" : ""
+      } ${isSidebarMobile ? "mobile" : ""}`}
+      ref={mobileMenuRef}
+    >
       <nav className="sidebar h-full flex flex-col">
         <div className="sidebar__top">
           <img src={LogoPrimary} alt="sitezy" width={33} />
           <p>Sitezy</p>
+          <div
+            className="sidebar__profile-settings top ml-auto"
+            onClick={() => toggleSidebar()}
+            style={{
+              transform: isSidebarOpen ? "" : "rotate(-180deg)",
+            }}
+          >
+            <KeyboardArrowRightRoundedIcon fontSize="small" />
+          </div>
         </div>
         <div className="sidebar__nav flex-1">
           <ul>
@@ -157,6 +187,7 @@ const Sidebar = () => {
                 <QuizRoundedIcon fontSize="small" /> <p>Help</p>
               </NavLink>
             </li>
+            <div className="menu__divider"></div>
           </ul>
         </div>
         <div className="sidebar__bottom">
@@ -183,13 +214,8 @@ const Sidebar = () => {
                     {selectedProject.id}
                   </div>
                 </div>
-                <div
-                  className="sidebar__profile-settings"
-                  style={{
-                    transform: isProject ? "rotate(90deg)" : "rotate(-90deg)",
-                  }}
-                >
-                  <KeyboardArrowRightRoundedIcon fontSize="small" />
+                <div className="sidebar__profile-settings">
+                  <UnfoldMoreIcon fontSize="small" />
                 </div>
               </div>
             </div>
@@ -228,11 +254,14 @@ const Sidebar = () => {
               </ul>
             </div>
           </div>
-          {subscription.planName === "Free" && (
-            <Link to={`/admin/project/${id}/settings/plan`} className="btn-outline-small text-center">
+          {/* subscription.planName === "Free" && (
+            <Link
+              to={`/admin/project/${id}/settings/plan`}
+              className="btn-outline-small text-center"
+            >
               Upgrade Plan
             </Link>
-          )}
+          ) */}
         </div>
         {/*<div className="sidebar__copyright">
           &copy; 2024 Sitezy by fendziorr
